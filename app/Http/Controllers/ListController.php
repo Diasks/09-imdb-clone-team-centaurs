@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\List;
+//use App\List;
 use Illuminate\Http\Request;
 
 class ListController extends Controller
@@ -14,7 +14,7 @@ class ListController extends Controller
      */
     public function index()
     {
-        //
+        return view('lists');
     }
 
     /**
@@ -46,7 +46,7 @@ class ListController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('list');
     }
 
     /**
