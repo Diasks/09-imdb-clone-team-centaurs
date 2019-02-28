@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-//use App\List;
 use Illuminate\Http\Request;
 
-class ListController extends Controller
+class MovieListController extends Controller
 {
     /**
      * Display a listing of the resource.
