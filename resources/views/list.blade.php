@@ -1,24 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Lists</div>
-
-                <div class="card-body">
-                    <ul>
-                        <li>Movie 1</li>
-                        <li>Movie 2</li>
-                        <li>Movie 3</li>
-                        <li>Movie 4</li>
-                        <li>Movie 5</li>
-                        <li>...</li>
-                    </ul>
-                </div>
+    <div class="card">
+        <h2 class="card-header">List</h2>
+        <div class="card-body p-0">
+            <div class="list-group list-group-flush bg-light">
+                <a class="list-group-item list-group-item-action h5" href="">Movie 1</a>
+                <a class="list-group-item list-group-item-action h5" href="">Movie 2</a>
+                <a class="list-group-item list-group-item-action h5" href="">Movie 3</a>
+                <a class="list-group-item list-group-item-action h5" href="">Movie 4</a>
+                <a class="list-group-item list-group-item-action h5" href="">Movie 5</a>
+                <a class="list-group-item list-group-item-action h5" href="">...</a>
             </div>
         </div>
     </div>
-</div>
 @endsection
