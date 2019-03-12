@@ -16,6 +16,24 @@
 // Homepage Route
 Route::get('/', 'WelcomeController@welcome')->name('welcome');
 
+Route::get('/', 'MovieController@index');
+
+/*ROUTES FÖR MOVIE*/
+
+Route::get('/movie/{movie_id}', 'MovieController@show');
+
+Route::get('/movie/{movie_id}/reviews', 'MovieController@show');
+Route::get('/movie/{movie_id}/photos', 'MovieController@show');
+Route::get('/movie/{movie_id}/trailers', 'MovieController@show');
+
+//ROUTE FÖR GENRE
+Route::get('/genre/{genre}', 'MovieController@show');
+
+// ROUTE FÖR CHART-TOP
+Route::get('/chart/top', 'MovieController@show');
+
+
+
 // Authentication Routes
 Auth::routes();
 
