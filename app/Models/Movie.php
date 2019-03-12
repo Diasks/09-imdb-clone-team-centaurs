@@ -18,10 +18,22 @@ class Movie extends Model
         'tagline',
         'poster_path',
         'video',
+        'vote_count',
+        'vote_average',
+        'production_companies',
+        'cast',
+        'crew',
     ];
 
     protected $casts = [
         'genres' => 'array',
         'production_companies' => 'array',
+        'cast' => 'array',
+        'crew' => 'array',
     ];
+
+    public function movieReviews()
+    {
+        return $this->hasMany('App\Models\Review');
+    }
 }
