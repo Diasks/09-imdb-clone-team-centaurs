@@ -52,6 +52,11 @@
                     </li>
                 @endrole
             </ul>
+            
+          <!--lägg in något här-->
+          <input type="text" placeholder="Search"><button>Browse</button>
+          <Button>TOP-CHART!</Button>
+
             {{-- Right Side Of Navbar --}}
             <ul class="navbar-nav ml-auto">
                 {{-- Authentication Links --}}
