@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Movie;
+use View;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -14,7 +14,12 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+       $movies = Movie::all()->take(8);
+       return view('welcome',compact('movies'));
+    //   return Movie::where('vote_average', '>', 8)->paginate(15);
+ 
+    // return view('welcome');
+       
     }
 
     /**
@@ -44,9 +49,13 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
-        //
+$movie = Movie::findOrFail($id);
+// dd($movie);
+return view('movies', compact('movie'));
+
+      
     }
 
     /**
