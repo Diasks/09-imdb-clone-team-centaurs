@@ -21,6 +21,14 @@ class CreateMoviesTable extends Migration
             $table->date('release_date');
             $table->boolean('adult');
             $table->integer('revenue')->unsigned();
+            $table->integer('budget')->unsigned();
+            $table->string('status');
+            $table->string('tagline');
+            $table->string('poster_path');
+            $table->string('video');
+            $table->integer('vote_count')->unsigned();
+            $table->float('vote_average');
+            $table->text('production_companies');
             $table->timestamps();
         });
     }

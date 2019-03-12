@@ -2,8 +2,6 @@
 
 use App\Models\Movie;
 use Illuminate\Database\Seeder;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Client;
 
 class MoviesTableSeeder extends Seeder
 {
@@ -14,35 +12,37 @@ class MoviesTableSeeder extends Seeder
      */
     public function run()
     {
-        $movieUrl = env('MOVIE_API_URL');
-        $movieKey = env('MOVIE_API_KEY');
+        $movieData = json_decode(Storage::get('movies.json'), true);
 
-        $client = new Client(); // Guzzle client
-
-        for($id = 0; $id < 10; $id++) {
+        function movieAdder($movieItem)
+        {
             try {
-                $res = $client->request('GET', $movieUrl . $id . '?api_key=' . $movieKey);
-            }
-            
-            catch(Exception $e) {
-                continue;
-            }
+                $dataArr = [
+                    'id' => $movieItem['id'],
+                    'title' => $movieItem['title'],
+                    'genres' => array_map(function($genre) {
+                        return $genre['id'];
+                    }, $movieItem['genres']),
+                    'runtime' => $movieItem['runtime'],
+                    'release_date' => $movieItem['release_date'],
+                    'adult' => $movieItem['adult'],
+                    'revenue' => $movieItem['revenue'],
+                    'budget' => $movieItem['budget'],
+                    'status' => $movieItem['status'],
+                    'tagline' => $movieItem['tagline'],
+                    'poster_path' => $movieItem['poster_path'],
+                    'video' => $movieItem['video'],
+                    'vote_count' => $movieItem['vote_count'],
+                    'vote_average' => $movieItem['vote_average'],
+                    'production_companies' => array_map(function($company) {
+                        return $company['id'];
+                    }, $movieItem['production_companies']),
+                ];
     
-            $resBody = json_decode($res->getBody(), true);
-    
-            $dataArr = [
-                'id' => $resBody['id'],
-                'title' => $resBody['title'],
-                'genres' => array_map(function($genre) {
-                    return $genre['id'];
-                }, $resBody['genres']),
-                'runtime' => $resBody['runtime'],
-                'release_date' => $resBody['release_date'],
-                'adult' => $resBody['adult'],
-                'revenue' => $resBody['revenue'],
-            ];
-    
-            $movie = Movie::create($dataArr);
+                $movie = Movie::create($dataArr);
+            } catch(Exception $e) {}
         }
+
+        array_map('movieAdder', $movieData);
     }
 }
