@@ -54,8 +54,45 @@
             </ul>
             
           <!--lägg in något här-->
-          <input type="text" placeholder="Search"><button>Browse</button>
-          <Button>TOP-CHART!</Button>
+          {!! Form::open(['method'=>'GET','url'=>'search','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
+        <div class="input-group custom-search-form">
+                  <input type="text" class="form-control" name="search" placeholder="Search for movie..."> <span class="input-group-btn">
+    <button class="btn btn-default-sm" type="submit">
+        <i class="fa fa-search"></i>
+    </button>
+    </span></div>
+    {{ Form::close() }}
+ 
+    <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Browse
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Adventure</a>
+    <a class="dropdown-item" href="#">Animation</a>
+    <a class="dropdown-item" href="#">Comedy</a>
+    <a class="dropdown-item" href="#">Crime</a>
+    <a class="dropdown-item" href="#">Documentary</a>
+    <a class="dropdown-item" href="#">Drama</a>
+    <a class="dropdown-item" href="#">Family</a>
+    <a class="dropdown-item" href="#">Fantasy</a>
+    <a class="dropdown-item" href="#">History</a>
+    <a class="dropdown-item" href="#">Horror</a>
+    <a class="dropdown-item" href="#">Music</a>
+    <a class="dropdown-item" href="#">Mystery</a>
+    <a class="dropdown-item" href="#">Romance</a>
+    <a class="dropdown-item" href="#">Science Fiction</a>
+    <a class="dropdown-item" href="#">Thriller</a>
+    <a class="dropdown-item" href="#">War</a>
+    <a class="dropdown-item" href="#">Western</a>
+  </div>
+</div>
+<a href="/chart/top">
+<Button class="btn btn-primary">TOP-CHART!</Button>
+</a>
+
+
 
             {{-- Right Side Of Navbar --}}
             <ul class="navbar-nav ml-auto">

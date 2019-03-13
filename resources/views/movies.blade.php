@@ -8,7 +8,15 @@
 <p>Speltid: {{$movie->runtime}} minuter</p>
 <p>Release date: {{$movie->release_date}}</p>
 
+@foreach ($movie->cast as $casts)
+<p>{{$casts}}</p>
+@endforeach
 
+@foreach ($movie->genres as $genre)
+
+<p>{{$genre}}</p>
+
+@endforeach
 
 
 <a href="/movie/{{$movie->id}}/reviews">Reviews</a>
