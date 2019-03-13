@@ -30,9 +30,9 @@ Route::get('/movie/{movie_id}/trailers', 'MovieController@show');
 Route::get('/genre/{genre}', 'MovieController@show');
 
 // ROUTE FÖR CHART-TOP
-Route::get('/chart/top', 'MovieController@show');
+Route::get('/chart/top', 'MovieController@topchart');
 
-
+Route::get('/search', 'MovieController@search');
 
 // Authentication Routes
 Auth::routes();
