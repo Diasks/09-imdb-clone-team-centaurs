@@ -22,6 +22,14 @@ class MovieController extends Controller
        
     }
 
+
+public function topchart() 
+{
+  $movies = Movie::where('vote_average', '>', 8)->paginate(15);
+  return view('topchart', compact('movies'));
+}
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -55,8 +63,20 @@ $movie = Movie::findOrFail($id);
 // dd($movie);
 return view('movies', compact('movie'));
 
-      
     }
+
+
+    public function search(Request $request)
+    {
+        $movie = Movie::all();
+
+        $search = \Request::get('search');  
+        $movies = Movie::where('title', 'like', '%'.$search.'%')
+        ->orderBy('title')
+        ->paginate(12);
+    
+        return view('search',compact('movies'))->withmovie($movies);
+     }
 
     /**
      * Show the form for editing the specified resource.
