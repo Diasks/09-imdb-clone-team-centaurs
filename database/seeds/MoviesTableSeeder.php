@@ -37,9 +37,7 @@ class MoviesTableSeeder extends Seeder
                 $dataArr = [
                     'id' => $movieItem['id'],
                     'title' => $movieItem['title'],
-                    'genres' => array_map(function($genre) {
-                        return $genre['id'];
-                    }, $movieItem['genres']),
+                    'genres' => $movieItem['genres'],
                     'runtime' => $movieItem['runtime'],
                     'release_date' => $movieItem['release_date'],
                     'adult' => $movieItem['adult'],
@@ -48,18 +46,13 @@ class MoviesTableSeeder extends Seeder
                     'status' => $movieItem['status'],
                     'tagline' => $movieItem['tagline'],
                     'poster_path' => $movieItem['poster_path'],
+                    'backdrop_path' => $movieItem['backdrop_path'],
                     'video' => $movieItem['video'],
                     'vote_count' => $movieItem['vote_count'],
                     'vote_average' => $movieItem['vote_average'],
-                    'production_companies' => array_map(function($company) {
-                        return $company['id'];
-                    }, $movieItem['production_companies']),
-                    'cast' => array_map(function($person) {
-                        return $person['cast_id'];
-                    }, $movieItem['cast']),
-                    'crew' => array_map(function($person) {
-                        return $person['credit_id'];
-                    }, $movieItem['crew']),
+                    'production_companies' => $movieItem['production_companies'],
+                    'cast' => $movieItem['cast'],
+                    'crew' => $movieItem['crew'],
                 ];
     
                 $movie = Movie::create($dataArr);

@@ -25,6 +25,7 @@ class CreateMoviesTable extends Migration
             $table->string('status');
             $table->string('tagline');
             $table->string('poster_path');
+            $table->string('backdrop_path');
             $table->string('video');
             $table->integer('vote_count')->unsigned();
             $table->float('vote_average');
