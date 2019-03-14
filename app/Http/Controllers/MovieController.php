@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Movie;
+use View;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller
@@ -14,8 +14,21 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+       $movies = Movie::all()->take(8);
+       return view('welcome',compact('movies'));
+    //   return Movie::where('vote_average', '>', 8)->paginate(15);
+ 
+    // return view('welcome');
+       
     }
+
+
+public function topchart() 
+{
+  $movies = Movie::where('vote_average', '>', 8)->paginate(15);
+  return view('topchart', compact('movies'));
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,10 +57,26 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
-        //
+$movie = Movie::findOrFail($id);
+// dd($movie);
+return view('movies', compact('movie'));
+
     }
+
+
+    public function search(Request $request)
+    {
+        $movie = Movie::all();
+
+        $search = \Request::get('search');  
+        $movies = Movie::where('title', 'like', '%'.$search.'%')
+        ->orderBy('title')
+        ->paginate(12);
+    
+        return view('search',compact('movies'))->withmovie($movies);
+     }
 
     /**
      * Show the form for editing the specified resource.
