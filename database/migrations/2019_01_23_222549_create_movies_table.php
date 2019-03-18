@@ -32,6 +32,7 @@ class CreateMoviesTable extends Migration
             $table->text('production_companies');
             $table->text('cast');
             $table->text('crew');
+            $table->string('overview');
             $table->timestamps();
         });
     }

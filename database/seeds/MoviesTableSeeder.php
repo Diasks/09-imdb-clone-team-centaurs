@@ -53,6 +53,7 @@ class MoviesTableSeeder extends Seeder
                     'production_companies' => $movieItem['production_companies'],
                     'cast' => $movieItem['cast'],
                     'crew' => $movieItem['crew'],
+                    'overview' => $movieItem['overview'],
                 ];
     
                 $movie = Movie::create($dataArr);
