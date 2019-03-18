@@ -18,16 +18,21 @@ Route::get('/', 'WelcomeController@welcome')->name('welcome');
 
 Route::get('/', 'MovieController@index');
 
+
+//REVIEW
+Route::get('/reviews', 'ReviewController@index');
+
+
 /*ROUTES FÖR MOVIE*/
 
 Route::get('/movie/{movie_id}', 'MovieController@show');
 
-Route::get('/movie/{movie_id}/reviews', 'MovieController@show');
-Route::get('/movie/{movie_id}/photos', 'MovieController@show');
-Route::get('/movie/{movie_id}/trailers', 'MovieController@show');
+Route::get('/movie/{movie_id}/reviews', 'ReviewController@index');
+Route::get('/movie/{movie_id}/photos', 'MovieController@showphoto');
+Route::get('/movie/{movie_id}/trailers', 'MovieController@showtrailer');
 
 //ROUTE FÖR GENRE
-Route::get('/genre/{genre}', 'MovieController@show');
+Route::get('/genre/{genre}', 'MovieController@genre');
 
 // ROUTE FÖR CHART-TOP
 Route::get('/chart/top', 'MovieController@topchart');

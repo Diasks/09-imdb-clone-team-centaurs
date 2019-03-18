@@ -68,24 +68,14 @@
    Browse
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Adventure</a>
-    <a class="dropdown-item" href="#">Animation</a>
-    <a class="dropdown-item" href="#">Comedy</a>
-    <a class="dropdown-item" href="#">Crime</a>
-    <a class="dropdown-item" href="#">Documentary</a>
-    <a class="dropdown-item" href="#">Drama</a>
-    <a class="dropdown-item" href="#">Family</a>
-    <a class="dropdown-item" href="#">Fantasy</a>
-    <a class="dropdown-item" href="#">History</a>
-    <a class="dropdown-item" href="#">Horror</a>
-    <a class="dropdown-item" href="#">Music</a>
-    <a class="dropdown-item" href="#">Mystery</a>
-    <a class="dropdown-item" href="#">Romance</a>
-    <a class="dropdown-item" href="#">Science Fiction</a>
-    <a class="dropdown-item" href="#">Thriller</a>
-    <a class="dropdown-item" href="#">War</a>
-    <a class="dropdown-item" href="#">Western</a>
+
+<!-- loopa igenom genres här som koden i genre.blade.php -->
+
+@foreach($genreData as $genre) 
+
+<a class="dropdown-item" href="/genre/{{$genre['name']}}">{{$genre['name']}}</a>
+@endforeach 
+ 
   </div>
 </div>
 <a href="/chart/top">

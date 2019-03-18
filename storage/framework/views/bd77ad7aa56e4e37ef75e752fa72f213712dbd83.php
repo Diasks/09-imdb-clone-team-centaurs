@@ -1,101 +1,39 @@
-<!DOCTYPE html>
-<html lang="<?php echo e(config('app.locale')); ?>">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+       
 
-        <title>Laravel</title>
+    
+<?php $__env->startSection('content'); ?>  
+<div class="links">
+                  
+                   <a href="https://laracasts.com">Laracasts</a>
+                   <a href="https://laravel-news.com">News</a>
+                   <a href="https://forge.laravel.com">Forge</a>
+                   <a href="https://github.com/laravel/laravel">GitHub</a>
+               </div>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+       <h1>FEATURED MOVIES</h1>
+        <?php $__currentLoopData = $movies; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $movie): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+    <a href="/movie/<?php echo e($movie->id); ?>"> 
+    <img src="http://image.tmdb.org/t/p/w185//<?php echo e($movie->poster_path); ?>"/>
+    </a>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+  
+   
+    <?php $__currentLoopData = $reviews; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $review): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+   
+   <h2> <?php echo e($review->author); ?></h2>
+   <p> <?php echo e($review->content); ?></p>
+   
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-            .full-height {
-                height: 100vh;
-            }
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    <?php $__env->stopSection(); ?>
 
-            .position-ref {
-                position: relative;
-            }
+  
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
 
-            .content {
-                text-align: center;
-            }
 
-            .title {
-                font-size: 84px;
-            }
 
-            .title small {
-                font-size: 60px;
-            }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            <?php if(Route::has('login')): ?>
-                <div class="top-right links">
-                    <?php if(Auth::check()): ?>
-                        <a href="<?php echo e(url('/home')); ?>">Home</a>
-                    <?php else: ?>
-                        <a href="<?php echo e(url('/login')); ?>">Login</a>
-                        <a href="<?php echo e(url('/register')); ?>">Register</a>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
-            <div class="content">
-                <div class="title m-b-md">
-                    <?php echo trans('titles.app'); ?><br />
-                    <small>
-                        <?php echo e(trans('titles.app2', ['version' => config('settings.app_project_version')])); ?>
-
-                    </small>
-                </div>
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>

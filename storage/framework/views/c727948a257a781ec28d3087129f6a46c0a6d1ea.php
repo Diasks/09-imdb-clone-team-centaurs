@@ -63,6 +63,40 @@
                 <?php endif; ?>
             </ul>
             
+          <!--lägg in något här-->
+          <?php echo Form::open(['method'=>'GET','url'=>'search','class'=>'navbar-form navbar-left','role'=>'search']); ?>
+
+        <div class="input-group custom-search-form">
+                  <input type="text" class="form-control" name="search" placeholder="Search for movie..."> <span class="input-group-btn">
+    <button class="btn btn-default-sm" type="submit">
+        <i class="fa fa-search"></i>
+    </button>
+    </span></div>
+    <?php echo e(Form::close()); ?>
+
+ 
+    <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Browse
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+<!-- loopa igenom genres här som koden i genre.blade.php -->
+
+<?php $__currentLoopData = $genreData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+
+<a class="dropdown-item" href="/genre/<?php echo e($genre['name']); ?>"><?php echo e($genre['name']); ?></a>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
+ 
+  </div>
+</div>
+<a href="/chart/top">
+<Button class="btn btn-primary">TOP-CHART!</Button>
+</a>
+
+
+
+            
             <ul class="navbar-nav ml-auto">
                 
                 <?php if(auth()->guard()->guest()): ?>

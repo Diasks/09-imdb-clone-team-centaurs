@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use View;
+use Storage;
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use App\Models\Review;
 
 class MovieController extends Controller
 {
@@ -15,10 +17,9 @@ class MovieController extends Controller
     public function index()
     {
        $movies = Movie::all()->take(8);
-       return view('welcome',compact('movies'));
-    //   return Movie::where('vote_average', '>', 8)->paginate(15);
+       $reviews = Review::all()->take(8);
+       return view('welcome',compact('movies', 'reviews'));
  
-    // return view('welcome');
        
     }
 
@@ -29,7 +30,39 @@ public function topchart()
   return view('topchart', compact('movies'));
 }
 
+public function genre(Request $request, $genre) 
+{
+    $name = $request->fullUrl();
+    $genreData = json_decode(Storage::get('genre.json'), true)['genres'];
+    $genreNames = array_map(function($genre)
+{
+    
+return $genre['name'];
 
+}, $genreData
+);
+
+    $movies = Movie::all()->toArray();
+    return view('genre', compact('genreData', 'movies', 'genreNames', 'genre'));
+ 
+    
+}
+
+
+
+/* implementera funktion för att visa specifik films trailer i trailer.blade.php som inte finns än */
+
+public function showtrailer ()
+{
+
+}
+
+
+/*implementera funktion för att visa specifik films foto/n i photo.blade.php som inte finns än */
+public function showphoto () 
+{
+
+}
     /**
      * Show the form for creating a new resource.
      *

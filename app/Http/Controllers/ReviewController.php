@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Review;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -12,9 +11,16 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+/* i denna funktion ska du hämta omdömen för en specifik film */
+
     public function index()
     {
-        //
+        $reviews = Review::all()->take(8);
+        return view('reviews', compact('reviews'));
+     
+  
     }
 
     /**
@@ -46,7 +52,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        //
+      
     }
 
     /**

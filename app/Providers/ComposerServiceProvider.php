@@ -17,6 +17,8 @@ class ComposerServiceProvider extends ServiceProvider
         View::composer(
             'layouts.app', 'App\Http\ViewComposers\ThemeComposer'
         );
+
+        view()->composer('layouts.app', 'App\Http\ViewComposers\GenresComposer');
     }
 
     /**
