@@ -116,4 +116,8 @@ class User extends Authenticatable
     public function reviews() {
         return $this->hasMany('App\Models\Review');
     }
+
+    public function movie_lists() {
+        return $this->hasMany('App\Models\MovieList');
+    }
 }
