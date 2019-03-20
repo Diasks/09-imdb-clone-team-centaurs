@@ -1,13 +1,9 @@
-
-
-<h1>Hej jag är genre!</h1>
-
-<!-- ska användas i navbaren i dropdownen -->
+@extends('layouts.app')
 
 
 
 
-
+@section('content')
 <?php 
 $choosenGenre = array_filter($movies, function($movie) use ($genre) {
    foreach ($movie['genres'] as $genreLocal) {
@@ -20,10 +16,14 @@ $choosenGenre = array_filter($movies, function($movie) use ($genre) {
 
 });
 
+echo "<h1>" . $genre . "</h1>";
+
 foreach ($choosenGenre as $genreMovie)
 {
+   
   echo "<a href='/movie/" . $genreMovie['id'] . "'>" . "<img src='http://image.tmdb.org/t/p/w185//" .$genreMovie['poster_path'] ."'/></a>" ;
 
 }
 
-
+?>
+@endsection

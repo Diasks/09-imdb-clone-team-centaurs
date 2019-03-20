@@ -4,6 +4,7 @@
 
 <img src="http://image.tmdb.org/t/p/w185//{{$movie->poster_path}}"/>
 <h1>{{$movie->title}}</h1>
+<p>{{$movie->overview}}</p>
 <p>Speltid: {{$movie->runtime}} minuter</p>
 <p>Release date: {{$movie->release_date}}</p>
 

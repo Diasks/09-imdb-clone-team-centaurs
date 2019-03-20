@@ -24,6 +24,11 @@
 
                             </a>
                             <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="<?php echo e(url('/admin/movies')); ?>">
+                                <?php echo trans('Movie Administration'); ?>
+
+                            </a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item <?php echo e(Request::is('users/create') ? 'active' : null); ?>" href="<?php echo e(url('/users/create')); ?>">
                                 <?php echo trans('titles.adminNewUser'); ?>
 
