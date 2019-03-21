@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\MovieList;
+use App\Models\User;
+use Auth;
 
 class MovieListController extends Controller
 {
@@ -11,9 +14,19 @@ class MovieListController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('lists');
+        $userId = $request['user_id'];
+
+        $user = User::find($userId);
+
+        $userExists = $user ? true : false;
+
+        if($userExists) {
+            $lists = $user->movie_lists;
+        }
+
+        return view('lists', compact('userExists', 'lists'));
     }
 
     /**
