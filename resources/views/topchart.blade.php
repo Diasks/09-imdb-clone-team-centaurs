@@ -13,6 +13,7 @@
     <img src="http://image.tmdb.org/t/p/w185//{{$topmovie->poster_path}}" class="shadow p-3 mb-5 bg-white rounded"/>
     </a>
 @endforeach
+<a href="/"><button class="btn btn-dark">Go back</button></a>
   </div>
 </div>
 

@@ -3,7 +3,7 @@
 @section('content')
 
 
-<h1>REVIEWS</h1>
+<h1>Reviews for {{$movie->title}}</h1>
 
 
 
@@ -18,7 +18,7 @@
 </div>
 @endforeach
 
-<a href="/movie/{{$movie->id}}"><button>Go back</button></a>
+<a href="/movie/{{$movie->id}}"><button class="btn btn-dark">Go back</button></a>
 
 
 

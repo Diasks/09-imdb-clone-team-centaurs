@@ -18,7 +18,7 @@ $choosenGenre = array_filter($movies, function($movie) use ($genre) {
 
 echo "<div class='jumbotron jumbotron-fluid bg-info'>"; 
 
-echo "<h1>" . $genre . "-movies</h1>";
+echo "<h1>Genre: " . $genre . "</h1>";
 
 foreach ($choosenGenre as $genreMovie)
 {
