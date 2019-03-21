@@ -12,6 +12,20 @@ class ReviewsTableSeeder extends Seeder
      */
     public function run()
     {
+
+    // DB::table('reviews')->delete();
+    // $data = json_decode(Storage::get('reviews.json'), true);
+    // foreach ($data as $obj) {
+    //     Review::create(array(
+    //         'user_id' => $obj->user_id,
+    //         'author' => $obj->author,
+    //         'content' => $obj->content,
+    //         'movie_id' => $obj->movie_id
+    //     ));
+    // }
+
+
+
         $reviewData = json_decode(Storage::get('reviews.json'), true);
 
         $currentItem;

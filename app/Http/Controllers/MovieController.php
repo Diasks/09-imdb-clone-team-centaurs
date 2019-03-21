@@ -137,9 +137,10 @@ public function showphoto ()
      */
     public function show($id)
     {
-$movie = Movie::findOrFail($id);
-// dd($movie);
-return view('movies', compact('movie'));
+    
+    $movie = Movie::findOrFail($id);
+    // dd($movie);
+    return view('movies', compact('movie'));
 
     }
 
@@ -165,7 +166,7 @@ return view('movies', compact('movie'));
     public function edit($id)
     {
         $movie = Movie::find($id);
-
+        
         return view('adminmovieedit', compact('movie'));
     }
 
