@@ -166,13 +166,9 @@ public function showphoto ()
     public function edit($id)
     {
         $movie = Movie::find($id);
-<<<<<<< HEAD
 
         return view('admin-movie-edit', compact('movie'));
-=======
-        
-        return view('adminmovieedit', compact('movie'));
->>>>>>> develop
+    
     }
 
     /**

@@ -1,28 +1,29 @@
+@extends('layouts.app')
 
-<!--loopa ut alla omdömen för denna specifika film-->
-
-<h2>REVIEWS</h2>
+@section('content')
 
 
-{{-- @foreach ($reviews as $review)
-   
-   <h2> {{$review->author}}</h2>
-   <p> {{$review->content}}</p>
+<h1>REVIEWS</h1>
 
-    @endforeach --}}
 
 
 @foreach ($reviews as $review)
-<ul>
-   <li>{{ $review->content }}</li>
-</ul>
-
+<div class="card">
+  <div class="card-header">
+  <h5>User:  {{$review->author}}</h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text"> <p> {{$review->content}}</p>
+  </div>
+</div>
 @endforeach
 
-{{-- @foreach ($reviews as $review)
+<a href="/movie/{{$movie->id}}"><button>Go back</button></a>
 
-   <p> {{ $review->review }} </p>
-   <p> {{ $review->author }}</p>
-   <p> {{ $review->movie_id }}</p>
-   <p> {{ $review->user_id }}</p>
-   @endforeach --}}
+
+
+   @endsection
+
+
+
+

@@ -19,11 +19,7 @@ class ReviewController extends Controller
 
 /* i denna funktion ska du hämta omdömen för en specifik film */
 
-<<<<<<< HEAD
-    public function index()
-    {
-       
-=======
+   
     public function index($id)
     {   
 
@@ -31,8 +27,9 @@ class ReviewController extends Controller
         // return view('reviews', compact('reviews'));
         // $reviews = Review::table('reviews')->where('id', = 'id');
         $reviews = Review::all()->where('id', '=', $id)->take(4);
+        $movie = Movie::findOrFail($id);
         // dd($reviews);
-        return view('reviews', compact('reviews'));
+        return view('reviews', compact('reviews', 'movie'));
         // dd($reviews);
         // $reviews = Review::all()->take(8);
         // dd($reviews); 
@@ -46,7 +43,6 @@ class ReviewController extends Controller
         // dd($reviews);
         // return view('reviews', compact('reviews'));
         
->>>>>>> develop
   
     }
 
@@ -115,4 +111,7 @@ class ReviewController extends Controller
     {
         //
     }
+
+
+ 
 }
