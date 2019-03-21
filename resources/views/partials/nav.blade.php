@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-laravel">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {!! config('app.name', trans('titles.app')) !!}
@@ -56,19 +56,18 @@
                     </li>
                 @endrole
             </ul>
-            
-          <!--lägg in något här-->
+    
           {!! Form::open(['method'=>'GET','url'=>'search','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
         <div class="input-group custom-search-form">
                   <input type="text" class="form-control" name="search" placeholder="Search for movie..."> <span class="input-group-btn">
-    <button class="btn btn-default-sm" type="submit">
+    <button class="btn btn-default-sm btn btn-info" type="submit">
         <i class="fa fa-search"></i>
     </button>
     </span></div>
     {{ Form::close() }}
  
     <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-secondary dropdown-toggle btn btn-light text-info" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Browse
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -83,7 +82,7 @@
   </div>
 </div>
 <a href="/chart/top">
-<Button class="btn btn-primary">TOP-CHART!</Button>
+<Button class="btn btn-light text-info">Topchart</Button>
 </a>
 
 

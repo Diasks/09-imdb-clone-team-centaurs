@@ -16,14 +16,16 @@ $choosenGenre = array_filter($movies, function($movie) use ($genre) {
 
 });
 
-echo "<h1>" . $genre . "</h1>";
+echo "<div class='jumbotron jumbotron-fluid bg-info'>"; 
+
+echo "<h1>" . $genre . "-movies</h1>";
 
 foreach ($choosenGenre as $genreMovie)
 {
    
-  echo "<a href='/movie/" . $genreMovie['id'] . "'>" . "<img src='http://image.tmdb.org/t/p/w185//" .$genreMovie['poster_path'] ."'/></a>" ;
+  echo " <a href='/movie/" . $genreMovie['id'] . "'>" . "<img src='http://image.tmdb.org/t/p/w185//" .$genreMovie['poster_path'] ."' class='shadow p-3 mb-5 bg-white rounded'/></a>" ;
 
 }
-
+echo "</div>";
 ?>
 @endsection

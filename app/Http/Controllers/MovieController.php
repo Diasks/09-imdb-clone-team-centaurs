@@ -16,8 +16,8 @@ class MovieController extends Controller
      */
     public function index()
     {
-       $movies = Movie::all()->take(8);
-       $reviews = Review::all()->take(8);
+       $movies = Movie::all()->take(10);
+       $reviews = Review::all()->take(4);
        return view('welcome',compact('movies', 'reviews'));
  
        
