@@ -26,7 +26,7 @@ class MovieListController extends Controller
             $lists = $user->movie_lists;
         }
 
-        return view('lists', compact('userExists', 'lists'));
+        return view('lists', compact('userExists', 'user', 'lists'));
     }
 
     /**
@@ -56,9 +56,17 @@ class MovieListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($userId, $listId)
     {
-        return view('list');
+        $user = User::find($userId);
+
+        $list = MovieList::find($listId);
+
+        $listExists = $list ? true : false;
+
+        $movies = $list->movies->toArray();
+
+        return view('list', compact('listExists', 'user', 'list', 'movies'));
     }
 
     /**

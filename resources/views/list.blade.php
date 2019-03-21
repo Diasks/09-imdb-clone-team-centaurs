@@ -2,16 +2,22 @@
 
 @section('content')
     <div class="card">
-        <h2 class="card-header">List</h2>
-        <div class="card-body p-0">
-            <div class="list-group list-group-flush bg-light">
-                <a class="list-group-item list-group-item-action h5" href="">Movie 1</a>
-                <a class="list-group-item list-group-item-action h5" href="">Movie 2</a>
-                <a class="list-group-item list-group-item-action h5" href="">Movie 3</a>
-                <a class="list-group-item list-group-item-action h5" href="">Movie 4</a>
-                <a class="list-group-item list-group-item-action h5" href="">Movie 5</a>
-                <a class="list-group-item list-group-item-action h5" href="">...</a>
+        @if ($listExists)
+            <h2 class="card-header">{{ $list->name }} by {{ $user->name }}</h2>
+            <div class="card-body p-0">
+                <div class="list-group list-group-flush bg-light">
+                    @forelse ($movies as $movie)
+                        <a class="list-group-item list-group-item-action h5" href="/movie/{{ $movie['id'] }}">
+                            <img src="http://image.tmdb.org/t/p/w185/{{ $movie['poster_path'] }}" class="col-1" />
+                            {{ $movie['title'] }}
+                        </a>
+                    @empty
+                        <div>List is empty.</div>
+                    @endforelse
+                </div>
             </div>
-        </div>
+        @else
+            <h2 class="card-header">This list does not exist.</h2>
+        @endif
     </div>
 @endsection

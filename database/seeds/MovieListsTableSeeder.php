@@ -12,11 +12,16 @@ class MovieListsTableSeeder extends Seeder
      */
     public function run()
     {
-        $dataArr = [
-            'name' => 'Favoriter!!!',
+        $list = MovieList::create([
+            'name' => 'Watchlist',
             'user_id' => 1,
-        ];
+        ]);
+        $list->movies()->attach(1893);
+        $list->movies()->attach(603);
 
-        $movie = MovieList::create($dataArr);
+        $list = MovieList::create([
+            'name' => 'Testlista 2',
+            'user_id' => 1,
+        ]);
     }
 }
