@@ -17,9 +17,7 @@ class ReviewController extends Controller
 
     public function index()
     {
-        $reviews = Review::all()->take(8);
-        return view('reviews', compact('reviews'));
-     
+       
   
     }
 

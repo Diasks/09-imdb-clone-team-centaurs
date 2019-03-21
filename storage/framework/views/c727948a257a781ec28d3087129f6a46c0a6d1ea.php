@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-laravel">
     <div class="container">
-        <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+        <a class="navbar-brand" href="<?php echo e(url('')); ?>">
             <?php echo config('app.name', trans('titles.app')); ?>
 
         </a>

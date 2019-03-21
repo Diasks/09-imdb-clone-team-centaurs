@@ -70,7 +70,7 @@ public function showphoto ()
      */
     public function create()
     {
-        return view('adminmoviecreate');
+        return view('admin-movie-create');
     }
 
     /**
@@ -166,7 +166,7 @@ return view('movies', compact('movie'));
     {
         $movie = Movie::find($id);
 
-        return view('adminmovieedit', compact('movie'));
+        return view('admin-movie-edit', compact('movie'));
     }
 
     /**
@@ -229,7 +229,7 @@ return view('movies', compact('movie'));
     public function get ()
     {
         $allMovies = Movie::all();
-        return view('adminmovie', compact('allMovies'));
+        return view('admin-movie', compact('allMovies'));
     }
     /**
      * Remove the specified resource from storage.

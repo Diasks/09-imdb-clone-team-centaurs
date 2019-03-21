@@ -40,7 +40,7 @@ Route::get('/chart/top', 'MovieController@topchart');
 Route::get('/search', 'MovieController@search');
 
 // Authentication Routes
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Public Routes
 Route::group(['middleware' => ['web', 'activity']], function () {
