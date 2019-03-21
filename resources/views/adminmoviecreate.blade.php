@@ -2,11 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-  .uper {
-    margin-top: 40px;
-  }
-</style>
+
 <div class="card uper">
   <div class="card-header">
     Add New Movie
@@ -21,7 +17,7 @@
         </ul>
       </div><br />
     @endif
-    <form action="{{ action('MovieController@create')}}" method="post">
+    <form action="{{ action('MovieController@store')}}" method="post">
           <div class="form-group">
               @csrf
               <label for="title">Title</label>

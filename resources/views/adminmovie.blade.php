@@ -2,8 +2,8 @@
 
 @section('content')
 
-<table class="table table-striped">
-<thead>
+<table class="table table-bordered table-sm">
+<thead class="thead-dark">
 <tr>
 <th>Id</th>
 <th>Title</th>
@@ -13,9 +13,11 @@
 <th>tagline</th>
 <th>overview</th>
 <th>action</th>
+<th>action</th>
+<th>action</th>
 </tr>
 </thead>
-<tbody>
+<tbody class="table-hover">
 @foreach($allMovies as $movie)
 <tr>
 <td>{{$movie->id}}</td>

@@ -152,7 +152,8 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 Route::redirect('/php', '/phpinfo', 301);
 
 Route::get('/admin/movies', 'MovieController@get');
-Route::post('/admin/movies/create', 'MovieController@create');
+Route::get('/admin/movies/create', 'MovieController@create');
+Route::post('/admin/movies/store', 'MovieController@store');
 Route::get('/admin/{movies}/edit', 'MovieController@edit');
 Route::patch('/admin/{movies}/update', 'MovieController@update');
 Route::delete('/admin/{movies}/destroy', 'MovieController@destroy');
