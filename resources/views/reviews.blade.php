@@ -13,8 +13,9 @@
 
 
 @foreach ($reviews as $review)
-
-<h2>{{ $review->content }}</h2>
+<ul>
+   <li>{{ $review->content }}</li>
+</ul>
 
 @endforeach
 
