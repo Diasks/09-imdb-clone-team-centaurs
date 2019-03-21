@@ -11,7 +11,12 @@
 
     @endforeach --}}
 
-<p>{{ $reviews }}</p>
+
+@foreach ($reviews as $review)
+
+<h2>{{ $review->content }}</h2>
+
+@endforeach
 
 {{-- @foreach ($reviews as $review)
 
