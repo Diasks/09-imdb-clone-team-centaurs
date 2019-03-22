@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MovieList;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class MovieListController extends Controller
 {
@@ -16,17 +16,22 @@ class MovieListController extends Controller
      */
     public function index(Request $request)
     {
+        $currentUser = Auth::user();
+
         $userId = $request['user_id'];
 
         $user = User::find($userId);
 
         $userExists = $user ? true : false;
-
+        
+        $lists = null;
+        $isUserOwner = false;
         if($userExists) {
             $lists = $user->movie_lists;
+            $isUserOwner = $currentUser->id === $user->id;
         }
 
-        return view('lists', compact('userExists', 'user', 'lists'));
+        return view('lists', compact('userExists', 'user', 'lists', 'isUserOwner'));
     }
 
     /**
@@ -60,11 +65,19 @@ class MovieListController extends Controller
     {
         $user = User::find($userId);
 
-        $list = MovieList::find($listId);
+        $list = null;
+        $listExists = false;
+        $movies = null;
 
-        $listExists = $list ? true : false;
-
-        $movies = $list->movies->toArray();
+        if($user) {
+            $list = $user->movie_lists()->find($listId);
+    
+            $listExists = $list ? true : false;
+    
+            if($listExists) {
+                $movies = $list->movies->toArray();
+            }
+        }
 
         return view('list', compact('listExists', 'user', 'list', 'movies'));
     }

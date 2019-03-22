@@ -37,6 +37,7 @@ class CheckIsUserActivated
                 'social/handle/{provider}',
                 'logout',
                 'welcome',
+                'user/{user_id}/lists'
             ];
 
             if (!in_array($currentRoute, $routesAllowed)) {

@@ -53,6 +53,10 @@ Route::group(['middleware' => ['web', 'activity']], function () {
 
     // Route to for user to reactivate their user deleted account.
     Route::get('/re-activate/{token}', ['as' => 'user.reactivate', 'uses' => 'RestoreUserController@userReActivate']);
+
+    // List routes
+    Route::get('user/{user_id}/lists', 'MovieListController@index');
+    Route::get('user/{user_id}/lists/{id}', 'MovieListController@show');
 });
 
 // Registered and Activated User Routes
@@ -78,7 +82,7 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
 
 // Registered, activated, and is current user routes.
 Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', 'twostep']], function () {
-
+    
     // User Profile and Account Routes
     Route::resource(
         'profile',
