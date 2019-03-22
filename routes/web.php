@@ -55,8 +55,9 @@ Route::group(['middleware' => ['web', 'activity']], function () {
     Route::get('/re-activate/{token}', ['as' => 'user.reactivate', 'uses' => 'RestoreUserController@userReActivate']);
 
     // List routes
-    Route::get('user/{user_id}/lists', 'MovieListController@index');
-    Route::get('user/{user_id}/lists/{id}', 'MovieListController@show');
+    Route::get('user/{user_id}/lists', 'MovieListController@index')->name('lists');
+    Route::get('user/{user_id}/lists/{list_id}', 'MovieListController@show')->name('list');
+    Route::delete('user/{user_id}/lists/{list_id}', 'MovieListController@destroy');
 });
 
 // Registered and Activated User Routes

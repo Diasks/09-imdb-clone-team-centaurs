@@ -16,7 +16,7 @@ class MovieListController extends Controller
      */
     public function index(Request $request)
     {
-        $currentUser = Auth::user();
+        $currentUserId = Auth::id();
 
         $userId = $request['user_id'];
 
@@ -28,7 +28,7 @@ class MovieListController extends Controller
         $isUserOwner = false;
         if($userExists) {
             $lists = $user->movie_lists;
-            $isUserOwner = $currentUser->id === $user->id;
+            $isUserOwner = $currentUserId === $user->id;
         }
 
         return view('lists', compact('userExists', 'user', 'lists', 'isUserOwner'));
@@ -111,8 +111,21 @@ class MovieListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($userId, $listId)
     {
-        //
+        $user = Auth::user();
+
+        $list = false;
+        if($user && $userId == $user->id) {
+            $list = $user->movie_lists()->find($listId);
+        }
+
+        if(!$list) {
+            return redirect()->route('list', ['user_id' => $userId, 'list_id' => $listId]);
+        }
+
+        $list->delete();
+
+        return redirect()->route('lists', ['user_id' => $userId]);
     }
 }
