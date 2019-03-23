@@ -25,7 +25,7 @@ Route::get('/reviews', 'ReviewController@index');
 
 /*ROUTES FÖR MOVIE*/
 
-Route::get('/movie/{movie_id}', 'MovieController@show');
+Route::get('/movie/{movie_id}', 'MovieController@show')->name('movie');
 
 Route::get('/movie/{movie_id}/reviews', 'ReviewController@index');
 Route::get('/movie/{movie_id}/photos', 'MovieController@showphoto');
@@ -64,6 +64,7 @@ Route::group(['middleware' => ['web', 'activity']], function () {
     Route::get('user/{user_id}/lists/{list_id}', 'MovieListController@show')->name('list');
     Route::delete('user/{user_id}/lists/{list_id}', 'MovieListController@destroy');
     Route::post('user/{user_id}/lists', 'MovieListController@store');
+    Route::patch('user/{user_id}/lists/{list_id}', 'MovieListController@update');
 });
 
 // Registered and Activated User Routes

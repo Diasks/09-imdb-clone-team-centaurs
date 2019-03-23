@@ -115,9 +115,30 @@ class MovieListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $userId, $listId)
     {
-        //
+        $validatedData = $request->validate([
+            'movie_id' => 'required',
+        ]);
+
+        $movieId = $validatedData['movie_id'];
+
+        $user = Auth::user();
+
+        if($user && $userId == $user->id) {
+            $list = $user->movie_lists()->find($listId);
+
+            if($list->movies->contains($movieId)) {
+                $request->session()->flash('error', 'That list already contains this movie');
+            }
+
+            else {
+                $list->movies()->attach($movieId);
+                $request->session()->flash('success', 'Movie added');
+            }
+        }
+
+        return redirect()->route('movie', ['movie_id' => $movieId]);
     }
 
     /**
