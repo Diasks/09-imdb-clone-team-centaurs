@@ -3,7 +3,7 @@
 @section('content')
     @if ($userExists)
         <div class="card">
-            <h2 class="card-header">Lists by {{ $user->name }}</h2>
+            <h2 class="card-header">Lists <small>by {{ $user->name }}</small></h2>
             <div class="card-body p-0">
                 <div class="list-group list-group-flush bg-light">
                     @forelse ($lists as $list)
@@ -25,7 +25,7 @@
                             @endif
                         </div>
                     @empty
-                        <div>No lists found.</div>
+                        <div class="p-3">No lists found.</div>
                     @endforelse
                 </div>
             </div>

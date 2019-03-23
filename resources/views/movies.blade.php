@@ -9,16 +9,19 @@
             @if ($lists)
                 <button class="btn btn-dark dropdown-toggle ml-3" id="listDropdownButton" data-toggle="dropdown">Add to list</button>
                 <div class="dropdown-menu" aria-labelledby="listDropdownButton">
-                    @foreach ($lists as $list)
+                    @forelse ($lists as $list)
                         <form action="/user/{{ $user->id }}/lists/{{ $list->id }}" method="POST">
                             @method('PATCH')
                             @csrf
+                            <input type="hidden" name="action" value="add" />
                             <input type="hidden" name="movie_id" value="{{ $movie->id }}" />
                             <div class="input-group">
                                 <button class="dropdown-item">{{ $list->name }}</button>
                             </div>
                         </form>
-                    @endforeach
+                    @empty
+                        <div class="dropdown-item">You don't have any lists</div>
+                    @endforelse
                 </div>
             @endif
         <div>

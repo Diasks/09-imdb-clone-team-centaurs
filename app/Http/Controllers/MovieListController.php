@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MovieList;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class MovieListController extends Controller
 {
@@ -32,16 +33,6 @@ class MovieListController extends Controller
         }
 
         return view('lists', compact('userExists', 'user', 'lists', 'isUserOwner'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -78,12 +69,14 @@ class MovieListController extends Controller
      */
     public function show($userId, $listId)
     {
+        $currentUserId = Auth::id();
+
         $user = User::find($userId);
 
         $list = null;
         $listExists = false;
         $movies = null;
-
+        $isUserOwner = false;
         if($user) {
             $list = $user->movie_lists()->find($listId);
     
@@ -92,20 +85,11 @@ class MovieListController extends Controller
             if($listExists) {
                 $movies = $list->movies->toArray();
             }
+
+            $isUserOwner = $userId == $currentUserId;
         }
 
-        return view('list', compact('listExists', 'user', 'list', 'movies'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return view('list', compact('listExists', 'user', 'list', 'movies', 'isUserOwner'));
     }
 
     /**
@@ -119,26 +103,47 @@ class MovieListController extends Controller
     {
         $validatedData = $request->validate([
             'movie_id' => 'required',
+            'action' => [
+                'required',
+                Rule::in(['add', 'remove']),
+            ]
         ]);
 
         $movieId = $validatedData['movie_id'];
+        $action = $validatedData['action'];
 
         $user = Auth::user();
 
         if($user && $userId == $user->id) {
             $list = $user->movie_lists()->find($listId);
 
-            if($list->movies->contains($movieId)) {
-                $request->session()->flash('error', 'That list already contains this movie');
-            }
+            switch ($action) {
+                case 'add':
+                    if($list->movies->contains($movieId)) {
+                        $request->session()->flash('error', 'That list already contains this movie');
+                    }
+        
+                    else {
+                        $list->movies()->attach($movieId);
+                        $request->session()->flash('success', 'Movie added');
+                    }
 
-            else {
-                $list->movies()->attach($movieId);
-                $request->session()->flash('success', 'Movie added');
+                    return redirect()->route('movie', ['movie_id' => $movieId]);
+                case 'remove':
+                    if($list->movies->contains($movieId)) {
+                        $list->movies()->detach($movieId);
+                        $request->session()->flash('success', 'Movie removed');
+                    }
+        
+                    else {
+                        $request->session()->flash('error', 'That movie is not in this list');
+                    }
+
+                    break;
             }
         }
 
-        return redirect()->route('movie', ['movie_id' => $movieId]);
+        return redirect()->route('list', ['user_id' => $userId, 'list_id' => $listId]);
     }
 
     /**
