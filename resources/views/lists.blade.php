@@ -8,7 +8,7 @@
                 <div class="list-group list-group-flush bg-light">
                     @forelse ($lists as $list)
                         <div class="list-group-item list-group-item-action d-flex justify-content-between py-0">
-                            <a class="col h5 text-dark m-0 py-3" href="lists/{{ $list->id }}">
+                            <a class="col h5 text-dark m-0 py-3" href="/user/{{ $user->id }}/lists/{{ $list->id }}">
                                 {{ $list->name }}
                                 <div class="badge badge-secondary ml-3">
                                     {{ count($list->movies->toArray()) }} movies
@@ -16,7 +16,7 @@
                             </a>
                             @if ($isUserOwner)
                                 <div class="d-flex flex-column justify-content-around">
-                                    <form action="lists/{{ $list->id }}" method="POST">
+                                    <form action="/user/{{ $user->id }}/lists/{{ $list->id }}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button class="btn btn-danger">X</button>
@@ -32,7 +32,7 @@
         </div>
         @if ($isUserOwner)
             <div class="pt-3">
-                <form action="lists/" method="POST">
+                <form action="/user/{{ $user->id }}/lists" method="POST">
                     @method('POST')
                     @csrf
                     <div class="input-group">

@@ -152,7 +152,7 @@ class MovieListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($userId, $listId)
+    public function destroy(Request $request, $userId, $listId)
     {
         $user = Auth::user();
 
@@ -166,6 +166,8 @@ class MovieListController extends Controller
         }
 
         $list->delete();
+
+        $request->session()->flash('success', 'List removed');
 
         return redirect()->route('lists', ['user_id' => $userId]);
     }
