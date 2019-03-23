@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-laravel">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="{{ url('') }}">
             {!! config('app.name', trans('titles.app')) !!}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,6 +19,10 @@
 
                             <a class="dropdown-item {{ Request::is('users', 'users/' . Auth::user()->id, 'users/' . Auth::user()->id . '/edit') ? 'active' : null }}" href="{{ url('/users') }}">
                                 {!! trans('titles.adminUserList') !!}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ url('/admin/movies') }}">
+                                {!! trans('Movie Administration') !!}
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item {{ Request::is('users/create') ? 'active' : null }}" href="{{ url('/users/create') }}">
@@ -52,44 +56,33 @@
                     </li>
                 @endrole
             </ul>
-            
-          <!--lägg in något här-->
+    
           {!! Form::open(['method'=>'GET','url'=>'search','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
         <div class="input-group custom-search-form">
                   <input type="text" class="form-control" name="search" placeholder="Search for movie..."> <span class="input-group-btn">
-    <button class="btn btn-default-sm" type="submit">
+    <button class="btn btn-default-sm btn btn-info" type="submit">
         <i class="fa fa-search"></i>
     </button>
     </span></div>
     {{ Form::close() }}
  
     <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-secondary dropdown-toggle btn btn-light text-info" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Browse
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Adventure</a>
-    <a class="dropdown-item" href="#">Animation</a>
-    <a class="dropdown-item" href="#">Comedy</a>
-    <a class="dropdown-item" href="#">Crime</a>
-    <a class="dropdown-item" href="#">Documentary</a>
-    <a class="dropdown-item" href="#">Drama</a>
-    <a class="dropdown-item" href="#">Family</a>
-    <a class="dropdown-item" href="#">Fantasy</a>
-    <a class="dropdown-item" href="#">History</a>
-    <a class="dropdown-item" href="#">Horror</a>
-    <a class="dropdown-item" href="#">Music</a>
-    <a class="dropdown-item" href="#">Mystery</a>
-    <a class="dropdown-item" href="#">Romance</a>
-    <a class="dropdown-item" href="#">Science Fiction</a>
-    <a class="dropdown-item" href="#">Thriller</a>
-    <a class="dropdown-item" href="#">War</a>
-    <a class="dropdown-item" href="#">Western</a>
+
+<!-- loopa igenom genres här som koden i genre.blade.php -->
+
+@foreach($genreData as $genre) 
+
+<a class="dropdown-item" href="/genre/{{$genre['name']}}">{{$genre['name']}}</a>
+@endforeach 
+ 
   </div>
 </div>
 <a href="/chart/top">
-<Button class="btn btn-primary">TOP-CHART!</Button>
+<Button class="btn btn-light text-info">Topchart</Button>
 </a>
 
 

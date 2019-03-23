@@ -18,16 +18,21 @@ Route::get('/', 'WelcomeController@welcome')->name('welcome');
 
 Route::get('/', 'MovieController@index');
 
+
+//REVIEW
+Route::get('/reviews', 'ReviewController@index');
+
+
 /*ROUTES FÖR MOVIE*/
 
 Route::get('/movie/{movie_id}', 'MovieController@show');
 
-Route::get('/movie/{movie_id}/reviews', 'MovieController@show');
-Route::get('/movie/{movie_id}/photos', 'MovieController@show');
-Route::get('/movie/{movie_id}/trailers', 'MovieController@show');
+Route::get('/movie/{movie_id}/reviews', 'ReviewController@index');
+Route::get('/movie/{movie_id}/photos', 'MovieController@showphoto');
+Route::get('/movie/{movie_id}/trailers', 'MovieController@showtrailer');
 
 //ROUTE FÖR GENRE
-Route::get('/genre/{genre}', 'MovieController@show');
+Route::get('/genre/{genre}', 'MovieController@genre');
 
 // ROUTE FÖR CHART-TOP
 Route::get('/chart/top', 'MovieController@topchart');
@@ -35,7 +40,7 @@ Route::get('/chart/top', 'MovieController@topchart');
 Route::get('/search', 'MovieController@search');
 
 // Authentication Routes
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Public Routes
 Route::group(['middleware' => ['web', 'activity']], function () {
@@ -151,3 +156,10 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 });
 
 Route::redirect('/php', '/phpinfo', 301);
+
+Route::get('/admin/movies', 'MovieController@get');
+Route::get('/admin/movies/create', 'MovieController@create');
+Route::post('/admin/movies/store', 'MovieController@store');
+Route::get('/admin/{movies}/edit', 'MovieController@edit');
+Route::patch('/admin/{movies}/update', 'MovieController@update');
+Route::delete('/admin/{movies}/destroy', 'MovieController@destroy');

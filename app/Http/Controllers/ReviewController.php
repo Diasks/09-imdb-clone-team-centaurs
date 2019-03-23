@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Review;
+use App\Models\Review;
 use Illuminate\Http\Request;
+use View;
+use Storage;
+use App\Models\Movie;
+
 
 class ReviewController extends Controller
 {
@@ -12,9 +15,35 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+
+
+/* i denna funktion ska du hämta omdömen för en specifik film */
+
+   
+    public function index($id)
+    {   
+
+        // $reviews =db::table('reviews')where('ID', $id)->get(8);
+        // return view('reviews', compact('reviews'));
+        // $reviews = Review::table('reviews')->where('id', = 'id');
+        $reviews = Review::all()->where('id', '=', $id)->take(4);
+        $movie = Movie::findOrFail($id);
+        // dd($reviews);
+        return view('reviews', compact('reviews', 'movie'));
+        // dd($reviews);
+        // $reviews = Review::all()->take(8);
+        // dd($reviews); 
+        // return view('reviews', compact('reviews'));
+        // return view('movies', compact('movie'));
+        // dd($movie);
+        // $reviews = Review::('reviews')->where()
+
+
+        // $reviews = Review::all()->take(100);
+        // dd($reviews);
+        // return view('reviews', compact('reviews'));
+        
+  
     }
 
     /**
@@ -46,7 +75,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        //
+      
     }
 
     /**
@@ -82,4 +111,7 @@ class ReviewController extends Controller
     {
         //
     }
+
+
+ 
 }

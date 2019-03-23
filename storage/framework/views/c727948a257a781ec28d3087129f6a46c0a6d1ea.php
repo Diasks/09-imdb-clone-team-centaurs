@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-laravel">
     <div class="container">
-        <a class="navbar-brand" href="<?php echo e(url('/')); ?>">
+        <a class="navbar-brand" href="<?php echo e(url('')); ?>">
             <?php echo config('app.name', trans('titles.app')); ?>
 
         </a>
@@ -21,6 +21,11 @@
 
                             <a class="dropdown-item <?php echo e(Request::is('users', 'users/' . Auth::user()->id, 'users/' . Auth::user()->id . '/edit') ? 'active' : null); ?>" href="<?php echo e(url('/users')); ?>">
                                 <?php echo trans('titles.adminUserList'); ?>
+
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="<?php echo e(url('/admin/movies')); ?>">
+                                <?php echo trans('Movie Administration'); ?>
 
                             </a>
                             <div class="dropdown-divider"></div>
@@ -62,6 +67,39 @@
                     </li>
                 <?php endif; ?>
             </ul>
+    
+          <?php echo Form::open(['method'=>'GET','url'=>'search','class'=>'navbar-form navbar-left','role'=>'search']); ?>
+
+        <div class="input-group custom-search-form">
+                  <input type="text" class="form-control" name="search" placeholder="Search for movie..."> <span class="input-group-btn">
+    <button class="btn btn-default-sm btn btn-info" type="submit">
+        <i class="fa fa-search"></i>
+    </button>
+    </span></div>
+    <?php echo e(Form::close()); ?>
+
+ 
+    <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle btn btn-light text-info" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   Browse
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+<!-- loopa igenom genres här som koden i genre.blade.php -->
+
+<?php $__currentLoopData = $genreData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
+
+<a class="dropdown-item" href="/genre/<?php echo e($genre['name']); ?>"><?php echo e($genre['name']); ?></a>
+<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
+ 
+  </div>
+</div>
+<a href="/chart/top">
+<Button class="btn btn-light text-info">Topchart</Button>
+</a>
+
+
+
             
             <ul class="navbar-nav ml-auto">
                 
