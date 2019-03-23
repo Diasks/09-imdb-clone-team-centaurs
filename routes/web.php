@@ -58,6 +58,7 @@ Route::group(['middleware' => ['web', 'activity']], function () {
     Route::get('user/{user_id}/lists', 'MovieListController@index')->name('lists');
     Route::get('user/{user_id}/lists/{list_id}', 'MovieListController@show')->name('list');
     Route::delete('user/{user_id}/lists/{list_id}', 'MovieListController@destroy');
+    Route::post('user/{user_id}/lists', 'MovieListController@store');
 });
 
 // Registered and Activated User Routes

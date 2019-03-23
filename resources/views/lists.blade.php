@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card">
-        @if ($userExists)
+    @if ($userExists)
+        <div class="card">
             <h2 class="card-header">Lists by {{ $user->name }}</h2>
             <div class="card-body p-0">
                 <div class="list-group list-group-flush bg-light">
@@ -29,8 +29,20 @@
                     @endforelse
                 </div>
             </div>
-        @else
-            <h2 class="card-header">This user does not exist.</h2>
+        </div>
+        @if ($isUserOwner)
+            <div class="pt-3">
+                <form action="lists/" method="POST">
+                    @method('POST')
+                    @csrf
+                    <div class="input-group">
+                        <input type="text" placeholder="Name" name="name" class="form-control col-3">
+                        <button class="btn btn-success ml-3">New list</button>
+                    </div>
+                </form>
+            </div>
         @endif
-    </div>
+    @else
+        <h2 class="card-header">This user does not exist.</h2>
+    @endif
 @endsection

@@ -50,9 +50,24 @@ class MovieListController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $userId)
     {
-        //
+        $user = Auth::user();
+        
+        if($user && $userId == $user->id) {
+            $validatedData = $request->validate([
+                'name' => 'required|max:50',
+            ]);
+
+            $list = new MovieList;
+
+            $list->name = $validatedData['name'];
+            $list->user_id = $user->id;
+
+            $list->save();
+        }
+
+        return redirect()->route('lists', ['user_id' => $userId]);
     }
 
     /**
