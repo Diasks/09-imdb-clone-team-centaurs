@@ -28,8 +28,8 @@ Route::get('/reviews', 'ReviewController@index');
 Route::get('/movie/{movie_id}', 'MovieController@show');
 
 Route::get('/movie/{movie_id}/reviews', 'ReviewController@index');
-Route::get('/movie/{movie_id}/photos', 'MovieController@showphoto');
-Route::get('/movie/{movie_id}/trailers', 'MovieController@showtrailer');
+Route::get('/movie/{movie_id}/photos', 'MovieController@showPhoto');
+Route::get('/movie/{movie_id}/trailers', 'MovieController@showTrailer');
 
 //ROUTE FÖR GENRE
 Route::get('/genre/{genre}', 'MovieController@genre');

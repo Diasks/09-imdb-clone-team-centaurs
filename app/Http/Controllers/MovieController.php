@@ -52,16 +52,18 @@ return $genre['name'];
 
 /* implementera funktion för att visa specifik films trailer i trailer.blade.php som inte finns än */
 
-public function showtrailer ()
+public function showTrailer ()
 {
-
+    return view('trailer');
 }
 
 
 /*implementera funktion för att visa specifik films foto/n i photo.blade.php som inte finns än */
-public function showphoto () 
+public function showPhoto ($id) 
 {
-
+    $photos = Movie::all('id');
+    dd($photos);
+    return view('photo', compact('photo'));
 }
     /**
      * Show the form for creating a new resource.
