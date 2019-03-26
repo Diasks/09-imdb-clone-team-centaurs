@@ -6,6 +6,7 @@ use Storage;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use App\Models\Review;
+use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
@@ -139,11 +140,16 @@ public function showPhoto ($id)
      */
     public function show($id)
     {
-    
-    $movie = Movie::findOrFail($id);
-    // dd($movie);
-    return view('movies', compact('movie'));
+        $movie = Movie::findOrFail($id);
 
+        $user = Auth::user();
+        
+        $lists = null;
+        if($user) {
+            $lists = $user->movie_lists;
+        }
+
+        return view('movies', compact('movie', 'lists', 'user'));
     }
 
 
@@ -156,7 +162,7 @@ public function showPhoto ($id)
         ->orderBy('title')
         ->paginate(12);
     
-        return view('search',compact('movies'))->withmovie($movies);
+        return view('search', compact('movies'))->withmovie($movies);
      }
 
     /**
