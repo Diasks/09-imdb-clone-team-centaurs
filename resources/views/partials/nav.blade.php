@@ -72,7 +72,7 @@
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-<!-- loopa igenom genres här som koden i genre.blade.php -->
+
 
 @foreach($genreData as $genre) 
 
