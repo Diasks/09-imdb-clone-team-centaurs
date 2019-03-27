@@ -53,18 +53,25 @@ return $genre['name'];
 
 /* implementera funktion för att visa specifik films trailer i trailer.blade.php som inte finns än */
 
-public function showTrailer ()
+public function showTrailer ($id)
 {
-    return view('trailer');
+    $trailers = Movie::all()
+    ->where('id', '=', $id)
+    ->take(1);
+
+    // dd($trailers);
+    return view('trailer', compact('trailers'));
 }
 
 
 /*implementera funktion för att visa specifik films foto/n i photo.blade.php som inte finns än */
 public function showPhoto ($id) 
 {
-    $photos = Movie::all('id');
-    dd($photos);
-    return view('photo', compact('photo'));
+    $photos = Movie::all()
+    ->where('id', '=', $id)
+    ->take(4);
+    // dd($photos);
+    return view('photo', compact('photos'));
 }
     /**
      * Show the form for creating a new resource.

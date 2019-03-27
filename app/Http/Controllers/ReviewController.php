@@ -26,9 +26,11 @@ class ReviewController extends Controller
         // $reviews =db::table('reviews')where('ID', $id)->get(8);
         // return view('reviews', compact('reviews'));
         // $reviews = Review::table('reviews')->where('id', = 'id');
-        $reviews = Review::all()->where('id', '=', $id)->take(4);
-        $movie = Movie::findOrFail($id);
+        $reviews = Review::all()
+        ->where('id', '=', $id)
+        ->take(4);
         // dd($reviews);
+        $movie = Movie::findOrFail($id);
         return view('reviews', compact('reviews', 'movie'));
         // dd($reviews);
         // $reviews = Review::all()->take(8);

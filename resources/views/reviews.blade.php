@@ -5,7 +5,7 @@
 
 <h1>Reviews for {{$movie->title}}</h1>
 
-
+    
 
 @foreach ($reviews as $review)
 <div class="card">

@@ -18,6 +18,7 @@ class Movie extends Model
         'status',
         'tagline',
         'poster_path',
+        'backdrop_path',
         'video',
         'vote_count',
         'vote_average',
