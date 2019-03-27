@@ -2,6 +2,10 @@
 
 @section('content')
 
+<td>
+        <a href="{{ action('MovieController@create') }}" class="btn btn-success">Create a movie</a>
+</td>
+
 <table class="table table-bordered table-sm">
 <thead class="thead-dark">
 <tr>
@@ -12,7 +16,6 @@
 <th>status</th>
 <th>tagline</th>
 <th>overview</th>
-<th>action</th>
 <th>action</th>
 <th>action</th>
 </tr>
@@ -27,9 +30,7 @@
 <td>{{$movie->status}}</td>
 <td>{{$movie->tagline}}</td>
 <td>{{$movie->overview}}</td>
-<td>
-<a href="{{ action('MovieController@create') }}" class="btn btn-success">Create</a>
-</td>
+
 <td>
 <a href="{{ action('MovieController@edit', $movie->id) }}" class="btn btn-warning">Edit</a>
 </td>
