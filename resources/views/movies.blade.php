@@ -4,7 +4,7 @@
     <div class="jumbotron jumbotron-fluid  bg-info">
         <div class="container">
             <h1 class="display-4">{{$movie->title}}</h1>
-            <img src="http://image.tmdb.org/t/p/w185//{{$movie->poster_path}}"/>
+            <img src="http://image.tmdb.org/t/p/w185//{{$movie->poster_path}}"/>   
 
             @if ($lists)
                 <button class="btn btn-dark dropdown-toggle ml-3" id="listDropdownButton" data-toggle="dropdown">Add to list</button>
@@ -31,7 +31,7 @@
     </div>
 
     <p class="lead"> {{$movie->overview}}   </p>
-
+<p>Rating: <i class="fa fa-star" aria-hidden="true"></i>{{$movie->vote_average}}</p>
     <p>Runtime: {{$movie->runtime}} minuter</p>
     <p>Release date: {{$movie->release_date}}</p>
     @foreach ($movie->genres as $genre)

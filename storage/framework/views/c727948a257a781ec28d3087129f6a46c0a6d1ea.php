@@ -85,7 +85,7 @@
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-<!-- loopa igenom genres här som koden i genre.blade.php -->
+
 
 <?php $__currentLoopData = $genreData; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
 
@@ -107,6 +107,9 @@
                     <li><a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(trans('titles.login')); ?></a></li>
                     <li><a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(trans('titles.register')); ?></a></li>
                 <?php else: ?>
+                    <li>
+                        <a class="nav-link" href="/user/<?php echo e(Auth::User()->id); ?>/lists">My lists</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <?php if((Auth::User()->profile) && Auth::user()->profile->avatar_status == 1): ?>
