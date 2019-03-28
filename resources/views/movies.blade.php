@@ -34,9 +34,9 @@
 <p>Rating: <i class="fa fa-star" aria-hidden="true"></i>{{$movie->vote_average}}</p>
     <p>Runtime: {{$movie->runtime}} minuter</p>
     <p>Release date: {{$movie->release_date}}</p>
-    @foreach ($movie->genres as $genre)
-    <p>Genre: {{$genre['name']}}</p>
-    @endforeach 
+ 
+    <p>Genre:   @foreach ($movie->genres as $genre) {{$genre['name']}}
+    @endforeach </p>
     <p>Production Company: @foreach ($movie->production_companies as $production)
     {{$production['name']}} 
     @endforeach</p>
