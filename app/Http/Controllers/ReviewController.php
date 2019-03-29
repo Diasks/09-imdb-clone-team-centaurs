@@ -51,9 +51,11 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+
+        return view('create-review', compact('movie'));
     }
 
     /**

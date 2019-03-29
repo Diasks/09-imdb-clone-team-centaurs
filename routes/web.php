@@ -28,6 +28,7 @@ Route::get('/reviews', 'ReviewController@index');
 Route::get('/movie/{movie_id}', 'MovieController@show')->name('movie');
 
 Route::get('/movie/{movie_id}/reviews', 'ReviewController@index');
+Route::get('/movie/{movie_id}/reviews/create', 'ReviewController@create');
 Route::get('/movie/{movie_id}/photos', 'MovieController@showphoto');
 Route::get('/movie/{movie_id}/trailers', 'MovieController@showtrailer');
 

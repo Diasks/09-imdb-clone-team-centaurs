@@ -25,7 +25,7 @@ class ReviewsTableSeeder extends Seeder
     //  så loopar jag igenom varje movie result och döper om dom till review
             foreach($movie->results as $review) {
                 Review::create(array(
-                    'user_id' => $movie_id,
+                    'user_id' => null,
                     'author' => $review->author,
                     'content' => $review->content,
                     'movie_id' => $movie_id
