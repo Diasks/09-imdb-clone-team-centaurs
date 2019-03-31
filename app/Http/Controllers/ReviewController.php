@@ -52,7 +52,7 @@ class ReviewController extends Controller
         
         if($user) {
             $validatedData = $request->validate([
-                'content' => 'required',
+                'content' => 'required|max:20000',
             ]);
 
             $review = new Review;
