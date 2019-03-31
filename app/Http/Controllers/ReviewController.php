@@ -5,6 +5,7 @@ use App\Models\Review;
 use Illuminate\Http\Request;
 use View;
 use Storage;
+use App\Models\User;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Auth;
 
@@ -112,6 +113,22 @@ class ReviewController extends Controller
         //
     }
 
+    /**
+     * Display a listing of the resource from a specific user.
+     *
+     * @param  \App\Review  $review
+     * @return \Illuminate\Http\Response
+     */
+    public function userReviews($userId)
+    {
+        $user = User::find($userId);
 
- 
+        if($user) {
+            $reviews = $user->reviews;
+            
+            return view('user-reviews', compact('reviews', 'user'));
+        }
+        
+        return redirect('/');
+    }
 }

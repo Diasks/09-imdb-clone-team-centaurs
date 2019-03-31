@@ -60,6 +60,8 @@
 								{{ $user->email }}
 							</dd>
 
+                            <a href="/user/{{ $user->id }}/reviews">Reviews</a>
+
 							@if ($user->profile)
 
 								@if ($user->profile->theme_id)

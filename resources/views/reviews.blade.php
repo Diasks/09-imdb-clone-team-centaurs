@@ -13,7 +13,7 @@
             </div>
         </div>
     @empty
-        <h2>No reviews found for this movie</h2>
+        <div class="py-3">No reviews found for this movie.</div>
     @endforelse
 
     <a href="/movie/{{$movie->id}}"><button class="btn btn-dark">Go back</button></a>
