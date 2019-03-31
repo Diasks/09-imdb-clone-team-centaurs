@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use View;
 use Storage;
 use App\Models\Movie;
-
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -22,14 +22,10 @@ class ReviewController extends Controller
    
     public function index($id)
     {   
-
-              $reviews = Review::all()
-        ->where('id', '=', $id)
-        ->take(4);
         $movie = Movie::findOrFail($id);
+        $reviews = $movie->reviews;
+
         return view('reviews', compact('reviews', 'movie'));
-        
-  
     }
 
     /**
@@ -50,9 +46,25 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $movieId)
     {
-        //
+        $user = Auth::user();
+        
+        if($user) {
+            $validatedData = $request->validate([
+                'content' => 'required',
+            ]);
+
+            $review = new Review;
+
+            $review->content = $validatedData['content'];
+            $review->movie_id = $movieId;
+            $review->user_id = $user->id;
+
+            $review->save();
+        }
+
+        return redirect()->route('reviews', ['movie_id' => $movieId]);
     }
 
     /**

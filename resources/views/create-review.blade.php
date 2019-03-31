@@ -8,7 +8,7 @@
                 @method('POST')
                 @csrf
                 <input type="hidden" name="movie_id" value="{{ $movie->id }}" />
-                <textarea name="content" cols="30" rows="10" class="form-control"></textarea>
+                <textarea name="content" cols="30" rows="10" class="form-control" placeholder="Write your review here"></textarea>
                 <button class="btn btn-dark mt-3">Post</button>
             </form>
         </div>
