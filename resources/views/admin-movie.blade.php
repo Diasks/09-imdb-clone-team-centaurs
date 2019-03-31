@@ -2,19 +2,24 @@
 
 @section('content')
 
+
+        <a href="{{ action('MovieController@create') }}" class="btn btn-success">Add a movie</a>
+
+        <div class="container">
+        <div class="row">
+      <div class="col-lg-10 offset-lg-1">
 <table class="table table-bordered table-sm">
 <thead class="thead-dark">
 <tr>
-<th>Id</th>
-<th>Title</th>
-<th>Runtime</th>
-<th>release_date</th>
-<th>status</th>
-<th>tagline</th>
-<th>overview</th>
-<th>action</th>
-<th>action</th>
-<th>action</th>
+<th scope="col">Id</th>
+<th scope="col">Title</th>
+<th scope="col">Runtime</th>
+<th scope="col">release_date</th>
+<th scope="col">status</th>
+<th scope="col">tagline</th>
+<th scope="col">overview</th>
+<th scope="col">action</th>
+<th scope="col">action</th>
 </tr>
 </thead>
 <tbody class="table-hover">
@@ -27,9 +32,7 @@
 <td>{{$movie->status}}</td>
 <td>{{$movie->tagline}}</td>
 <td>{{$movie->overview}}</td>
-<td>
-<a href="{{ action('MovieController@create') }}" class="btn btn-success">Create</a>
-</td>
+
 <td>
 <a href="{{ action('MovieController@edit', $movie->id) }}" class="btn btn-warning">Edit</a>
 </td>
@@ -45,4 +48,7 @@
 
 </tbody>
 </table>
+</div>
+</div>
+</div>
 @endsection

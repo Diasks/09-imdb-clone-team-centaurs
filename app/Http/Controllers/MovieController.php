@@ -53,16 +53,23 @@ return $genre['name'];
 
 /* implementera funktion för att visa specifik films trailer i trailer.blade.php som inte finns än */
 
-public function showtrailer ()
+public function showTrailer ($id)
 {
-
+    $trailers = Movie::all()
+    ->where('id', '=', $id)
+    ->take(1);
+    return view('trailer', compact('trailers'));
 }
 
 
 /*implementera funktion för att visa specifik films foto/n i photo.blade.php som inte finns än */
-public function showphoto () 
+public function showPhoto ($id) 
 {
-
+ 
+    $photos = Movie::all()
+    ->where('id', '=', $id)
+    ->take(4);
+    return view('photo', compact('photos'));
 }
     /**
      * Show the form for creating a new resource.
