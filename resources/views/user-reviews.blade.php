@@ -12,6 +12,6 @@
             </div>
         </div>
     @empty
-        <div class="p-3">No reviews found.</div>
+        <div class="py-3">No reviews found.</div>
     @endforelse
 @endsection

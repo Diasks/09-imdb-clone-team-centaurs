@@ -63,6 +63,8 @@ class ReviewController extends Controller
             $review->user_id = $user->id;
 
             $review->save();
+
+            $request->session()->flash('success', 'Review posted');
         }
 
         return redirect()->route('reviews', ['movie_id' => $movieId]);

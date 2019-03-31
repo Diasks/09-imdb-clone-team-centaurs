@@ -6,6 +6,11 @@
             <h1 class="display-4">{{$movie->title}}</h1>
             <img src="http://image.tmdb.org/t/p/w185//{{$movie->poster_path}}"/>   
 
+            <div class="pt-2">
+                <a href="/movie/{{$movie->id}}/reviews" class="badge badge-dark">Reviews</a>
+                <a href="/movie/{{$movie->id}}/photos" class="badge badge-dark">Photos</a>
+                <a href="/movie/{{$movie->id}}/trailers" class="badge badge-dark">Trailers</a>
+            </div>
             <div class="my-3">
                 <a href="/movie/{{ $movie->id }}/reviews/create" class="btn btn-dark">Write a review...</a>
                 @if ($lists)
@@ -28,9 +33,6 @@
                 @endif
             </div>
         <div>
-        <a href="/movie/{{$movie->id}}/reviews" class="badge badge-dark">Reviews</a>
-        <a href="/movie/{{$movie->id}}/photos" class="badge badge-dark">Photos</a>
-        <a href="/movie/{{$movie->id}}/trailers" class="badge badge-dark">Trailers</a>
     </div>
 
     <p class="lead"> {{$movie->overview}}   </p>
