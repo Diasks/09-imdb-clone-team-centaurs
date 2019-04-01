@@ -21,7 +21,6 @@
 <a href="/movie/{{$movie->id}}"><button class="btn btn-dark">Go back</button></a>
 
 
-
    @endsection
 
 

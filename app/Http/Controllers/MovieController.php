@@ -44,9 +44,9 @@ return $genre['name'];
 );
 
     $movies = Movie::all()->toArray();
+    // dd($movies);
     return view('genre', compact('genreData', 'movies', 'genreNames', 'genre'));
- 
-    
+
 }
 
 
