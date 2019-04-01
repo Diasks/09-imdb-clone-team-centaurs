@@ -15,10 +15,11 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('user_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->string('author')->nullable();
-            $table->mediumText('content');
+            $table->text('content');
             $table->integer('movie_id');
+            $table->boolean('accepted')->default(0);
             $table->timestamps();
         });
     }

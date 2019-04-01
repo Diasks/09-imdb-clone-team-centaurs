@@ -5,8 +5,9 @@ use App\Models\Review;
 use Illuminate\Http\Request;
 use View;
 use Storage;
+use App\Models\User;
 use App\Models\Movie;
-
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -22,30 +23,10 @@ class ReviewController extends Controller
    
     public function index($id)
     {   
-
-        // $reviews =db::table('reviews')where('ID', $id)->get(8);
-        // return view('reviews', compact('reviews'));
-        // $reviews = Review::table('reviews')->where('id', = 'id');
-        $reviews = Review::all()
-        ->where('id', '=', $id)
-        ->take(4);
-        // dd($reviews);
         $movie = Movie::findOrFail($id);
+        $reviews = $movie->accepted_reviews;
+
         return view('reviews', compact('reviews', 'movie'));
-        // dd($reviews);
-        // $reviews = Review::all()->take(8);
-        // dd($reviews); 
-        // return view('reviews', compact('reviews'));
-        // return view('movies', compact('movie'));
-        // dd($movie);
-        // $reviews = Review::('reviews')->where()
-
-
-        // $reviews = Review::all()->take(100);
-        // dd($reviews);
-        // return view('reviews', compact('reviews'));
-        
-  
     }
 
     /**
@@ -53,9 +34,11 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+
+        return view('create-review', compact('movie'));
     }
 
     /**
@@ -64,9 +47,31 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $movieId)
     {
+<<<<<<< HEAD
     
+=======
+        $user = Auth::user();
+        
+        if($user) {
+            $validatedData = $request->validate([
+                'content' => 'required|max:20000',
+            ]);
+
+            $review = new Review;
+
+            $review->content = $validatedData['content'];
+            $review->movie_id = $movieId;
+            $review->user_id = $user->id;
+
+            $review->save();
+
+            $request->session()->flash('success', 'Review saved - Wait for it to be accepted');
+        }
+
+        return redirect()->route('reviews', ['movie_id' => $movieId]);
+>>>>>>> develop
     }
 
     /**
@@ -114,6 +119,22 @@ class ReviewController extends Controller
         //
     }
 
+    /**
+     * Display a listing of the resource from a specific user.
+     *
+     * @param  \App\Review  $review
+     * @return \Illuminate\Http\Response
+     */
+    public function userReviews($userId)
+    {
+        $user = User::find($userId);
 
- 
+        if($user) {
+            $reviews = $user->accepted_reviews;
+            
+            return view('user-reviews', compact('reviews', 'user'));
+        }
+        
+        return redirect('/');
+    }
 }

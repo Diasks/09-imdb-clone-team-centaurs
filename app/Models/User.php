@@ -114,11 +114,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->profiles()->detach($profile);
     }
 
-    public function reviews() {
+    public function reviews()
+    {
         return $this->hasMany('App\Models\Review');
     }
 
-    public function movie_lists() {
+    public function accepted_reviews()
+    {
+        return $this->reviews()->where('accepted', '=', 1);
+    }
+
+    public function movie_lists()
+    {
         return $this->hasMany('App\Models\MovieList');
     }
 }

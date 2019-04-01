@@ -11,6 +11,7 @@ class Review extends Model
         'content',
         'movie_id',
         'user_id',
+        'accepted',
     ];
 
     public function movie()

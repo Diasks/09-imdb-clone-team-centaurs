@@ -63,7 +63,7 @@ class ProfilesController extends Controller
             abort(404);
         }
 
-        $currentTheme = Theme::find($user->profile->theme_id);
+        $currentTheme = $user->profile ? Theme::find($user->profile->theme_id) : null;
 
         $data = [
             'user'         => $user,
@@ -94,7 +94,7 @@ class ProfilesController extends Controller
                         ->orderBy('name', 'asc')
                         ->get();
 
-        $currentTheme = Theme::find($user->profile->theme_id);
+        $currentTheme = $user->profile ? Theme::find($user->profile->theme_id) : null;
 
         $data = [
             'user'         => $user,

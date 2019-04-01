@@ -58,8 +58,6 @@ public function showTrailer ($id)
     $trailers = Movie::all()
     ->where('id', '=', $id)
     ->take(1);
-
-    // dd($trailers);
     return view('trailer', compact('trailers'));
 }
 
@@ -67,10 +65,10 @@ public function showTrailer ($id)
 /*implementera funktion för att visa specifik films foto/n i photo.blade.php som inte finns än */
 public function showPhoto ($id) 
 {
+ 
     $photos = Movie::all()
     ->where('id', '=', $id)
     ->take(4);
-    // dd($photos);
     return view('photo', compact('photos'));
 }
     /**

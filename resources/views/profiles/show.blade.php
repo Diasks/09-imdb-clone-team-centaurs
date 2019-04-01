@@ -26,7 +26,7 @@
 					</div>
 					<div class="card-body">
 
-    					<img src="@if ($user->profile->avatar_status == 1) {{ $user->profile->avatar }} @else {{ Gravatar::get($user->email) }} @endif" alt="{{ $user->name }}" class="user-avatar">
+    					<img src="@if ($user->profile && $user->profile->avatar_status == 1) {{ $user->profile->avatar }} @else {{ Gravatar::get($user->email) }} @endif" alt="{{ $user->name }}" class="user-avatar">
 
 						<dl class="user-info">
 
@@ -59,6 +59,8 @@
 							<dd>
 								{{ $user->email }}
 							</dd>
+
+                            <a href="/user/{{ $user->id }}/reviews">Reviews</a>
 
 							@if ($user->profile)
 

@@ -27,7 +27,8 @@ Route::get('/reviews', 'ReviewController@index');
 
 Route::get('/movie/{movie_id}', 'MovieController@show')->name('movie');
 
-Route::get('/movie/{movie_id}/reviews', 'ReviewController@index');
+Route::get('/movie/{movie_id}/reviews', 'ReviewController@index')->name('reviews');
+
 Route::get('/movie/{movie_id}/photos', 'MovieController@showPhoto');
 Route::get('/movie/{movie_id}/trailers', 'MovieController@showTrailer');
 
@@ -69,6 +70,9 @@ Route::group(['middleware' => ['web', 'activity']], function () {
 
 // Registered and Activated User Routes
 Route::group(['middleware' => ['auth', 'activated', 'activity']], function () {
+    //Review routes
+    Route::get('/movie/{movie_id}/reviews/create', 'ReviewController@create');
+    Route::post('/movie/{movie_id}/reviews', 'ReviewController@store');
 
     // Activation Routes
     Route::get('/activation-required', ['uses' => 'Auth\ActivateController@activationRequired'])->name('activation-required');
@@ -86,6 +90,9 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
         'as'   => '{username}',
         'uses' => 'ProfilesController@show',
     ]);
+
+    // Show users reviews
+    Route::get('/user/{user_id}/reviews', 'ReviewController@userReviews');
 });
 
 // Registered, activated, and is current user routes.

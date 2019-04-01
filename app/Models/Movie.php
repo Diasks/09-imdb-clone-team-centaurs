@@ -34,9 +34,14 @@ class Movie extends Model
         'crew' => 'array',
     ];
 
-    public function movieReviews()
+    public function reviews()
     {
         return $this->hasMany('App\Models\Review');
+    }
+
+    public function accepted_reviews()
+    {
+        return $this->reviews()->where('accepted', '=', 1);
     }
 
     public function movie_lists()
