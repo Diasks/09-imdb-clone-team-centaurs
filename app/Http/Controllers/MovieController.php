@@ -87,13 +87,14 @@ public function showPhoto ($id)
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'movie_title'=>'required',
             'movie_genres'=> 'required',
             'movie_runtime' => 'required|integer',
-            'movie_release'=> 'required|integer',
+            'movie_release'=> 'required',
             'movie_adult' => 'required|integer',
             'movie_revenue'=> 'required|integer',
             'movie_budget' => 'required|integer',
@@ -106,31 +107,32 @@ public function showPhoto ($id)
             'movie_average'=> 'required|integer',
             'movie_production' => 'required',
             'movie_cast' => 'required',
-            'movie_crew' => 'required',
+            'movie_crew' => 'required', 
             'movie_overview' => 'required'
             
 
           ]);
+        //   dd($validatedData);
           $movie = new Movie([
-            'movie_title'=> $request->get('movie_title'),
-            'movie_genres'=> $request->get('movie_genres'),
-            'movie_runtime' => $request->get('movie_runtime'),
-            'movie_release'=> $request->get('movie_release'),
-            'movie_adult' => $request->get('movie_adult'),
-            'movie_revenue'=> $request->get('movie_revenue'),
-            'movie_budget' => $request->get('movie_budget'),
-            'movie_status'=> $request->get('movie_status'),
-            'movie_tagline' => $request->get('movie_tagline'),
-            'movie_poster'=> $request->get('movie_poster'),
-            'movie_backdrop' => $request->get('movie_backdrop'),
-            'movie_video'=> $request->get('movie_video'),
-            'movie_vote' => $request->get('movie_vote'),
-            'movie_average'=> $request->get('movie_average'),
-            'movie_production' => $request->get('movie_production'),
-            'movie_cast' => $request->get('movie_cast'),
-            'movie_crew' => $request->get('movie_crew'),
-            'movie_overview' => $request->get('movie_overview'),
-
+            'title'=> $validatedData['movie_title'],
+            'genres'=> $validatedData['movie_genres'],
+            'runtime' => $validatedData['movie_runtime'],
+            'release_date'=> $validatedData['movie_release'],
+            'adult' => $validatedData['movie_adult'],
+            'revenue'=> $validatedData['movie_revenue'],
+            'budget' => $validatedData['movie_budget'],
+            'status'=> $validatedData['movie_status'],
+            'tagline' => $validatedData['movie_tagline'],
+            'poster_path'=> $validatedData['movie_poster'],
+            'backdrop_path' => $validatedData['movie_backdrop'],
+            'video'=> $validatedData['movie_video'],
+            'vote_count' => $validatedData['movie_vote'],
+            'vote_average'=> $validatedData['movie_average'],
+            'production_companies' => $validatedData['movie_production'],
+            'cast' => $validatedData['movie_cast'],
+            'crew' => $validatedData['movie_crew'],
+            'overview' => 'hjhghjgjhg'
+            
 
           ]);
           $movie->save();

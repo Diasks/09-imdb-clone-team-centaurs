@@ -25,6 +25,7 @@ class Movie extends Model
         'production_companies',
         'cast',
         'crew',
+        'overview'
     ];
 
     protected $casts = [

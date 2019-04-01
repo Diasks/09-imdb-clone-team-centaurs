@@ -1,33 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<<<<<<< HEAD
-
-
-<h1>Reviews for {{$movie->title}}</h1>
-
-    
-
-@foreach ($reviews as $review)
-<div class="card">
-  <div class="card-header">
-  <h5>User:  {{$review->author}}</h5>
-  </div>
-  <div class="card-body">
-    <p class="card-text"> <p> {{$review->content}}</p>
-  </div>
-</div>
-@endforeach
-
-<a href="/movie/{{$movie->id}}"><button class="btn btn-dark">Go back</button></a>
-
-
-   @endsection
-
-
-
-
-=======
     <h1>Reviews for {{$movie->title}}</h1>    
 
     @forelse ($reviews as $review)
@@ -45,4 +18,3 @@
 
     <a href="/movie/{{$movie->id}}"><button class="btn btn-dark">Go back</button></a>
 @endsection
->>>>>>> develop
