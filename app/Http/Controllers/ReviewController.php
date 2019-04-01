@@ -24,7 +24,7 @@ class ReviewController extends Controller
     public function index($id)
     {   
         $movie = Movie::findOrFail($id);
-        $reviews = $movie->reviews;
+        $reviews = $movie->accepted_reviews;
 
         return view('reviews', compact('reviews', 'movie'));
     }
@@ -64,7 +64,7 @@ class ReviewController extends Controller
 
             $review->save();
 
-            $request->session()->flash('success', 'Review posted');
+            $request->session()->flash('success', 'Review saved - Wait for it to be accepted');
         }
 
         return redirect()->route('reviews', ['movie_id' => $movieId]);
@@ -126,7 +126,7 @@ class ReviewController extends Controller
         $user = User::find($userId);
 
         if($user) {
-            $reviews = $user->reviews;
+            $reviews = $user->accepted_reviews;
             
             return view('user-reviews', compact('reviews', 'user'));
         }

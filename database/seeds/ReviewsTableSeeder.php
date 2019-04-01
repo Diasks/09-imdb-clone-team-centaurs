@@ -28,7 +28,8 @@ class ReviewsTableSeeder extends Seeder
                     'user_id' => null,
                     'author' => $review->author,
                     'content' => $review->content,
-                    'movie_id' => $movie_id
+                    'movie_id' => $movie_id,
+                    'accepted' => 1
                 ));
             }
         }
