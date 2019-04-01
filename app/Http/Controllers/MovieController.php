@@ -112,7 +112,7 @@ public function showPhoto ($id)
             
 
           ]);
-        //   dd($validatedData);
+        
           $movie = new Movie([
             'title'=> $validatedData['movie_title'],
             'genres'=> $validatedData['movie_genres'],
@@ -181,7 +181,7 @@ public function showPhoto ($id)
     public function edit($id)
     {
         $movie = Movie::find($id);
-
+        // dd($movie);
         return view('admin-movie-edit', compact('movie'));
     
     }
@@ -217,6 +217,7 @@ public function showPhoto ($id)
             
 
           ]);
+        //   dd($request->all());
           $movie = Movie::find($id);
           $movie->title= $request->get('movie_title');
           $movie->genres= $request->get('movie_genres');
@@ -238,7 +239,6 @@ public function showPhoto ($id)
           $movie->overview = $request->get('movie_overview');
 
 
-         
           $movie->save();
           return redirect('/admin/movies')->with('success', 'Movie has been updated!');
     }
