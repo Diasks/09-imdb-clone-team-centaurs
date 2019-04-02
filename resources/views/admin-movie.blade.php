@@ -10,8 +10,8 @@
      
         <div class="row">
         <a href="{{ action('MovieController@create') }}" class="btn btn-success">Add a movie</a>
-        <div class="table-responsive users-table">
-                            <table class="table table-striped table-sm data-table">
+        <div class="table-responsive">
+                            <table class="table table-striped table-sm">
 <thead class="thead-dark">
 <tr>
 <th scope="col">Id</th>
