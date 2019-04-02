@@ -3,12 +3,15 @@
 @section('content')
 
 
-        <a href="{{ action('MovieController@create') }}" class="btn btn-success">Add a movie</a>
+       
 
         <div class="container">
+ 
+     
         <div class="row">
-      <div class="col-lg-10 offset-lg-1">
-<table class="table table-bordered table-sm">
+        <a href="{{ action('MovieController@create') }}" class="btn btn-success">Add a movie</a>
+        <div class="table-responsive users-table">
+                            <table class="table table-striped table-sm data-table">
 <thead class="thead-dark">
 <tr>
 <th scope="col">Id</th>

@@ -104,16 +104,6 @@
                                 </button>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-12 col-lg-10 offset-lg-1 col-xl-8 offset-xl-2">
-                                <p class="text-center mb-4">
-                                    Or Use Social Logins to Register
-                                </p>
-                                <?php echo $__env->make('partials.socials', \Illuminate\Support\Arr::except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                            </div>
-                        </div>
-
                     </form>
                 </div>
             </div>
