@@ -19,6 +19,7 @@ class CreateReviewsTable extends Migration
             $table->string('author')->nullable();
             $table->text('content');
             $table->integer('movie_id');
+            $table->boolean('audited')->default(0);
             $table->boolean('accepted')->default(0);
             $table->timestamps();
         });

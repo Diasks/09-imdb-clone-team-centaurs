@@ -29,6 +29,7 @@ class ReviewsTableSeeder extends Seeder
                     'author' => $review->author,
                     'content' => $review->content,
                     'movie_id' => $movie_id,
+                    'audited' => 1,
                     'accepted' => 1
                 ));
             }

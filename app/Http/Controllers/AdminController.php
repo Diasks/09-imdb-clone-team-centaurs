@@ -14,7 +14,7 @@ class AdminController extends Controller
      */
     public function reviews(Request $request)
     {
-        $reviews = Review::where('accepted', 0)->get();
+        $reviews = Review::where('audited', 0)->get();
 
         return view('admin-reviews', compact('reviews'));
     }
@@ -24,6 +24,7 @@ class AdminController extends Controller
         $review = Review::find($reviewId);
 
         if($review) {
+            $review->audited = 1;
             $review->accepted = 1;
             $review->save();
         }
@@ -33,6 +34,14 @@ class AdminController extends Controller
 
     public function reviewReject($reviewId)
     {
+        $review = Review::find($reviewId);
 
+        if($review) {
+            $review->audited = 1;
+            $review->accepted = 0;
+            $review->save();
+        }
+
+        return redirect()->route('audit-reviews');
     }
 }

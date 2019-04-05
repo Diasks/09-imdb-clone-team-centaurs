@@ -27,7 +27,7 @@
         </div>
     </div>
 @empty
-    <h5>No reviews to audit.</h5>
+    <p>No reviews to audit.</p>
 @endforelse
 
 @endsection
