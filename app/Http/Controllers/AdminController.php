@@ -14,7 +14,7 @@ class AdminController extends Controller
      */
     public function reviews(Request $request)
     {
-        $reviews = Review::where('accepted', 0);
+        $reviews = Review::where('accepted', 0)->get();
 
         return view('admin-reviews', compact('reviews'));
     }
