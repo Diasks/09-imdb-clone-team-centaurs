@@ -164,7 +164,9 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('/admin/{movies}/edit', 'MovieController@edit');
     Route::patch('/admin/{movies}/update', 'MovieController@update');
     Route::delete('/admin/{movies}/destroy', 'MovieController@destroy');
-    Route::get('/admin/reviews', 'AdminController@reviews');
+    Route::get('/admin/reviews', 'AdminController@reviews')->name('audit-reviews');
+    Route::patch('/admin/reviews/{review_id}/accept', 'AdminController@reviewAccept');
+    Route::patch('/admin/reviews/{review_id}/reject', 'AdminController@reviewReject');
 });
 
 Route::redirect('/php', '/phpinfo', 301);

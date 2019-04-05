@@ -2,6 +2,8 @@
 
 @section('content')
 
+<h2>Audit reviews</h2>
+
 @forelse ($reviews as $review)
     <div class="card mb-3">
         <div class="card-header">
@@ -10,12 +12,22 @@
         </div>
         <div class="card-body">
             <p class="card-text">{{ $review->content }}</p>
-            <button title="Accept" class="btn btn-success">✓</button>
-            <button title="Reject" class="btn btn-danger">✕</button>
+            <div class="d-flex">
+                <form action="/admin/reviews/{{ $review->id }}/accept" method="POST">
+                    @method('PATCH')
+                    @csrf
+                    <button title="Accept" class="btn btn-success">✓</button>
+                </form>
+                <form action="/admin/reviews/{{ $review->id }}/reject" method="POST">
+                    @method('PATCH')
+                    @csrf
+                    <button title="Reject" class="btn btn-danger ml-2">✕</button>
+                </form>
+            </div>
         </div>
     </div>
 @empty
-    <div class="dropdown-item">No reviews to audit.</div>
+    <h5>No reviews to audit.</h5>
 @endforelse
 
 @endsection

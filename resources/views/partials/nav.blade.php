@@ -26,7 +26,7 @@
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ url('/admin/reviews') }}">
-                                {!! trans('Review Administration') !!}
+                                {!! trans('Audit Reviews') !!}
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item {{ Request::is('users/create') ? 'active' : null }}" href="{{ url('/users/create') }}">

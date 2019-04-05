@@ -18,4 +18,21 @@ class AdminController extends Controller
 
         return view('admin-reviews', compact('reviews'));
     }
+
+    public function reviewAccept($reviewId)
+    {
+        $review = Review::find($reviewId);
+
+        if($review) {
+            $review->accepted = 1;
+            $review->save();
+        }
+
+        return redirect()->route('audit-reviews');
+    }
+
+    public function reviewReject($reviewId)
+    {
+
+    }
 }
