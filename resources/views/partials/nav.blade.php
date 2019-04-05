@@ -25,6 +25,10 @@
                                 {!! trans('Movie Administration') !!}
                             </a>
                             <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ url('/admin/reviews') }}">
+                                {!! trans('Review Administration') !!}
+                            </a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item {{ Request::is('users/create') ? 'active' : null }}" href="{{ url('/users/create') }}">
                                 {!! trans('titles.adminNewUser') !!}
                             </a>
@@ -52,6 +56,7 @@
                             <a class="dropdown-item {{ Request::is('active-users') ? 'active' : null }}" href="{{ url('/active-users') }}">
                                 {!! trans('titles.activeUsers') !!}
                             </a>
+                            <div class="dropdown-divider"></div>
                         </div>
                     </li>
                 @endrole

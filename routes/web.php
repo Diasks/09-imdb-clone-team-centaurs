@@ -157,13 +157,14 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('routes', 'AdminDetailsController@listRoutes');
     Route::get('active-users', 'AdminDetailsController@activeUsers');
+
+    Route::get('/admin/movies', 'MovieController@get');
+    Route::get('/admin/movies/create', 'MovieController@create');
+    Route::post('/admin/movies/store', 'MovieController@store');
+    Route::get('/admin/{movies}/edit', 'MovieController@edit');
+    Route::patch('/admin/{movies}/update', 'MovieController@update');
+    Route::delete('/admin/{movies}/destroy', 'MovieController@destroy');
+    Route::get('/admin/reviews', 'AdminController@reviews');
 });
 
 Route::redirect('/php', '/phpinfo', 301);
-
-Route::get('/admin/movies', 'MovieController@get');
-Route::get('/admin/movies/create', 'MovieController@create');
-Route::post('/admin/movies/store', 'MovieController@store');
-Route::get('/admin/{movies}/edit', 'MovieController@edit');
-Route::patch('/admin/{movies}/update', 'MovieController@update');
-Route::delete('/admin/{movies}/destroy', 'MovieController@destroy');
