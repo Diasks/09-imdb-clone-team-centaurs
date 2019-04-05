@@ -1,10 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.app', ['container' => false])
 
 @section('content')
-    <div class="jumbotron jumbotron-fluid  bg-info">
-        <div class="container">
+<div class="movie-wrapper">
+    <div class="movie-backdrop-container w-100">
+        <img src="http://image.tmdb.org/t/p/original/{{ $movie->backdrop_path }}" class="w-100 movie-backdrop" />
+    </div>
+    <div>
+        <div class="container movie-details p-4">
             <h1 class="display-4">{{$movie->title}}</h1>
-            <img src="http://image.tmdb.org/t/p/w185//{{$movie->poster_path}}"/>   
+            <img src="http://image.tmdb.org/t/p/w185/{{ $movie->poster_path }}" class="movie-poster" />
 
             <div class="pt-2">
                 <a href="/movie/{{$movie->id}}/reviews" class="badge badge-dark">Reviews</a>
@@ -67,4 +71,5 @@
             @endforeach
         </div>
     </div>
+</div>
 @endsection
