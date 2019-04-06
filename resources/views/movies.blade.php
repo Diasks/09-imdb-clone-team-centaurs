@@ -6,15 +6,23 @@
         <img src="http://image.tmdb.org/t/p/original/{{ $movie->backdrop_path }}" class="w-100 movie-backdrop" />
     </div>
     <div>
-        <div class="container movie-details p-4">
-            <h1 class="display-4">{{$movie->title}}</h1>
-            <img src="http://image.tmdb.org/t/p/w185/{{ $movie->poster_path }}" class="movie-poster" />
+        <div class="container col-12 col-sm-12 col-md-10 col-lg-8 movie-details p-4">
+            <div class="movie-head-info">
+                <img src="http://image.tmdb.org/t/p/w185/{{ $movie->poster_path }}" class="movie-poster" />
 
-            <div class="pt-2">
-                <a href="/movie/{{$movie->id}}/reviews" class="badge badge-dark">Reviews</a>
-                <a href="/movie/{{$movie->id}}/photos" class="badge badge-dark">Photos</a>
-                <a href="/movie/{{$movie->id}}/trailers" class="badge badge-dark">Trailers</a>
+                <div class="movie-head-info-text">
+                    <div>
+                    <h1 class="movie-title">{{ $movie->title }}</h1>
+                        <div class="pt-2">
+                            <a href="/movie/{{$movie->id}}/reviews" class="badge badge-dark">Reviews</a>
+                            <a href="/movie/{{$movie->id}}/photos" class="badge badge-dark">Photos</a>
+                            <a href="/movie/{{$movie->id}}/trailers" class="badge badge-dark">Trailers</a>
+                        </div>
+                    </div>
+                    <p class="lead mt-3">{{$movie->overview}}</p>
+                </div>
             </div>
+            <p class="movie-mobile-overview">{{$movie->overview}}</p>
             <div class="my-3">
                 <a href="/movie/{{ $movie->id }}/reviews/create" class="btn btn-dark">Write a review...</a>
                 @if ($lists)
@@ -39,9 +47,8 @@
         <div>
     </div>
 
-    <p class="lead"> {{$movie->overview}}   </p>
 <p>Rating: <i class="fa fa-star" aria-hidden="true"></i>{{$movie->vote_average}}</p>
-    <p>Runtime: {{$movie->runtime}} minuter</p>
+    <p>Runtime: {{$movie->runtime}} minutes</p>
     <p>Release date: {{$movie->release_date}}</p>
  
     <p>Genre:   @foreach ($movie->genres as $genre) {{$genre['name']}}

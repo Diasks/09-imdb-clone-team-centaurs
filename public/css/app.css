@@ -17266,22 +17266,71 @@ div[data-toggle="buttons"] label.active {
 
 .movie-details {
   position: relative;
-  top: -500px;
-  background-color: #202123;
-  color: white !important;
+  top: -250px;
+}
+
+.movie-details > *:not(.collapse) {
+  color: white;
+}
+
+@media (max-width: 767.98px) {
+  .movie-details {
+    top: -210px;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .movie-details {
+    top: -140px;
+  }
 }
 
 .movie-poster {
-  border-radius: 5px;
+  width: 200px;
+  margin-right: 25px;
+}
+
+@media (max-width: 575.98px) {
+  .movie-poster {
+    width: 100px;
+  }
 }
 
 .movie-backdrop-container {
+  height: 600px;
+  overflow: hidden;
   display: inline-block;
   position: relative;
   top: -100px;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), color-stop(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.8)));
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
-  /* W3C */
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), color-stop(rgba(0, 0, 0, 0)), to(#151515));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), #151515);
+}
+
+@media (max-width: 1199.98px) {
+  .movie-backdrop-container {
+    top: -50px;
+    height: 550px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .movie-backdrop-container {
+    top: -40px;
+    height: 430px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .movie-backdrop-container {
+    height: auto;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .movie-backdrop-container {
+    top: -20px;
+  }
 }
 
 .movie-backdrop {
@@ -17294,7 +17343,70 @@ div[data-toggle="buttons"] label.active {
   z-index: 0;
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background-color: #151515;
+}
+
+.movie-head-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.movie-head-info-text {
+  -ms-flex-item-align: stretch;
+      align-self: stretch;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.movie-head-info-text > .lead {
+  display: block;
+}
+
+@media (max-width: 575.98px) {
+  .movie-head-info-text > .lead {
+    display: none;
+  }
+}
+
+.movie-mobile-overview {
+  display: none;
+  margin-top: 20px;
+}
+
+@media (max-width: 575.98px) {
+  .movie-mobile-overview {
+    display: block;
+  }
+}
+
+.movie-title {
+  font-size: 4em;
+  margin-bottom: -5px;
+}
+
+@media (max-width: 575.98px) {
+  .movie-title {
+    font-size: 2.5em;
+  }
+}
+
+@media (min-width: 1600px) {
+  .movie-backdrop-container {
+    height: 700px;
+    top: -125px;
+  }
 }
 
