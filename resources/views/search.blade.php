@@ -4,16 +4,27 @@
     @if (count($movies) === 0)
         <h2>... No movie found</h2>
     @elseif (count($movies) >= 1)
-        <div class="jumbotron jumbotron-fluid bg-info">
-            <div class="container">
-                @foreach($movies as $movie)
-                    <a href="/movie/{{$movie->id}}"> 
-                        <img src="http://image.tmdb.org/t/p/w185//{{$movie->poster_path}}" class="shadow p-3 mb-5 bg-white rounded"/>
-                    </a>
-                @endforeach
-            </div>
+        <div class="movie-list-container">
+            @foreach($movies as $movie)
+                <a href="/movie/{{ $movie->id }}" class="movie-list-item" title="{{ $movie->title }}"> 
+                    <img src="http://image.tmdb.org/t/p/w185/{{ $movie->poster_path }}" class="movie-list-item-poster" />
+                    <img src="http://image.tmdb.org/t/p/original/{{ $movie->backdrop_path }}" class="movie-list-item-backdrop" />
+                    <div class="movie-list-item-info">
+                        <h2>{{ $movie->title }}</h2>
+                        <div class="genre-box">
+                            {{ join(', ', array_map(function($g) {
+                                return $g['name'];
+                            }, $movie->genres)) }}
+                        </div>
+                        <div class="movie-list-item-rating">
+                            <span class="fa fa-star" aria-hidden="true"></span>
+                            {{ $movie->vote_average }}
+                        </div>
+                    </div>
+                </a>
+            @endforeach
         </div>
     @endif
 
-    {{$movies->appends(request()->input())->links()}}
+    {{$movies->onEachSide(0)->appends(request()->input())->links()}}
 @endsection
