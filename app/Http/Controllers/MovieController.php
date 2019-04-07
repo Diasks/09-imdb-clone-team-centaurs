@@ -20,57 +20,47 @@ class MovieController extends Controller
        $movies = Movie::all()->take(10);
        $reviews = Review::all()->take(4);
        return view('welcome',compact('movies', 'reviews'));
- 
-       
     }
 
+    public function topchart() 
+    {
+        $movies = Movie::where('vote_average', '>', 8)->paginate(15);
+        return view('topchart', compact('movies'));
+    }
 
-public function topchart() 
-{
-  $movies = Movie::where('vote_average', '>', 8)->paginate(15);
-  return view('topchart', compact('movies'));
-}
+    public function genre(Request $request, $genre) 
+    {
+        $name = $request->fullUrl();
+        $genreData = json_decode(Storage::get('genre.json'), true)['genres'];
+        $genreNames = array_map(function($genre) {
+            return $genre['name'];
+        }, $genreData);
 
-public function genre(Request $request, $genre) 
-{
-    $name = $request->fullUrl();
-    $genreData = json_decode(Storage::get('genre.json'), true)['genres'];
-    $genreNames = array_map(function($genre)
-{
-    
-return $genre['name'];
+        $movies = Movie::all()->toArray();
+        
+        return view('genre', compact('genreData', 'movies', 'genreNames', 'genre'));
+    }
 
-}, $genreData
-);
+    /* implementera funktion för att visa specifik films trailer i trailer.blade.php som inte finns än */
+    public function showTrailer($id)
+    {
+        $trailers = Movie::all()
+        ->where('id', '=', $id)
+        ->take(1);
 
-    $movies = Movie::all()->toArray();
-    // dd($movies);
-    return view('genre', compact('genreData', 'movies', 'genreNames', 'genre'));
+        return view('trailer', compact('trailers'));
+    }
 
-}
+    /*implementera funktion för att visa specifik films foto/n i photo.blade.php som inte finns än */
+    public function showPhoto($id) 
+    {
+        $photos = Movie::all()
+        ->where('id', '=', $id)
+        ->take(4);
 
+        return view('photo', compact('photos'));
+    }
 
-
-/* implementera funktion för att visa specifik films trailer i trailer.blade.php som inte finns än */
-
-public function showTrailer ($id)
-{
-    $trailers = Movie::all()
-    ->where('id', '=', $id)
-    ->take(1);
-    return view('trailer', compact('trailers'));
-}
-
-
-/*implementera funktion för att visa specifik films foto/n i photo.blade.php som inte finns än */
-public function showPhoto ($id) 
-{
- 
-    $photos = Movie::all()
-    ->where('id', '=', $id)
-    ->take(4);
-    return view('photo', compact('photos'));
-}
     /**
      * Show the form for creating a new resource.
      *
@@ -87,7 +77,6 @@ public function showPhoto ($id)
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -109,11 +98,9 @@ public function showPhoto ($id)
             'movie_cast' => 'required',
             'movie_crew' => 'required', 
             'movie_overview' => 'required'
-            
-
-          ]);
+        ]);
         
-          $movie = new Movie([
+        $movie = new Movie([
             'title'=> $validatedData['movie_title'],
             'genres'=> $validatedData['movie_genres'],
             'runtime' => $validatedData['movie_runtime'],
@@ -132,11 +119,10 @@ public function showPhoto ($id)
             'cast' => $validatedData['movie_cast'],
             'crew' => $validatedData['movie_crew'],
             'overview' => 'hjhghjgjhg'
-            
+        ]);
 
-          ]);
-          $movie->save();
-          return redirect('/admin/movies')->with('success', 'Movie has been added!');
+        $movie->save();
+        return redirect('/admin/movies')->with('success', 'Movie has been added!');
     }
 
     /**
@@ -165,12 +151,12 @@ public function showPhoto ($id)
         $movie = Movie::all();
 
         $search = \Request::get('search');  
-        $movies = Movie::where('title', 'like', '%'.$search.'%')
-        ->orderBy('title')
+        $movies = Movie::where('title', 'like', '%' . $search . '%')
+        ->orderBy('vote_average', 'desc')
         ->paginate(12);
     
-        return view('search', compact('movies'))->withmovie($movies);
-     }
+        return view('search', ['movies' => $movies]);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -214,40 +200,38 @@ public function showPhoto ($id)
             'movie_cast' ,
             'movie_crew' ,
             'movie_overview' 
-            
+        ]);
+        
+        $movie = Movie::find($id);
+        $movie->title= $request->get('movie_title');
+        $movie->genres = $request->get('movie_genres');
+        $movie->runtime = $request->get('movie_runtime');
+        $movie->release_date = $request->get('movie_release');
+        $movie->adult = $request->get('movie_adult');
+        $movie->revenue = $request->get('movie_revenue');
+        $movie->budget = $request->get('movie_budget');
+        $movie->status = $request->get('movie_status');
+        $movie->tagline = $request->get('movie_tagline');
+        $movie->poster_path = $request->get('movie_poster');
+        $movie->backdrop_path = $request->get('movie_backdrop');
+        $movie->video = $request->get('movie_video');
+        $movie->vote_count = $request->get('movie_vote');
+        $movie->vote_average = $request->get('movie_average');
+        $movie->production_companies = $request->get('movie_production');
+        $movie->cast = $request->get('movie_cast');
+        $movie->crew = $request->get('movie_crew');
+        $movie->overview = $request->get('movie_overview');
 
-          ]);
-        //   dd($request->all());
-          $movie = Movie::find($id);
-          $movie->title= $request->get('movie_title');
-          $movie->genres= $request->get('movie_genres');
-          $movie->runtime = $request->get('movie_runtime');
-          $movie->release_date= $request->get('movie_release');
-          $movie->adult = $request->get('movie_adult');
-          $movie->revenue= $request->get('movie_revenue');
-          $movie->budget = $request->get('movie_budget');
-          $movie->status= $request->get('movie_status');
-          $movie->tagline = $request->get('movie_tagline');
-          $movie->poster_path= $request->get('movie_poster');
-          $movie->backdrop_path = $request->get('movie_backdrop');
-          $movie->video= $request->get('movie_video');
-          $movie->vote_count =$request->get('movie_vote');
-          $movie->vote_average= $request->get('movie_average');
-          $movie->production_companies = $request->get('movie_production');
-          $movie->cast = $request->get('movie_cast');
-          $movie->crew = $request->get('movie_crew');
-          $movie->overview = $request->get('movie_overview');
-
-
-          $movie->save();
-          return redirect('/admin/movies')->with('success', 'Movie has been updated!');
+        $movie->save();
+        return redirect('/admin/movies')->with('success', 'Movie has been updated!');
     }
 
-    public function get ()
+    public function get()
     {
         $allMovies = Movie::all();
         return view('admin-movie', compact('allMovies'));
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -258,6 +242,5 @@ public function showPhoto ($id)
     {
         Movie::destroy($id);
         return redirect('admin/movies')->with('success', 'movie was removed successfully');
-
     }
 }
