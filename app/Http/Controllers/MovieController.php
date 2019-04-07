@@ -17,28 +17,33 @@ class MovieController extends Controller
      */
     public function index()
     {
-       $movies = Movie::all()->take(10);
-       $reviews = Review::all()->take(4);
-       return view('welcome',compact('movies', 'reviews'));
+        $movies = Movie::orderBy('release_date', 'desc')
+            ->paginate(36);
+
+        $reviews = Review::all()->take(4);
+
+        return view('welcome', compact('movies', 'reviews'));
     }
 
     public function topchart() 
     {
-        $movies = Movie::where('vote_average', '>', 8)->paginate(15);
+        $movies = Movie::where([
+            ['vote_average', '>', 8],
+            ['vote_count', '>', 500]
+        ])
+            ->orderBy('vote_average', 'desc')
+            ->paginate(36);
+
         return view('topchart', compact('movies'));
     }
 
     public function genre(Request $request, $genre) 
     {
-        $name = $request->fullUrl();
-        $genreData = json_decode(Storage::get('genre.json'), true)['genres'];
-        $genreNames = array_map(function($genre) {
-            return $genre['name'];
-        }, $genreData);
-
-        $movies = Movie::all()->toArray();
+        $movies = Movie::where('genres', 'LIKE', '%' . $genre . '%')
+            ->orderBy('vote_count', 'desc')
+            ->paginate(36);
         
-        return view('genre', compact('genreData', 'movies', 'genreNames', 'genre'));
+        return view('genre', compact('movies', 'genre'));
     }
 
     /* implementera funktion för att visa specifik films trailer i trailer.blade.php som inte finns än */
@@ -152,8 +157,8 @@ class MovieController extends Controller
 
         $search = \Request::get('search');  
         $movies = Movie::where('title', 'like', '%' . $search . '%')
-        ->orderBy('vote_average', 'desc')
-        ->paginate(12);
+            ->orderBy('vote_count', 'desc')
+            ->paginate(36);
     
         return view('search', ['movies' => $movies]);
     }
