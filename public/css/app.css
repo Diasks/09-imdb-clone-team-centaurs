@@ -17406,6 +17406,87 @@ div[data-toggle="buttons"] label.active {
   background-color: #191919;
 }
 
+.cast-list {
+  overflow: hidden;
+  white-space: nowrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 18px;
+}
+
+@media (max-width: 1199.98px) {
+  .cast-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cast-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cast-list .cast-list-item {
+  overflow: hidden;
+  background-color: #222;
+  -webkit-box-shadow: 0 5px 10px #000;
+          box-shadow: 0 5px 10px #000;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.cast-list .cast-list-item .cast-list-item-info {
+  padding: 15px;
+  white-space: normal;
+}
+
+.cast-list .cast-list-item .cast-list-item-info .cast-list-item-name {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.cast-list .cast-list-item .cast-list-item-image-container {
+  width: 100%;
+  height: 15vw;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+}
+
+@media (max-width: 1199.98px) {
+  .cast-list .cast-list-item .cast-list-item-image-container {
+    height: 26vw;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .cast-list .cast-list-item .cast-list-item-image-container {
+    height: 31vw;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cast-list .cast-list-item .cast-list-item-image-container {
+    height: 37vw;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cast-list .cast-list-item .cast-list-item-image-container {
+    height: 54vw;
+  }
+}
+
+.cast-list .cast-list-item .cast-list-item-image {
+  width: 100%;
+  position: relative;
+  top: -5px;
+}
+
+.movie-sub-title {
+  font-weight: bold;
+  margin: 15px 0 10px 0;
+}
+
 @media (min-width: 1600px) {
   .movie-backdrop-container {
     height: 700px;

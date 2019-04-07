@@ -48,7 +48,7 @@
         <div>
     </div>
 
-<p>Rating: <i class="fa fa-star" aria-hidden="true"></i>{{$movie->vote_average}}</p>
+<p>Rating: <i class="fa fa-star" aria-hidden="true"></i> {{$movie->vote_average}}</p>
     <p>Runtime: {{$movie->runtime}} minutes</p>
     <p>Release date: {{$movie->release_date}}</p>
  
@@ -58,15 +58,23 @@
     {{$production['name']}} 
     @endforeach</p>
 
-    <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">
-        Actors
-    </button>
-    <div class="collapse" id="collapseExample1">
-        <div class="card card-body">
-            @foreach ($movie->cast as $casts)
-                <p>Character: {{$casts['character']}} Played by: {{$casts['name']}}</p>
-            @endforeach
-        </div>
+    <h2 class="movie-sub-title">Top Billed Cast</h2>
+    <div class="cast-list">
+        @foreach (array_slice($movie->cast, 0, 5) as $person)
+            <div class="cast-list-item">
+                <div class="cast-list-item-image-container">
+                    @if ($person['profile_path'] != '')
+                        <img class="cast-list-item-image" src="http://image.tmdb.org/t/p/w185/{{ $person['profile_path'] }}" />
+                    @else
+                        <img class="cast-list-item-image" src="{{ asset('images/unknown.jpg') }}" />
+                    @endif
+                </div>
+                <div class="cast-list-item-info">
+                    <h3 class="cast-list-item-name">{{ $person['name'] }}</h3>
+                    <div class="cast-list-item-character">{{ $person['character'] }}</div>
+                </div>
+            </div>
+        @endforeach
     </div>
 
     <button class="btn btn-dark" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample">

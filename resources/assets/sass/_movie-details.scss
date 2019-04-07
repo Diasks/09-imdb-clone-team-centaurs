@@ -108,6 +108,77 @@
     background-color: #191919;
 }
 
+.cast-list {
+    overflow: hidden;
+    white-space: nowrap;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 18px;
+
+    @include media-breakpoint-down(lg) {    
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include media-breakpoint-down(xs) {    
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cast-list-item {
+        overflow: hidden;
+        background-color: #222;
+        box-shadow: 0 5px 10px #000;
+        border-radius: 5px;
+        margin-bottom: 30px;
+
+        .cast-list-item-info {
+            padding: 15px;
+            white-space: normal;
+
+            .cast-list-item-name {
+                font-size: 1.1em;
+                font-weight: bold;
+            }
+
+            .cast-list-item-character {
+            }
+        }
+
+        .cast-list-item-image-container {
+            width: 100%;
+            height: 15vw;
+            overflow: hidden;
+            border-radius: 5px 5px 0 0;
+
+            @include media-breakpoint-down(lg) {    
+                height: 26vw;
+            }
+
+            @include media-breakpoint-down(md) {    
+                height: 31vw;
+            }
+
+            @include media-breakpoint-down(sm) {    
+                height: 37vw;
+            }
+
+            @include media-breakpoint-down(xs) {    
+                height: 54vw;
+            }
+        }
+
+        .cast-list-item-image {
+            width: 100%;
+            position: relative;
+            top: -5px;
+        }
+    }
+}
+
+.movie-sub-title {
+    font-weight: bold;
+    margin: 15px 0 10px 0;
+}
+
 @media (min-width: 1600px) {
     .movie-backdrop-container {
         height: 700px;
