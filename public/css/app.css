@@ -17260,8 +17260,9 @@ div[data-toggle="buttons"] label.active {
   border-radius: 0 0.25rem 0.25rem 0;
 }
 
-.navbar {
+.main-nav {
   z-index: 9999;
+  background-color: rgba(21, 21, 21, 0.8);
 }
 
 .movie-details {
@@ -17309,14 +17310,13 @@ div[data-toggle="buttons"] label.active {
 
 @media (max-width: 1199.98px) {
   .movie-backdrop-container {
-    top: -50px;
+    top: -55px;
     height: 550px;
   }
 }
 
 @media (max-width: 991.98px) {
   .movie-backdrop-container {
-    top: -40px;
     height: 430px;
   }
 }
@@ -17324,12 +17324,6 @@ div[data-toggle="buttons"] label.active {
 @media (max-width: 767.98px) {
   .movie-backdrop-container {
     height: auto;
-  }
-}
-
-@media (max-width: 575.98px) {
-  .movie-backdrop-container {
-    top: -20px;
   }
 }
 
@@ -17401,6 +17395,15 @@ div[data-toggle="buttons"] label.active {
   .movie-title {
     font-size: 2.5em;
   }
+}
+
+.movie-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #191919;
 }
 
 @media (min-width: 1600px) {

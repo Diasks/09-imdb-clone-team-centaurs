@@ -34,21 +34,16 @@
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(21, 21, 21, 1));
 
     @include media-breakpoint-down(lg) {
-        top: -50px;
+        top: -55px;
         height: 550px;
     }
 
     @include media-breakpoint-down(md) {
-        top: -40px;
         height: 430px;
     }
 
     @include media-breakpoint-down(sm) {
         height: auto;
-    }
-
-    @include media-breakpoint-down(xs) {
-        top: -20px;
     }
 }
 
@@ -102,6 +97,15 @@
     @include media-breakpoint-down(xs) {
         font-size: 2.5em;
     }
+}
+
+.movie-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #191919;
 }
 
 @media (min-width: 1600px) {

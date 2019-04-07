@@ -1,6 +1,7 @@
 @extends('layouts.app', ['container' => false])
 
 @section('content')
+<div class="movie-bg"></div>
 <div class="movie-wrapper">
     <div class="movie-backdrop-container w-100">
         <img src="http://image.tmdb.org/t/p/original/{{ $movie->backdrop_path }}" class="w-100 movie-backdrop" />
