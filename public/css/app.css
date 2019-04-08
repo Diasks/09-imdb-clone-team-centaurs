@@ -17579,3 +17579,7 @@ div[data-toggle="buttons"] label.active {
   margin: 3px 0 0 0;
 }
 
+.create-review-container textarea {
+  padding: 10px;
+}
+
