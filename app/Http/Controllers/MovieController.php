@@ -53,18 +53,6 @@ class MovieController extends Controller
     {
         $trailers = Movie::where('id', '=', $id)
         ->first();
-       /* dd($trailers->id);
-        $client = new \GuzzleHttp\Client();
-        $request = new \GuzzleHttp\Psr7\Request('GET', 'https://api.themoviedb.org/3/movie/'.$trailers->id.'/videos?api_key=d21c743d52e4de7178e9b0e0d115e1c1&language=en-US');
-        $promise = $client->sendAsync($request)->then(function ($response) {
-            //dd($->getBody());
-        });
-        $promise->wait();
-
-        $res = $client->request('GET', 'https://api.themoviedb.org/3/movie/'.$trailers->id.'/videos?api_key=d21c743d52e4de7178e9b0e0d115e1c1&language=en-US');
-        dd($res->getBody());
-        $trailerId = $res->getBody();
-        $movieKey = env('MOVIE_API_KEY');*/
         $client = new Client();
         $res = $client->request('GET', 'https://api.themoviedb.org/3/movie/' . $trailers->id.'/videos' . '?api_key=d21c743d52e4de7178e9b0e0d115e1c1&language=en-US' );
         $trailerData = json_decode($res->getBody(), true);
@@ -74,11 +62,12 @@ class MovieController extends Controller
     /*implementera funktion för att visa specifik films foto/n i photo.blade.php som inte finns än */
     public function showPhoto($id) 
     {
-        $photos = Movie::all()
-        ->where('id', '=', $id)
-        ->take(4);
-
-        return view('photo', compact('photos'));
+        $images = Movie::where('id', '=', $id)
+        ->first();
+        $client = new Client();
+        $res = $client->request('GET', 'https://api.themoviedb.org/3/movie/' . $images->id.'/images' . '?api_key=d21c743d52e4de7178e9b0e0d115e1c1&language=en-US&include_image_language=en,null' );
+        $imageData = json_decode($res->getBody(), true);
+        return view('photo', compact('images', 'imageData'));
     }
 
     /**
