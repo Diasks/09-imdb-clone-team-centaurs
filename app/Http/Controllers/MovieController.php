@@ -7,6 +7,8 @@ use App\Models\Movie;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class MovieController extends Controller
 {
@@ -49,11 +51,24 @@ class MovieController extends Controller
     /* implementera funktion för att visa specifik films trailer i trailer.blade.php som inte finns än */
     public function showTrailer($id)
     {
-        $trailers = Movie::all()
-        ->where('id', '=', $id)
-        ->take(1);
+        $trailers = Movie::where('id', '=', $id)
+        ->first();
+       /* dd($trailers->id);
+        $client = new \GuzzleHttp\Client();
+        $request = new \GuzzleHttp\Psr7\Request('GET', 'https://api.themoviedb.org/3/movie/'.$trailers->id.'/videos?api_key=d21c743d52e4de7178e9b0e0d115e1c1&language=en-US');
+        $promise = $client->sendAsync($request)->then(function ($response) {
+            //dd($->getBody());
+        });
+        $promise->wait();
 
-        return view('trailer', compact('trailers'));
+        $res = $client->request('GET', 'https://api.themoviedb.org/3/movie/'.$trailers->id.'/videos?api_key=d21c743d52e4de7178e9b0e0d115e1c1&language=en-US');
+        dd($res->getBody());
+        $trailerId = $res->getBody();
+        $movieKey = env('MOVIE_API_KEY');*/
+        $client = new Client();
+        $res = $client->request('GET', 'https://api.themoviedb.org/3/movie/' . $trailers->id.'/videos' . '?api_key=d21c743d52e4de7178e9b0e0d115e1c1&language=en-US' );
+        $trailerData = json_decode($res->getBody(), true);
+        return view('trailer', compact('trailers', 'trailerData'));
     }
 
     /*implementera funktion för att visa specifik films foto/n i photo.blade.php som inte finns än */
