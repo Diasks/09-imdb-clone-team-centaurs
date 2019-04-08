@@ -120,12 +120,12 @@ class MovieListController extends Controller
             switch ($action) {
                 case 'add':
                     if($list->movies->contains($movieId)) {
-                        $request->session()->flash('error', 'That list already contains this movie');
+                        //$request->session()->flash('error', 'That list already contains this movie');
                     }
         
                     else {
                         $list->movies()->attach($movieId);
-                        $request->session()->flash('success', 'Movie added');
+                        //$request->session()->flash('success', 'Movie added');
                     }
 
                     return redirect()->route('movie', ['movie_id' => $movieId]);

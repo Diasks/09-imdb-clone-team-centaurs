@@ -53,10 +53,6 @@ Route::group(['middleware' => ['web', 'activity']], function () {
     Route::get('/activation', ['as' => 'authenticated.activation-resend', 'uses' => 'Auth\ActivateController@resend']);
     Route::get('/exceeded', ['as' => 'exceeded', 'uses' => 'Auth\ActivateController@exceeded']);
 
-    // Socialite Register Routes
-    Route::get('/social/redirect/{provider}', ['as' => 'social.redirect', 'uses' => 'Auth\SocialController@getSocialRedirect']);
-    Route::get('/social/handle/{provider}', ['as' => 'social.handle', 'uses' => 'Auth\SocialController@getSocialHandle']);
-
     // Route to for user to reactivate their user deleted account.
     Route::get('/re-activate/{token}', ['as' => 'user.reactivate', 'uses' => 'RestoreUserController@userReActivate']);
 
@@ -161,13 +157,16 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('routes', 'AdminDetailsController@listRoutes');
     Route::get('active-users', 'AdminDetailsController@activeUsers');
+
+    Route::get('/admin/movies', 'MovieController@get');
+    Route::get('/admin/movies/create', 'MovieController@create');
+    Route::post('/admin/movies/store', 'MovieController@store');
+    Route::get('/admin/{movies}/edit', 'MovieController@edit');
+    Route::patch('/admin/{movies}/update', 'MovieController@update');
+    Route::delete('/admin/{movies}/destroy', 'MovieController@destroy');
+    Route::get('/admin/reviews', 'AdminController@reviews')->name('audit-reviews');
+    Route::patch('/admin/reviews/{review_id}/accept', 'AdminController@reviewAccept');
+    Route::patch('/admin/reviews/{review_id}/reject', 'AdminController@reviewReject');
 });
 
 Route::redirect('/php', '/phpinfo', 301);
-
-Route::get('/admin/movies', 'MovieController@get');
-Route::get('/admin/movies/create', 'MovieController@create');
-Route::post('/admin/movies/store', 'MovieController@store');
-Route::get('/admin/{movies}/edit', 'MovieController@edit');
-Route::patch('/admin/{movies}/update', 'MovieController@update');
-Route::delete('/admin/{movies}/destroy', 'MovieController@destroy');

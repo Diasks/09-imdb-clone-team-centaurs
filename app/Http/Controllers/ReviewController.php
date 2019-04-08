@@ -49,9 +49,6 @@ class ReviewController extends Controller
      */
     public function store(Request $request, $movieId)
     {
-<<<<<<< HEAD
-    
-=======
         $user = Auth::user();
         
         if($user) {
@@ -71,7 +68,6 @@ class ReviewController extends Controller
         }
 
         return redirect()->route('reviews', ['movie_id' => $movieId]);
->>>>>>> develop
     }
 
     /**

@@ -9,16 +9,20 @@
 
 <div class="jumbotron jumbotron-fluid bg-info">
   <div class="container">
-    <h1 class="display-4">Trailer for: {{$trailers->first()->title}}</h1>
-    @if (($trailers->first()->video) > 0)
-    <video width="320" height="240" controls >
-<source src={{ $trailers->first()->video }} type="video/mp4">
-</video>
-@else 
+    <h1 class="display-4">Trailer for: {{$trailers->title}}</h1>
+    @forelse($trailerData['results'] as $trailer)
+    <iframe width="320" height="240" controls
+ src="{{ 'http://youtube.com/embed/'.$trailer['key'] }}" type="video/mp4">
+</iframe>
+@empty
+<h2> No trailers were found for this movie </h2>
+@endforelse
+ 
 
-<h2>No trailer availabe for this movie!</h2>
 
-@endif
+
+
+
 
   </div>
   <a href="/movie/{{$trailers->first()->id}}"><button class="btn btn-dark">Go back</button></a>

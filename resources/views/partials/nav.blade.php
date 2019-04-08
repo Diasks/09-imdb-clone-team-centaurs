@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-laravel">
+<nav class="navbar main-nav navbar-expand-md navbar-dark navbar-laravel">
     <div class="container">
         <a class="navbar-brand" href="{{ url('') }}">
             {!! config('app.name', trans('titles.app')) !!}
@@ -23,6 +23,10 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ url('/admin/movies') }}">
                                 {!! trans('Movie Administration') !!}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ url('/admin/reviews') }}">
+                                {!! trans('Audit Reviews') !!}
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item {{ Request::is('users/create') ? 'active' : null }}" href="{{ url('/users/create') }}">
@@ -52,6 +56,7 @@
                             <a class="dropdown-item {{ Request::is('active-users') ? 'active' : null }}" href="{{ url('/active-users') }}">
                                 {!! trans('titles.activeUsers') !!}
                             </a>
+                            <div class="dropdown-divider"></div>
                         </div>
                     </li>
                 @endrole
