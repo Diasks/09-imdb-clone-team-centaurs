@@ -1,7 +1,7 @@
 <nav class="navbar main-nav navbar-expand-md navbar-dark navbar-laravel">
     <div class="container">
         <a class="navbar-brand" href="{{ url('') }}">
-            {!! config('app.name', trans('titles.app')) !!}
+            Centaurs
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -50,6 +50,13 @@
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item {{ Request::is('routes') ? 'active' : null }}" href="{{ url('/routes') }}">
+                                {!! trans('titles.adminRoutes') !!}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item {{ Request::is('active-users') ? 'active' : null }}" href="{{ url('/active-users') }}">
+                                {!! trans('titles.activeUsers') !!}
+                            </a>
+                            <div class="dropdown-divider"></div>ve' : null }}" href="{{ url('/routes') }}">
                                 {!! trans('titles.adminRoutes') !!}
                             </a>
                             <div class="dropdown-divider"></div>
