@@ -16,6 +16,12 @@
         grid-template-columns: repeat(1, 1fr);
     }
     
+    .paginator {
+
+        @include media-breakpoint-down(xs) {
+            width: 80%;
+        }
+    }
     .movie-list-item {
         background-color: white;
         text-decoration: none;

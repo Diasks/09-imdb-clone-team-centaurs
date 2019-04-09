@@ -19,8 +19,10 @@
                     </div>
                 </div>
             </a>
-        @endforeach
-    </div>
-@endif
-
-{{$movies->onEachSide(0)->appends(request()->input())->links()}}
+            @endforeach
+        </div>
+        @endif
+        
+        <div class="paginator">
+        {{$movies->appends(request()->input())->links()}}
+        </div>

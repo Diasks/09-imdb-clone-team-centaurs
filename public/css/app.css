@@ -17579,6 +17579,7 @@ div[data-toggle="buttons"] label.active {
   margin: 3px 0 0 0;
 }
 
+<<<<<<< HEAD
 .movie-trailers-container {
   margin: 70px;
   display: grid;
@@ -17607,5 +17608,9 @@ div[data-toggle="buttons"] label.active {
 .headerTextContainer {
   text-align: center;
   margin: 15px;
+=======
+.create-review-container textarea {
+  padding: 10px;
+>>>>>>> develop
 }
 
