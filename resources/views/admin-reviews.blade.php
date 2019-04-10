@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2>Audit reviews</h2>
+<h1 class="main-heading">AUDIT REVIEWS</h1>
 
 @forelse ($reviews as $review)
     <div class="card mb-3">

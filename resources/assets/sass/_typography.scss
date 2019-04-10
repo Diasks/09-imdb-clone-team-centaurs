@@ -21,6 +21,16 @@
 
 }
 
+.main-heading {
+    font-size: 2.6em;
+    font-weight: bold;
+    margin: 10px 0;
+
+    @include media-breakpoint-down(xs) {
+        font-size: 1.8em;
+    }
+}
+
 
 
 // $brand-primary: #3097D1;
