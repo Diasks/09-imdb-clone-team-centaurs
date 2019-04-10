@@ -20,7 +20,7 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::orderBy('release_date', 'desc')
-            ->paginate(36);
+        ->paginate(36);
 
         $reviews = Review::all()->take(4);
 
