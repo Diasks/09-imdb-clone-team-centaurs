@@ -17265,6 +17265,25 @@ div[data-toggle="buttons"] label.active {
   background-color: rgba(21, 21, 21, 0.8);
 }
 
+.main-nav .nav-btn {
+  margin-right: 10px;
+  background-color: #555;
+  color: white;
+  border: none;
+}
+
+.main-nav .nav-btn,
+.main-nav .search-input {
+  -webkit-box-shadow: 0 2px 3px #333;
+          box-shadow: 0 2px 3px #333;
+}
+
+.main-nav .search-btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  height: 100%;
+}
+
 .movie-details {
   position: relative;
   top: -250px;

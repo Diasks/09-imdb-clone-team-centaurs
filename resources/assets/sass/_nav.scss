@@ -1,4 +1,21 @@
 .main-nav {
     z-index: 9999;
     background-color: rgba(21, 21, 21, 0.8);
+
+    .nav-btn {
+        margin-right: 10px;
+        background-color: #555;
+        color: white;
+        border: none;
+    }
+
+    .nav-btn, .search-input {
+        box-shadow: 0 2px 3px #333;
+    }
+    
+    .search-btn {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        height: 100%;
+    }
 }
