@@ -17278,10 +17278,24 @@ div[data-toggle="buttons"] label.active {
           box-shadow: 0 2px 3px #333;
 }
 
+@media (max-width: 767.98px) {
+  .main-nav .nav-btn,
+  .main-nav .search-input {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
 .main-nav .search-btn {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   height: 100%;
+}
+
+@media (max-width: 767.98px) {
+  .main-nav .search-btn {
+    height: calc(100% - 10px);
+  }
 }
 
 .movie-details {

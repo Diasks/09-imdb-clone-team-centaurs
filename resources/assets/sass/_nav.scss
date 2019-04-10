@@ -11,11 +11,20 @@
 
     .nav-btn, .search-input {
         box-shadow: 0 2px 3px #333;
+
+        @include media-breakpoint-down(sm) {
+            margin-top: 5px;    
+            margin-bottom: 5px;
+        }
     }
     
     .search-btn {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         height: 100%;
+
+        @include media-breakpoint-down(sm) {
+            height: calc(100% - 10px);
+        }
     }
 }
