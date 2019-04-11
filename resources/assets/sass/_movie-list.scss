@@ -16,6 +16,12 @@
         grid-template-columns: repeat(1, 1fr);
     }
     
+    .paginator {
+
+        @include media-breakpoint-down(xs) {
+            width: 80%;
+        }
+    }
     .movie-list-item {
         background-color: white;
         text-decoration: none;
@@ -67,6 +73,12 @@
 
         .movie-list-item-rating {
             margin: 3px 0 0 0;
+            display: flex;
+            justify-content: space-between;
+
+            .date-container {
+                color: #777;
+            }
         }
     }
 }

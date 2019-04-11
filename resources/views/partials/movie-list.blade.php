@@ -14,13 +14,20 @@
                         }, $movie->genres)) }}
                     </div>
                     <div class="movie-list-item-rating">
-                        <span class="fa fa-star" aria-hidden="true"></span>
-                        {{ $movie->vote_average }}
+                        <div>
+                            <span class="fa fa-star" aria-hidden="true"></span>
+                            {{ $movie->vote_average }}
+                        </div>
+                        <div class="date-container">
+                            {{ explode("-", $movie->release_date)[0] }}
+                        </div>
                     </div>
                 </div>
             </a>
-        @endforeach
-    </div>
-@endif
-
-{{$movies->onEachSide(0)->appends(request()->input())->links()}}
+            @endforeach
+        </div>
+        @endif
+        
+        <div class="paginator">
+        {{$movies->appends(request()->input())->links()}}
+        </div>
