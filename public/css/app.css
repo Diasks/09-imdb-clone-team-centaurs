@@ -17622,6 +17622,16 @@ div[data-toggle="buttons"] label.active {
 
 .movie-list-container .movie-list-item .movie-list-item-rating {
   margin: 3px 0 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.movie-list-container .movie-list-item .movie-list-item-rating .date-container {
+  color: #777;
 }
 
 .create-review-container textarea {

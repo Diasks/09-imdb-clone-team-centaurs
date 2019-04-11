@@ -67,6 +67,12 @@
 
         .movie-list-item-rating {
             margin: 3px 0 0 0;
+            display: flex;
+            justify-content: space-between;
+
+            .date-container {
+                color: #777;
+            }
         }
     }
 }
