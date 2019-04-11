@@ -1,0 +1,34 @@
+.containerPhotos {
+  /* Masonry container */
+ column-count: 4;
+ column-gap: 1em;
+}
+
+.photos{
+  /* Masonry bricks or child elements */
+ background-color: #eee;
+ display: inline-block;
+ margin: 0 0 1em;
+ width: 100%;
+ height: auto; 
+}
+.display-4 {
+  text-align: center;
+}
+@media only screen and (max-width: 1523px) {
+  
+  .containerPhotos {
+    column-count: 3;
+    column-gap: 0.5em;
+  }
+} 
+@media only screen and (max-width: 1035px) {
+ .containerPhotos {
+  column-count: 2;
+  }  
+} 
+@media only screen and (min-width: 310px) and (max-width: 711px) {
+  .containerPhotos {
+   column-count: 1;
+   }  
+ } 
