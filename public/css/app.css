@@ -600,11 +600,6 @@ h6,
   font-size: 3.5rem;
   font-weight: 300;
   line-height: 1.2;
-  text-align: center;
-}
-
-.genre {
-  text-align: center;
 }
 
 hr {
@@ -15241,7 +15236,7 @@ a.text-dark:focus {
   width: 80px;
   margin-left: -40px;
   background: rgba(255, 255, 255, 0.9);
-  webkit-transform: scale(1);
+  -webkit-transform: scale(1);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -17569,6 +17564,12 @@ div[data-toggle="buttons"] label.active {
   }
 }
 
+@media (max-width: 575.98px) {
+  .movie-list-container .paginator {
+    width: 80%;
+  }
+}
+
 .movie-list-container .movie-list-item {
   background-color: white;
   text-decoration: none;
@@ -17668,6 +17669,7 @@ div[data-toggle="buttons"] label.active {
   text-align: center;
   margin: 15px;
 }
+
 .create-review-container textarea {
   padding: 10px;
 }

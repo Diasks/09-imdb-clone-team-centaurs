@@ -6,7 +6,6 @@
 
 @section('template_linked_css')
     <style type="text/css">
-        .btn-save,
         .pw-change-container {
             display: none;
         }
