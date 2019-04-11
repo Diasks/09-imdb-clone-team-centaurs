@@ -71,15 +71,15 @@
     
           {!! Form::open(['method'=>'GET','url'=>'search','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
         <div class="input-group custom-search-form">
-                  <input type="text" class="form-control" name="search" placeholder="Search for movie..."> <span class="input-group-btn">
-    <button class="btn btn-default-sm btn btn-info" type="submit">
+            <input type="text" class="form-control search-input" name="search" placeholder="Search for movie..."> <span class="input-group-btn">
+            <button class="btn btn-default-sm btn-dark btn nav-btn search-btn" type="submit">
         <i class="fa fa-search"></i>
     </button>
     </span></div>
     {{ Form::close() }}
  
     <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle btn btn-light text-info" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button class="btn btn-secondary dropdown-toggle btn btn-dark nav-btn browse-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
    Browse
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -94,7 +94,7 @@
   </div>
 </div>
 <a href="/chart/top">
-<Button class="btn btn-light text-info">Topchart</Button>
+<Button class="btn btn-dark nav-btn top-btn">Topchart</Button>
 </a>
 
 
