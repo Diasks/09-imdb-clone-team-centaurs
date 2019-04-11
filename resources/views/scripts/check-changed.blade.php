@@ -13,12 +13,7 @@
     checkChanged();
   });
   function checkChanged() {
-    if(!$('input').val()){
-      $(".btn-save").hide();
-    }
-    else {
-      $(".btn-save").show();
-    }
+    $(".btn-save").show();
   }
 
 </script>

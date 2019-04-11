@@ -17674,6 +17674,50 @@ div[data-toggle="buttons"] label.active {
   padding: 10px;
 }
 
+.containerPhotos {
+  /* Masonry container */
+  -webkit-column-count: 4;
+          column-count: 4;
+  -webkit-column-gap: 1em;
+          column-gap: 1em;
+}
+
+.photos {
+  /* Masonry bricks or child elements */
+  background-color: #eee;
+  display: inline-block;
+  margin: 0 0 1em;
+  width: 100%;
+  height: auto;
+}
+
+.display-4 {
+  text-align: center;
+}
+
+@media only screen and (max-width: 1523px) {
+  .containerPhotos {
+    -webkit-column-count: 3;
+            column-count: 3;
+    -webkit-column-gap: 0.5em;
+            column-gap: 0.5em;
+  }
+}
+
+@media only screen and (max-width: 1035px) {
+  .containerPhotos {
+    -webkit-column-count: 2;
+            column-count: 2;
+  }
+}
+
+@media only screen and (min-width: 310px) and (max-width: 711px) {
+  .containerPhotos {
+    -webkit-column-count: 1;
+            column-count: 1;
+  }
+}
+
 .checkbox-menu li label {
   display: block;
   padding: 3px 10px;
