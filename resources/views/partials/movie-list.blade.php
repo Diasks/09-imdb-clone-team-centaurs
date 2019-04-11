@@ -20,9 +20,10 @@
                 </div>
             </a>
             @endforeach
+
         </div>
         @endif
         
-        <div class="paginator">
-        {{$movies->appends(request()->input())->links()}}
+        <div class="paginator flex-wrap">   
+            {{$movies->appends(request()->input())->links()}}
         </div>
