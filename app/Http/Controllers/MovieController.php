@@ -227,6 +227,54 @@ class MovieController extends Controller
                 throw new Exception();
             }
 
+            foreach($newGenres as $g) {
+                if(!property_exists($g, 'id') || !property_exists($g, 'name')) {
+                    throw new Exception();
+                }
+            }
+
+            $production_companies = json_decode($request->get('movie_production'));
+
+            foreach($production_companies as $p) {
+                if(!property_exists($p, 'id') ||
+                    !property_exists($p, 'logo_path') ||
+                    !property_exists($p, 'name') ||
+                    !property_exists($p, 'origin_country')
+                ) {
+                    throw new Exception();
+                }
+            }
+
+            $cast = json_decode($request->get('movie_cast'));
+
+            foreach($cast as $c) {
+                if(!property_exists($c, 'cast_id') ||
+                    !property_exists($c, 'character') ||
+                    !property_exists($c, 'credit_id') ||
+                    !property_exists($c, 'gender') ||
+                    !property_exists($c, 'id') ||
+                    !property_exists($c, 'name') ||
+                    !property_exists($c, 'order') ||
+                    !property_exists($c, 'profile_path')
+                ) {
+                    throw new Exception();
+                }
+            }
+            
+            $crew = json_decode($request->get('movie_crew'));
+
+            foreach($crew as $c) {
+                if(!property_exists($c, 'credit_id') ||
+                    !property_exists($c, 'department') ||
+                    !property_exists($c, 'gender') ||
+                    !property_exists($c, 'id') ||
+                    !property_exists($c, 'job') ||
+                    !property_exists($c, 'profile_path')
+                ) {
+                    throw new Exception();
+                }
+            }
+
             $movie = Movie::find($id);
             $movie->title = $request->get('movie_title');
             $movie->genres = json_decode($jsonGenres);
@@ -242,9 +290,9 @@ class MovieController extends Controller
             $movie->video = $request->get('movie_video');
             $movie->vote_count = $request->get('movie_vote');
             $movie->vote_average = $request->get('movie_average');
-            $movie->production_companies = json_decode($request->get('movie_production'));
-            $movie->cast = json_decode($request->get('movie_cast'));
-            $movie->crew = json_decode($request->get('movie_crew'));
+            $movie->production_companies = $production_companies;
+            $movie->cast = $cast;
+            $movie->crew = $crew;
             $movie->overview = $request->get('movie_overview');
             
             $movie->save();
