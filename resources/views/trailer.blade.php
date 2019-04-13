@@ -8,7 +8,7 @@
 
 <div class="headerTextContainer">
 
-<h1>Trailer {{$trailers->title}}</h1>
+<h1 class="main-heading">Trailers - {{$trailers->title}}</h1>
 
 </div>
 <div class="movie-trailers-container">
@@ -26,7 +26,7 @@ src="{{ 'http://youtube.com/embed/'.$trailer['key'] }}" type="video/mp4">
 
 
 <div class="headerTextContainer">
-<a href="/movie/{{$trailers->first()->id}}"><button class="btn btn-dark">Go back</button></a>
+<a href="/movie/{{$trailers->id}}"><button class="btn btn-dark">Go back</button></a>
 
 </div>  
 

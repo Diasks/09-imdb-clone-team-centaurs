@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <a href="{{ action('MovieController@create') }}" class="btn btn-success">Add a movie</a>
+            <a href="{{ action('MovieController@create') }}" class="btn btn-success my-2 ml-auto">Add a movie</a>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead class="thead-dark">
