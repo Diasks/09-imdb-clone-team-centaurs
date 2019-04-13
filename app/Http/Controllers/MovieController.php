@@ -13,6 +13,39 @@ use \Exception;
 
 class MovieController extends Controller
 {
+    private $genreProps = [
+        'id',
+        'name'
+    ];
+
+    private $productionCompaniesProps = [
+        'id',
+        'logo_path',
+        'name',
+        'origin_country'
+    ];
+
+    private $castProps = [
+        'cast_id',
+        'character',
+        'credit_id',
+        'gender',
+        'id',
+        'name',
+        'order',
+        'profile_path'
+    ];
+
+    private $crewProps = [
+        'credit_id',
+        'department',
+        'gender',
+        'id',
+        'job',
+        'name',
+        'profile_path'
+    ];
+    
     /**
      * Display a listing of the resource.
      *
@@ -89,49 +122,33 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'movie_title'=>'required',
-            'movie_genres'=> 'required',
-            'movie_runtime' => 'required|integer',
-            'movie_release'=> 'required',
-            'movie_adult' => 'required|integer',
-            'movie_revenue'=> 'required|integer',
-            'movie_budget' => 'required|integer',
-            'movie_status'=> 'required',
-            'movie_tagline' => 'required',
-            'movie_poster'=> 'required',
-            'movie_backdrop' => 'required',
-            'movie_video'=> 'required',
-            'movie_vote' => 'required|integer',
-            'movie_average'=> 'required|integer',
-            'movie_production' => 'required',
-            'movie_cast' => 'required',
-            'movie_crew' => 'required', 
-            'movie_overview' => 'required'
-        ]);
-        
-        $movie = new Movie([
-            'title'=> $validatedData['movie_title'],
-            'genres'=> $validatedData['movie_genres'],
-            'runtime' => $validatedData['movie_runtime'],
-            'release_date'=> $validatedData['movie_release'],
-            'adult' => $validatedData['movie_adult'],
-            'revenue'=> $validatedData['movie_revenue'],
-            'budget' => $validatedData['movie_budget'],
-            'status'=> $validatedData['movie_status'],
-            'tagline' => $validatedData['movie_tagline'],
-            'poster_path'=> $validatedData['movie_poster'],
-            'backdrop_path' => $validatedData['movie_backdrop'],
-            'video'=> $validatedData['movie_video'],
-            'vote_count' => $validatedData['movie_vote'],
-            'vote_average'=> $validatedData['movie_average'],
-            'production_companies' => $validatedData['movie_production'],
-            'cast' => $validatedData['movie_cast'],
-            'crew' => $validatedData['movie_crew'],
-            'overview' => 'hjhghjgjhg'
-        ]);
+        try {
+            $params = $request->all();
+                
+            $parsedGenres = $this->parseGenres($request->genres);
+            
+            $params['genres'] = $parsedGenres;
+            
+            $request->replace($params);
+            
+            if(!$this->isMovieValid($request)) {
+                throw new Exception();
+            }
 
-        $movie->save();
+            $params['genres'] = json_decode($params['genres']);
+            $params['production_companies'] = json_decode($params['production_companies']);
+            $params['cast'] = json_decode($params['cast']);
+            $params['crew'] = json_decode($params['crew']);
+
+            $request->replace($params);
+            
+            $movie = new Movie($request->all());
+    
+            $movie->save();
+        } catch(Exception $e) {
+            return redirect()->back()->with('error', 'Invalid input');
+        }
+
         return redirect('/admin/movies')->with('success', 'Movie has been added!');
     }
 
@@ -188,112 +205,43 @@ class MovieController extends Controller
      * @param  \App\Movie  $movie
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'movie_title' => 'required',
-            'movie_genres' => 'required',
-            'movie_runtime' => 'required',
-            'movie_release' => 'required',
-            'movie_adult' => 'required',
-            'movie_revenue' => 'required',
-            'movie_budget' => 'required',
-            'movie_status' => 'required',
-            'movie_tagline' => 'required',
-            'movie_poster' => 'required',
-            'movie_backdrop' => 'required',
-            'movie_video' => 'required',
-            'movie_vote' => 'required',
-            'movie_average' => 'required',
-            'movie_production' => 'required|json',
-            'movie_cast' => 'required|json',
-            'movie_crew' => 'required|json',
-            'movie_overview' => 'required' 
-        ]);
-
-        function isJson($string) {
-            json_decode($string);
-            return (json_last_error() == JSON_ERROR_NONE);
-        }
-
         try {
-            $newGenres = array_map(function($g) {
-                return json_decode($g);
-            }, array_keys($request->movie_genres));
-
-            $jsonGenres = stripslashes(json_encode($newGenres));
-
-            if(!isJson($jsonGenres, true)) {
+            $params = $request->all();
+            
+            $parsedGenres = $this->parseGenres($request->genres);
+            
+            $params['genres'] = $parsedGenres;
+            $params['production_companies'] = $params['production_companies'];
+            $params['cast'] = $params['cast'];
+            $params['crew'] = $params['crew'];
+            
+            $request->replace($params);
+            
+            if(!$this->isMovieValid($request)) {
                 throw new Exception();
             }
-
-            foreach($newGenres as $g) {
-                if(!property_exists($g, 'id') || !property_exists($g, 'name')) {
-                    throw new Exception();
-                }
-            }
-
-            $production_companies = json_decode($request->get('movie_production'));
-
-            foreach($production_companies as $p) {
-                if(!property_exists($p, 'id') ||
-                    !property_exists($p, 'logo_path') ||
-                    !property_exists($p, 'name') ||
-                    !property_exists($p, 'origin_country')
-                ) {
-                    throw new Exception();
-                }
-            }
-
-            $cast = json_decode($request->get('movie_cast'));
-
-            foreach($cast as $c) {
-                if(!property_exists($c, 'cast_id') ||
-                    !property_exists($c, 'character') ||
-                    !property_exists($c, 'credit_id') ||
-                    !property_exists($c, 'gender') ||
-                    !property_exists($c, 'id') ||
-                    !property_exists($c, 'name') ||
-                    !property_exists($c, 'order') ||
-                    !property_exists($c, 'profile_path')
-                ) {
-                    throw new Exception();
-                }
-            }
-            
-            $crew = json_decode($request->get('movie_crew'));
-
-            foreach($crew as $c) {
-                if(!property_exists($c, 'credit_id') ||
-                    !property_exists($c, 'department') ||
-                    !property_exists($c, 'gender') ||
-                    !property_exists($c, 'id') ||
-                    !property_exists($c, 'job') ||
-                    !property_exists($c, 'profile_path')
-                ) {
-                    throw new Exception();
-                }
-            }
-
+        
             $movie = Movie::find($id);
-            $movie->title = $request->get('movie_title');
-            $movie->genres = json_decode($jsonGenres);
-            $movie->runtime = $request->get('movie_runtime');
-            $movie->release_date = $request->get('movie_release');
-            $movie->adult = $request->get('movie_adult');
-            $movie->revenue = $request->get('movie_revenue');
-            $movie->budget = $request->get('movie_budget');
-            $movie->status = $request->get('movie_status');
-            $movie->tagline = $request->get('movie_tagline');
-            $movie->poster_path = $request->get('movie_poster');
-            $movie->backdrop_path = $request->get('movie_backdrop');
-            $movie->video = $request->get('movie_video');
-            $movie->vote_count = $request->get('movie_vote');
-            $movie->vote_average = $request->get('movie_average');
-            $movie->production_companies = $production_companies;
-            $movie->cast = $cast;
-            $movie->crew = $crew;
-            $movie->overview = $request->get('movie_overview');
+            $movie->title = $request->title;
+            $movie->genres = json_decode($request->genres);
+            $movie->runtime = $request->runtime;
+            $movie->release_date = $request->release_date;
+            $movie->adult = $request->adult;
+            $movie->revenue = $request->revenue;
+            $movie->budget = $request->budget;
+            $movie->status = $request->status;
+            $movie->tagline = $request->tagline;
+            $movie->poster_path = $request->poster_path;
+            $movie->backdrop_path = $request->backdrop_path;
+            $movie->video = $request->video;
+            $movie->vote_count = $request->vote_count;
+            $movie->vote_average = $request->vote_average;
+            $movie->production_companies = json_decode($request->production_companies);
+            $movie->cast = json_decode($request->cast);
+            $movie->crew = json_decode($request->crew);
+            $movie->overview = $request->overview;
             
             $movie->save();
         } catch(Exception $e) {
@@ -321,5 +269,67 @@ class MovieController extends Controller
     {
         Movie::destroy($id);
         return redirect('admin/movies')->with('success', 'movie was removed successfully');
+    }
+
+    private function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+
+    private function listHasProps($objList, $props) {
+        foreach($objList as $obj) {
+            foreach($props as $prop) {
+                if(!property_exists($obj, $prop)) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private function isMovieValid($request) {
+        $request->validate([
+            'title' => 'required',
+            'genres' => 'required',
+            'runtime' => 'required',
+            'release_date' => 'required',
+            'adult' => 'required',
+            'revenue' => 'required',
+            'budget' => 'required',
+            'status' => 'required',
+            'tagline' => 'required',
+            'poster_path' => 'required',
+            'backdrop_path' => 'required',
+            'video' => 'required',
+            'vote_count' => 'required',
+            'vote_average' => 'required',
+            'production_companies' => 'required|json',
+            'cast' => 'required|json',
+            'crew' => 'required|json',
+            'overview' => 'required'
+        ]);
+
+        try {
+            if(!$this->listHasProps(json_decode($request->genres), $this->genreProps) ||
+                !$this->listHasProps(json_decode($request->production_companies), $this->productionCompaniesProps) ||
+                !$this->listHasProps(json_decode($request->cast), $this->castProps) ||
+                !$this->listHasProps(json_decode($request->crew), $this->crewProps)
+            ) {
+                throw new Exception();
+            }
+        } catch(Exception $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function parseGenres($genres) {
+        $newGenres = array_map(function($g) {
+            return json_decode($g);
+        }, array_keys($genres));
+
+        return stripslashes(json_encode($newGenres));
     }
 }

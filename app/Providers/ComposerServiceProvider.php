@@ -18,7 +18,7 @@ class ComposerServiceProvider extends ServiceProvider
             'layouts.app', 'App\Http\ViewComposers\ThemeComposer'
         );
 
-        view()->composer(['layouts.app', 'admin-movie-edit'], 'App\Http\ViewComposers\GenresComposer');
+        view()->composer(['layouts.app', 'admin-movie-edit', 'admin-movie-create'], 'App\Http\ViewComposers\GenresComposer');
     }
 
     /**
