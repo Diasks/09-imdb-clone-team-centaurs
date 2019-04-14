@@ -3,20 +3,9 @@
 @section('content')
     <h1 class="main-heading">REVIEWS FOR {{ strtoupper($movie->title) }}</h1>
 
-    @forelse ($reviews as $review)
-        <div class="card mb-3">
-            <div class="card-header">
-                <h5>User: {{ $review->author ? $review->author : $review->user->name }}</h5>
-            </div>
-            <div class="card-body">
-                <p class="card-text">{{$review->content}}</p>
-            </div>
-        </div>
-    @empty
-        <div class="py-3">No reviews found for this movie.</div>
-    @endforelse
+    @include('partials.review-list', ['reviews' => $reviews])
 
-    <a href="/movie/{{$movie->id}}">
+    <a href="/movie/{{ $movie->id }}">
         <button class="btn btn-dark">Go back</button>
     </a>
 @endsection
