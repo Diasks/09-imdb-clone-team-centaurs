@@ -17532,6 +17532,15 @@ div[data-toggle="buttons"] label.active {
   margin: 15px 0 10px 0;
 }
 
+.prod-container {
+  background-color: white;
+}
+
+.prod-image {
+  width: 80%;
+  margin: 25% 10% 10% 10%;
+}
+
 @media (min-width: 1600px) {
   .movie-backdrop-container {
     height: 700px;

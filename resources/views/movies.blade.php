@@ -48,52 +48,97 @@
         <div>
     </div>
 
-<p>Rating: <i class="fa fa-star" aria-hidden="true"></i> {{$movie->vote_average}}</p>
-    <p>Runtime: {{$movie->runtime}} minutes</p>
-    <p>Release date: {{$movie->release_date}}</p>
+    <div class="my-2">
+        <div class="font-weight-bold">
+            Rating
+        </div>
+        <i class="fa fa-star" aria-hidden="true"></i> {{ $movie->vote_average }}
+    </div>
+
+    <div class="my-2">
+        <div class="font-weight-bold">
+            Runtime
+        </div>
+        {{ $movie->runtime }} minutes
+    </div>
+
+    <div class="my-2">
+        <div class="font-weight-bold">
+            Release date
+        </div>
+        {{ $movie->release_date }}
+    </div>
  
-    <p>Genre:   @foreach ($movie->genres as $genre) {{$genre['name']}}
-    @endforeach </p>
-    <p>Production Company: @foreach ($movie->production_companies as $production)
-    {{$production['name']}} 
-    @endforeach</p>
-
-    <h2 class="movie-sub-title">Top Billed Cast</h2>
-    <div class="cast-list">
-        @foreach (array_slice($movie->cast, 0, 5) as $person)
-            <div class="cast-list-item">
-                <div class="cast-list-item-image-container">
-                    @if ($person['profile_path'] != '')
-                        <img class="cast-list-item-image" src="http://image.tmdb.org/t/p/w185/{{ $person['profile_path'] }}" />
-                    @else
-                        <img class="cast-list-item-image" src="{{ asset('images/unknown.jpg') }}" />
-                    @endif
-                </div>
-                <div class="cast-list-item-info">
-                    <h3 class="cast-list-item-name">{{ $person['name'] }}</h3>
-                    <div class="cast-list-item-character">{{ $person['character'] }}</div>
-                </div>
-            </div>
-        @endforeach
+    <div class="my-2">
+        <div class="font-weight-bold">
+            Genres
+        </div>
+        {{ join(', ', array_map(function($g) {
+            return $g['name'];
+        }, $movie->genres)) }}
     </div>
 
-    <h2 class="movie-sub-title">Crew</h2>
-    <div class="cast-list">
-        @foreach (array_slice($movie->crew, 0, 5) as $person)
-            <div class="cast-list-item">
-                <div class="cast-list-item-image-container">
-                    @if ($person['profile_path'] != '')
-                        <img class="cast-list-item-image" src="http://image.tmdb.org/t/p/w185/{{ $person['profile_path'] }}" />
-                    @else
-                        <img class="cast-list-item-image" src="{{ asset('images/unknown.jpg') }}" />
-                    @endif
+    @if ($movie->cast)
+        <h2 class="movie-sub-title">Top Billed Cast</h2>
+        <div class="cast-list">
+            @foreach (array_slice($movie->cast, 0, 10) as $person)
+                <div class="cast-list-item">
+                    <div class="cast-list-item-image-container">
+                        @if ($person['profile_path'] != '')
+                            <img class="cast-list-item-image" src="http://image.tmdb.org/t/p/w185/{{ $person['profile_path'] }}" />
+                        @else
+                            <img class="cast-list-item-image" src="{{ asset('images/unknown.jpg') }}" />
+                        @endif
+                    </div>
+                    <div class="cast-list-item-info">
+                        <h3 class="cast-list-item-name">{{ $person['name'] }}</h3>
+                        <div class="cast-list-item-character">{{ $person['character'] }}</div>
+                    </div>
                 </div>
-                <div class="cast-list-item-info">
-                    <h3 class="cast-list-item-name">{{ $person['name'] }}</h3>
-                    <div class="cast-list-item-character">{{ $person['job'] }}</div>
+            @endforeach
+        </div>
+    @endif
+
+    @if ($movie->crew)
+        <h2 class="movie-sub-title">Crew</h2>
+        <div class="cast-list">
+            @foreach (array_slice($movie->crew, 0, 5) as $person)
+                <div class="cast-list-item">
+                    <div class="cast-list-item-image-container">
+                        @if ($person['profile_path'] != '')
+                            <img class="cast-list-item-image" src="http://image.tmdb.org/t/p/w185/{{ $person['profile_path'] }}" />
+                        @else
+                            <img class="cast-list-item-image" src="{{ asset('images/unknown.jpg') }}" />
+                        @endif
+                    </div>
+                    <div class="cast-list-item-info">
+                        <h3 class="cast-list-item-name">{{ $person['name'] }}</h3>
+                        <div class="cast-list-item-character">{{ $person['job'] }}</div>
+                    </div>
                 </div>
-            </div>
-        @endforeach
-    </div>
+            @endforeach
+        </div>
+    @endif
+
+    @if ($movie->production_companies)
+        <h2 class="movie-sub-title">Production companies</h2>
+        <div class="cast-list">
+            @foreach (array_slice($movie->production_companies, 0, 5) as $p)
+                <div class="cast-list-item">
+                    <div class="cast-list-item-image-container prod-container">
+                        @if ($p['logo_path'] != '')
+                            <img class="prod-image" src="http://image.tmdb.org/t/p/w185/{{ $p['logo_path'] }}" />
+                        @else
+                            <img src="{{ asset('images/unknown.jpg') }}" />
+                        @endif
+                    </div>
+                    <div class="cast-list-item-info">
+                        <h3 class="cast-list-item-name">{{ $p['name'] }}</h3>
+                        <div class="cast-list-item-character">{{ $p['origin_country'] }}</div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
 </div>
 @endsection
