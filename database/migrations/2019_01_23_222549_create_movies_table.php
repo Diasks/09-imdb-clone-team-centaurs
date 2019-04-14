@@ -30,8 +30,8 @@ class CreateMoviesTable extends Migration
             $table->integer('vote_count')->unsigned();
             $table->float('vote_average');
             $table->text('production_companies');
-            $table->text('cast');
-            $table->text('crew');
+            $table->mediumText('cast');
+            $table->mediumText('crew');
             $table->text('overview');
             $table->timestamps();
         });
