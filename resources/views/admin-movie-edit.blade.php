@@ -10,6 +10,10 @@
                 @method('PATCH')
                 @csrf
                 <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" name="id" value="{{ $movie->id }}">
+                </div>
+                <div class="form-group">
                     <label for="title">Title</label>
                 <input type="text" class="form-control" name="title" value="{{ $movie->title }}">
                 </div>
@@ -86,7 +90,7 @@
 
                 <div class="form-group">
                     <label for="production_companies">Production companies (JSON)</label>
-                    <textarea type="text" placeholder='e.g. [{"id": 923, "logo_path": "/5UQsZrfbfG2dYJbx8DxfoTr2Bvu.png", "name": "Legendary Entertainment", "origin_country": "US"}]' class="form-control" name="production_companies" rows="5" value="{{ json_encode($movie->production_companies, true) }}"></textarea>
+                    <textarea type="text" placeholder='e.g. [{"id": 923, "logo_path": "/5UQsZrfbfG2dYJbx8DxfoTr2Bvu.png", "name": "Legendary Entertainment", "origin_country": "US"}]' class="form-control" name="production_companies" rows="5">{{ json_encode($movie->production_companies, true) }}</textarea>
                 </div>
 
 

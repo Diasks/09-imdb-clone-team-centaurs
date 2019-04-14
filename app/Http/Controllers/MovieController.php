@@ -224,6 +224,7 @@ class MovieController extends Controller
             }
         
             $movie = Movie::find($id);
+            $movie->id = $request->id;
             $movie->title = $request->title;
             $movie->genres = json_decode($request->genres);
             $movie->runtime = $request->runtime;
