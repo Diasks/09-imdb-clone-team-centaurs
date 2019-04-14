@@ -3,7 +3,9 @@
 @section('content')
     @if ($userExists)
         <div class="card">
-            <h2 class="card-header">Lists <small>by {{ $user->name }}</small></h2>
+            <h2 class="card-header">Lists
+                <small>by {{ $user->name }}</small>
+            </h2>
             <div class="card-body p-0">
                 <div class="list-group list-group-flush bg-light">
                     @forelse ($lists as $list)

@@ -22,7 +22,7 @@ class RestoreUserController extends ProfilesController
      * User Account Restore.
      *
      * @param \Illuminate\Http\Request $request
-     * @param string                   $token
+     * @param string $token
      *
      * @return \Illuminate\Http\Response
      */

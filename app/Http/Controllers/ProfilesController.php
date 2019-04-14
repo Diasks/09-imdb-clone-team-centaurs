@@ -66,7 +66,7 @@ class ProfilesController extends Controller
         $currentTheme = $user->profile ? Theme::find($user->profile->theme_id) : null;
 
         $data = [
-            'user'         => $user,
+            'user' => $user,
             'currentTheme' => $currentTheme,
         ];
 
@@ -91,14 +91,14 @@ class ProfilesController extends Controller
         }
 
         $themes = Theme::where('status', 1)
-                        ->orderBy('name', 'asc')
-                        ->get();
+            ->orderBy('name', 'asc')
+            ->get();
 
         $currentTheme = $user->profile ? Theme::find($user->profile->theme_id) : null;
 
         $data = [
-            'user'         => $user,
-            'themes'       => $themes,
+            'user' => $user,
+            'themes' => $themes,
             'currentTheme' => $currentTheme,
 
         ];
@@ -112,9 +112,9 @@ class ProfilesController extends Controller
      * @param \App\Http\Requests\UpdateUserProfile $request
      * @param $username
      *
+     * @return mixed
      * @throws Laracasts\Validation\FormValidationException
      *
-     * @return mixed
      */
     public function update(UpdateUserProfile $request, $username)
     {
@@ -135,14 +135,14 @@ class ProfilesController extends Controller
         $user->updated_ip_address = $ipAddress->getClientIp();
         $user->save();
 
-        return redirect('profile/'.$user->name.'/edit')->with('success', trans('profile.updateSuccess'));
+        return redirect('profile/' . $user->name . '/edit')->with('success', trans('profile.updateSuccess'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -174,7 +174,7 @@ class ProfilesController extends Controller
         }
         $additionalRules = [
             'first_name' => 'nullable|string|max:255',
-            'last_name'  => 'nullable|string|max:255',
+            'last_name' => 'nullable|string|max:255',
         ];
 
         $rules = array_merge($usernameRules, $emailRules, $additionalRules);
@@ -196,14 +196,14 @@ class ProfilesController extends Controller
 
         $user->save();
 
-        return redirect('profile/'.$user->name.'/edit')->with('success', trans('profile.updateAccountSuccess'));
+        return redirect('profile/' . $user->name . '/edit')->with('success', trans('profile.updateAccountSuccess'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\UpdateUserPasswordRequest $request
-     * @param int                                          $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -220,7 +220,7 @@ class ProfilesController extends Controller
         $user->updated_ip_address = $ipAddress->getClientIp();
         $user->save();
 
-        return redirect('profile/'.$user->name.'/edit')->with('success', trans('profile.updatePWSuccess'));
+        return redirect('profile/' . $user->name . '/edit')->with('success', trans('profile.updatePWSuccess'));
     }
 
     /**
@@ -235,16 +235,16 @@ class ProfilesController extends Controller
         if (Input::hasFile('file')) {
             $currentUser = \Auth::user();
             $avatar = Input::file('file');
-            $filename = 'avatar.'.$avatar->getClientOriginalExtension();
-            $save_path = storage_path().'/users/id/'.$currentUser->id.'/uploads/images/avatar/';
-            $path = $save_path.$filename;
-            $public_path = '/images/profile/'.$currentUser->id.'/avatar/'.$filename;
+            $filename = 'avatar.' . $avatar->getClientOriginalExtension();
+            $save_path = storage_path() . '/users/id/' . $currentUser->id . '/uploads/images/avatar/';
+            $path = $save_path . $filename;
+            $public_path = '/images/profile/' . $currentUser->id . '/avatar/' . $filename;
 
             // Make the user a folder and set permissions
             File::makeDirectory($save_path, $mode = 0755, true, true);
 
             // Save the file to the server
-            Image::make($avatar)->resize(300, 300)->save($save_path.$filename);
+            Image::make($avatar)->resize(300, 300)->save($save_path . $filename);
 
             // Save the public image path
             $currentUser->profile->avatar = $public_path;
@@ -266,14 +266,14 @@ class ProfilesController extends Controller
      */
     public function userProfileAvatar($id, $image)
     {
-        return Image::make(storage_path().'/users/id/'.$id.'/uploads/images/avatar/'.$image)->response();
+        return Image::make(storage_path() . '/users/id/' . $id . '/uploads/images/avatar/' . $image)->response();
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \App\Http\Requests\DeleteUserAccount $request
-     * @param int                                  $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -284,7 +284,7 @@ class ProfilesController extends Controller
         $ipAddress = new CaptureIpTrait();
 
         if ($user->id != $currentUser->id) {
-            return redirect('profile/'.$user->name.'/edit')->with('error', trans('profile.errorDeleteNotYour'));
+            return redirect('profile/' . $user->name . '/edit')->with('error', trans('profile.errorDeleteNotYour'));
         }
 
         // Create and encrypt user account restore token
@@ -293,7 +293,7 @@ class ProfilesController extends Controller
         $restoreKey = config('settings.restoreKey');
         $encrypter = config('settings.restoreUserEncType');
         $level1 = $user->id * $userIdKey;
-        $level2 = urlencode(Uuid::generate(4).$sepKey.$level1);
+        $level2 = urlencode(Uuid::generate(4) . $sepKey . $level1);
         $level3 = base64_encode($level2);
         $level4 = openssl_encrypt($level3, $encrypter, $restoreKey);
         $level5 = base64_encode($level4);
@@ -319,7 +319,7 @@ class ProfilesController extends Controller
     /**
      * Send GoodBye Email Function via Notify.
      *
-     * @param array  $user
+     * @param array $user
      * @param string $token
      *
      * @return void

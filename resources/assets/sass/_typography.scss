@@ -1,36 +1,36 @@
 .text-danger {
-	color: $brand-danger
+  color: $brand-danger
 }
+
 .text-warning {
-	color: $brand-warning
+  color: $brand-warning
 }
 
 .text-muted {
-	color: #00b1b1;
+  color: #00b1b1;
 }
 
 .text-larger {
-	font-size: 1.15em;
+  font-size: 1.15em;
 }
 
 @media(min-width: $tablet + 1) {
 
-	.text-left-tablet {
-		text-align: left;
-	}
+  .text-left-tablet {
+    text-align: left;
+  }
 
 }
 
 .main-heading {
-    font-size: 2.6em;
-    font-weight: bold;
-    margin: 10px 0;
+  font-size: 2.6em;
+  font-weight: bold;
+  margin: 10px 0;
 
-    @include media-breakpoint-down(xs) {
-        font-size: 1.8em;
-    }
+  @include media-breakpoint-down(xs) {
+    font-size: 1.8em;
+  }
 }
-
 
 
 // $brand-primary: #3097D1;

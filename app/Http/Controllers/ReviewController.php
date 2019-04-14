@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Review;
 use Illuminate\Http\Request;
 use View;
@@ -18,11 +19,11 @@ class ReviewController extends Controller
      */
 
 
-/* i denna funktion ska du hämta omdömen för en specifik film */
+    /* i denna funktion ska du hämta omdömen för en specifik film */
 
-   
+
     public function index($id)
-    {   
+    {
         $movie = Movie::findOrFail($id);
         $reviews = $movie->accepted_reviews;
 
@@ -44,14 +45,14 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $movieId)
     {
         $user = Auth::user();
-        
-        if($user) {
+
+        if ($user) {
             $validatedData = $request->validate([
                 'content' => 'required|max:20000',
             ]);
@@ -73,18 +74,18 @@ class ReviewController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Review  $review
+     * @param \App\Review $review
      * @return \Illuminate\Http\Response
      */
     public function show(Review $review)
     {
-      
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Review  $review
+     * @param \App\Review $review
      * @return \Illuminate\Http\Response
      */
     public function edit(Review $review)
@@ -95,8 +96,8 @@ class ReviewController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Review  $review
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Review $review
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Review $review)
@@ -107,7 +108,7 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Review  $review
+     * @param \App\Review $review
      * @return \Illuminate\Http\Response
      */
     public function destroy(Review $review)
@@ -118,19 +119,19 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource from a specific user.
      *
-     * @param  \App\Review  $review
+     * @param \App\Review $review
      * @return \Illuminate\Http\Response
      */
     public function userReviews($userId)
     {
         $user = User::find($userId);
 
-        if($user) {
+        if ($user) {
             $reviews = $user->accepted_reviews;
-            
+
             return view('user-reviews', compact('reviews', 'user'));
         }
-        
+
         return redirect('/');
     }
 }

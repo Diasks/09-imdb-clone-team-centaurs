@@ -3,7 +3,8 @@
         <a class="navbar-brand" href="{{ url('') }}">
             {!! config('app.name', trans('titles.app')) !!}
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             <span class="sr-only">{!! trans('titles.toggleNav') !!}</span>
         </button>
@@ -12,11 +13,11 @@
             <ul class="navbar-nav mr-auto">
                 @role('admin')
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {!! trans('titles.adminDropdownNav') !!}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
                             <a class="dropdown-item {{ Request::is('users', 'users/' . Auth::user()->id, 'users/' . Auth::user()->id . '/edit') ? 'active' : null }}" href="{{ url('/users') }}">
                                 {!! trans('titles.adminUserList') !!}
                             </a>
@@ -56,35 +57,35 @@
                     </li>
                 @endrole
             </ul>
-    
-          {!! Form::open(['method'=>'GET','url'=>'search','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
-        <div class="input-group custom-search-form">
-            <input type="text" class="form-control search-input" name="search" placeholder="Search for movie..."> <span class="input-group-btn">
+
+            {!! Form::open(['method'=>'GET','url'=>'search','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
+            <div class="input-group custom-search-form">
+                <input type="text" class="form-control search-input" name="search" placeholder="Search for movie...">
+                <span class="input-group-btn">
             <button class="btn btn-default-sm btn-dark btn nav-btn search-btn" type="submit">
         <i class="fa fa-search"></i>
     </button>
     </span></div>
-    {{ Form::close() }}
- 
-    <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle btn btn-dark nav-btn browse-btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   Browse
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {{ Form::close() }}
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle btn btn-dark nav-btn browse-btn" type="button"
+                        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Browse
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
 
+                    @foreach($genreData as $genre)
 
-@foreach($genreData as $genre) 
+                        <a class="dropdown-item" href="/genre/{{$genre['name']}}">{{$genre['name']}}</a>
+                    @endforeach
 
-<a class="dropdown-item" href="/genre/{{$genre['name']}}">{{$genre['name']}}</a>
-@endforeach 
- 
-  </div>
-</div>
-<a href="/chart/top">
-<Button class="btn btn-dark nav-btn top-btn">Topchart</Button>
-</a>
-
+                </div>
+            </div>
+            <a href="/chart/top">
+                <Button class="btn btn-dark nav-btn top-btn">Topchart</Button>
+            </a>
 
 
             {{-- Right Side Of Navbar --}}
@@ -98,16 +99,19 @@
                         <a class="nav-link" href="/user/{{ Auth::User()->id }}/lists">My lists</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             @if ((Auth::User()->profile) && Auth::user()->profile->avatar_status == 1)
-                                <img src="{{ Auth::user()->profile->avatar }}" alt="{{ Auth::user()->name }}" class="user-avatar-nav">
+                                <img src="{{ Auth::user()->profile->avatar }}" alt="{{ Auth::user()->name }}"
+                                     class="user-avatar-nav">
                             @else
                                 <div class="user-avatar-nav"></div>
                             @endif
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item {{ Request::is('profile/'.Auth::user()->name, 'profile/'.Auth::user()->name . '/edit') ? 'active' : null }}" href="{{ url('/profile/'.Auth::user()->name) }}">
+                            <a class="dropdown-item {{ Request::is('profile/'.Auth::user()->name, 'profile/'.Auth::user()->name . '/edit') ? 'active' : null }}"
+                               href="{{ url('/profile/'.Auth::user()->name) }}">
                                 {!! trans('titles.profile') !!}
                             </a>
                             <div class="dropdown-divider"></div>

@@ -1,16 +1,17 @@
 <?php
 
-    $levelAmount = 'level';
+$levelAmount = 'level';
 
-    if (Auth::User()->level() >= 2) {
-        $levelAmount = 'levels';
+if (Auth::User()->level() >= 2) {
+    $levelAmount = 'levels';
 
-    }
+}
 
 ?>
 
 <div class="card">
-    <div class="card-header <?php if (Auth::check() && Auth::user()->hasRole('admin', true)): ?> bg-secondary text-white <?php endif; ?>">
+    <div class="card-header <?php if (Auth::check() && Auth::user()->hasRole('admin',
+            true)): ?> bg-secondary text-white <?php endif; ?>">
 
         Welcome <?php echo e(Auth::user()->name); ?>
 
@@ -35,10 +36,12 @@
             <em>Thank you</em> for checking this project out. <strong>Please remember to star it!</strong>
         </p>
         <p>
-            <iframe src="https://ghbtns.com/github-btn.html?user=jeremykenedy&repo=laravel-auth&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px" style="margin: 0px 0 -3px .5em;"></iframe>
+            <iframe src="https://ghbtns.com/github-btn.html?user=jeremykenedy&repo=laravel-auth&type=star&count=true"
+                    frameborder="0" scrolling="0" width="170px" height="20px" style="margin: 0px 0 -3px .5em;"></iframe>
         </p>
         <p>
-            This page route is protected by <code>activated</code> middleware. Only accounts with activated emails are able pass this middleware.
+            This page route is protected by <code>activated</code> middleware. Only accounts with activated emails are
+            able pass this middleware.
         </p>
         <p>
             <small>
@@ -50,14 +53,14 @@
 
         <p>
             You have
-                <strong>
-                    <?php if (Auth::check() && Auth::user()->hasRole('admin')): ?>
-                       Admin
-                    <?php endif; ?>
-                    <?php if (Auth::check() && Auth::user()->hasRole('user')): ?>
-                       User
-                    <?php endif; ?>
-                </strong>
+            <strong>
+                <?php if (Auth::check() && Auth::user()->hasRole('admin')): ?>
+                    Admin
+                <?php endif; ?>
+                <?php if (Auth::check() && Auth::user()->hasRole('user')): ?>
+                    User
+                <?php endif; ?>
+            </strong>
             Access
         </p>
 

@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -27,7 +26,7 @@ const app = new Vue({
 });
 
 $.fn.extend({
-    toggleText: function(a, b){
+    toggleText: function (a, b) {
         return this.text(this.text() == b ? a : b);
     },
 
@@ -36,26 +35,23 @@ $.fn.extend({
      *   $( '#foo' ).alterClass( 'foo-* bar-*', 'foobar' )
      *
      */
-    alterClass: function(removals, additions) {
+    alterClass: function (removals, additions) {
         var self = this;
 
-        if(removals.indexOf('*') === -1) {
+        if (removals.indexOf('*') === -1) {
             // Use native jQuery methods if there is no wildcard matching
             self.removeClass(removals);
             return !additions ? self : self.addClass(additions);
         }
 
-        var patt = new RegExp( '\\s' +
-                removals.
-                    replace( /\*/g, '[A-Za-z0-9-_]+' ).
-                    split( ' ' ).
-                    join( '\\s|\\s' ) +
-                '\\s', 'g' );
+        var patt = new RegExp('\\s' +
+            removals.replace(/\*/g, '[A-Za-z0-9-_]+').split(' ').join('\\s|\\s') +
+            '\\s', 'g');
 
-        self.each(function(i, it) {
+        self.each(function (i, it) {
             var cn = ' ' + it.className + ' ';
-            while(patt.test(cn)) {
-                cn = cn.replace( patt, ' ' );
+            while (patt.test(cn)) {
+                cn = cn.replace(patt, ' ');
             }
             it.className = $.trim(cn);
         });

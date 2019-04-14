@@ -59,9 +59,9 @@ class Theme extends Model
     {
         return array_merge(
             [
-                'name'   => 'required|min:3|max:50|unique:themes,name'.($id ? ",$id" : ''),
-                'link'   => 'required|min:3|max:255|unique:themes,link'.($id ? ",$id" : ''),
-                'notes'  => 'max:500',
+                'name' => 'required|min:3|max:50|unique:themes,name' . ($id ? ",$id" : ''),
+                'link' => 'required|min:3|max:255|unique:themes,link' . ($id ? ",$id" : ''),
+                'notes' => 'max:500',
                 'status' => 'required',
             ],
             $merge);

@@ -23,16 +23,16 @@ class ThemesTest extends TestCase
      */
     public function testCreateNewTheme()
     {
-        $this->_faker = (object) \Faker\Factory::create();
+        $this->_faker = (object)\Faker\Factory::create();
         $this->_themeName = $this->_faker->domainWord;
         $this->_themeUrl = $this->_faker->url;
 
         $theme = Theme::create([
-            'name'          => $this->_themeName,
-            'link'          => $this->_themeUrl,
-            'notes'         => 'Test Default Theme.',
-            'status'        => 1,
-            'taggable_id'   => 0,
+            'name' => $this->_themeName,
+            'link' => $this->_themeUrl,
+            'notes' => 'Test Default Theme.',
+            'status' => 1,
+            'taggable_id' => 0,
             'taggable_type' => 'theme',
         ]);
         $theme->taggable_id = $theme->id;

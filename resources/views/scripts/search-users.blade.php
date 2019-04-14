@@ -1,5 +1,5 @@
 <script>
-    $(function() {
+    $(function () {
         var cardTitle = $('#card_title');
         var usersTable = $('#users_table');
         var resultsContainer = $('#search_results');
@@ -14,46 +14,46 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        searchform.submit(function(e) {
+        searchform.submit(function (e) {
             e.preventDefault();
             resultsContainer.html('');
             usersTable.hide();
             clearSearchTrigger.show();
             let noResulsHtml = '<tr>' +
-                                '<td>{!! trans("usersmanagement.search.no-results") !!}</td>' +
-                                '<td></td>' +
-                                '<td class="hidden-xs"></td>' +
-                                '<td class="hidden-xs"></td>' +
-                                '<td class="hidden-xs"></td>' +
-                                '<td class="hidden-sm hidden-xs"></td>' +
-                                '<td class="hidden-sm hidden-xs hidden-md"></td>' +
-                                '<td class="hidden-sm hidden-xs hidden-md"></td>' +
-                                '<td></td>' +
-                                '<td></td>' +
-                                '<td></td>' +
-                                '</tr>';
+                '<td>{!! trans("usersmanagement.search.no-results") !!}</td>' +
+                '<td></td>' +
+                '<td class="hidden-xs"></td>' +
+                '<td class="hidden-xs"></td>' +
+                '<td class="hidden-xs"></td>' +
+                '<td class="hidden-sm hidden-xs"></td>' +
+                '<td class="hidden-sm hidden-xs hidden-md"></td>' +
+                '<td class="hidden-sm hidden-xs hidden-md"></td>' +
+                '<td></td>' +
+                '<td></td>' +
+                '<td></td>' +
+                '</tr>';
 
             $.ajax({
-                type:'POST',
+                type: 'POST',
                 url: "{{ route('search-users') }}",
                 data: searchform.serialize(),
                 success: function (result) {
                     let jsonData = JSON.parse(result);
                     if (jsonData.length != 0) {
-                        $.each(jsonData, function(index, val) {
+                        $.each(jsonData, function (index, val) {
                             let rolesHtml = '';
                             let roleClass = '';
                             let showCellHtml = '<a class="btn btn-sm btn-success btn-block" href="users/' + val.id + '" data-toggle="tooltip" title="{{ trans("usersmanagement.tooltips.show") }}">{!! trans("usersmanagement.buttons.show") !!}</a>';
                             let editCellHtml = '<a class="btn btn-sm btn-info btn-block" href="users/' + val.id + '/edit" data-toggle="tooltip" title="{{ trans("usersmanagement.tooltips.edit") }}">{!! trans("usersmanagement.buttons.edit") !!}</a>';
-                            let deleteCellHtml = '<form method="POST" action="/users/'+ val.id +'" accept-charset="UTF-8" data-toggle="tooltip" title="Delete">' +
-                                    '{!! Form::hidden("_method", "DELETE") !!}' +
-                                    '{!! csrf_field() !!}' +
-                                    '<button class="btn btn-danger btn-sm" type="button" style="width: 100%;" data-toggle="modal" data-target="#confirmDelete" data-title="Delete User" data-message="{!! trans("usersmanagement.modals.delete_user_message", ["user" => "'+val.name+'"]) !!}">' +
-                                        '{!! trans("usersmanagement.buttons.delete") !!}' +
-                                    '</button>' +
+                            let deleteCellHtml = '<form method="POST" action="/users/' + val.id + '" accept-charset="UTF-8" data-toggle="tooltip" title="Delete">' +
+                                '{!! Form::hidden("_method", "DELETE") !!}' +
+                                '{!! csrf_field() !!}' +
+                                '<button class="btn btn-danger btn-sm" type="button" style="width: 100%;" data-toggle="modal" data-target="#confirmDelete" data-title="Delete User" data-message="{!! trans("usersmanagement.modals.delete_user_message", ["user" => "'+val.name+'"]) !!}">' +
+                                '{!! trans("usersmanagement.buttons.delete") !!}' +
+                                '</button>' +
                                 '</form>';
 
-                            $.each(val.roles, function(roleIndex, role) {
+                            $.each(val.roles, function (roleIndex, role) {
                                 if (role.name == "User") {
                                     roleClass = 'primary';
                                 } else if (role.name == "Admin") {
@@ -62,7 +62,8 @@
                                     roleClass = 'danger';
                                 } else {
                                     roleClass = 'default';
-                                };
+                                }
+                                ;
                                 rolesHtml = '<span class="label label-' + roleClass + '">' + role.name + '</span> ';
                             });
                             resultsContainer.append('<tr>' +
@@ -71,17 +72,18 @@
                                 '<td class="hidden-xs">' + val.email + '</td>' +
                                 '<td class="hidden-xs">' + val.first_name + '</td>' +
                                 '<td class="hidden-xs">' + val.last_name + '</td>' +
-                                '<td class="hidden-sm hidden-xs"> ' + rolesHtml  +'</td>' +
+                                '<td class="hidden-sm hidden-xs"> ' + rolesHtml + '</td>' +
                                 '<td class="hidden-sm hidden-xs hidden-md">' + val.created_at + '</td>' +
                                 '<td class="hidden-sm hidden-xs hidden-md">' + val.updated_at + '</td>' +
                                 '<td>' + deleteCellHtml + '</td>' +
                                 '<td>' + showCellHtml + '</td>' +
                                 '<td>' + editCellHtml + '</td>' +
-                            '</tr>');
+                                '</tr>');
                         });
                     } else {
                         resultsContainer.append(noResulsHtml);
-                    };
+                    }
+                    ;
                     usersCount.html(jsonData.length + " {!! trans('usersmanagement.search.found-footer') !!}");
                     userPagination.hide();
                     cardTitle.html("{!! trans('usersmanagement.search.title') !!}");
@@ -92,15 +94,16 @@
                         usersCount.html(0 + " {!! trans('usersmanagement.search.found-footer') !!}");
                         userPagination.hide();
                         cardTitle.html("{!! trans('usersmanagement.search.title') !!}");
-                    };
+                    }
+                    ;
                 },
             });
         });
-        searchSubmit.click(function(event) {
+        searchSubmit.click(function (event) {
             event.preventDefault();
             searchform.submit();
         });
-        searchformInput.keyup(function(event) {
+        searchformInput.keyup(function (event) {
             if ($('#user_search_box').val() != '') {
                 clearSearchTrigger.show();
             } else {
@@ -110,9 +113,10 @@
                 cardTitle.html("{!! trans('usersmanagement.showing-all-users') !!}");
                 userPagination.show();
                 usersCount.html(" ");
-            };
+            }
+            ;
         });
-        clearSearchTrigger.click(function(e) {
+        clearSearchTrigger.click(function (e) {
             e.preventDefault();
             clearSearchTrigger.hide();
             usersTable.show();

@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         var is_touch_device = 'ontouchstart' in document.documentElement;
 

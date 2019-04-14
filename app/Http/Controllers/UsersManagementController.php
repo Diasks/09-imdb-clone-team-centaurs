@@ -68,25 +68,25 @@ class UsersManagementController extends Controller
     {
         $validator = Validator::make($request->all(),
             [
-                'name'                  => 'required|max:255|unique:users',
-                'first_name'            => '',
-                'last_name'             => '',
-                'email'                 => 'required|email|max:255|unique:users',
-                'password'              => 'required|min:6|max:20|confirmed',
+                'name' => 'required|max:255|unique:users',
+                'first_name' => '',
+                'last_name' => '',
+                'email' => 'required|email|max:255|unique:users',
+                'password' => 'required|min:6|max:20|confirmed',
                 'password_confirmation' => 'required|same:password',
-                'role'                  => 'required',
+                'role' => 'required',
             ],
             [
-                'name.unique'         => trans('auth.userNameTaken'),
-                'name.required'       => trans('auth.userNameRequired'),
+                'name.unique' => trans('auth.userNameTaken'),
+                'name.required' => trans('auth.userNameRequired'),
                 'first_name.required' => trans('auth.fNameRequired'),
-                'last_name.required'  => trans('auth.lNameRequired'),
-                'email.required'      => trans('auth.emailRequired'),
-                'email.email'         => trans('auth.emailInvalid'),
-                'password.required'   => trans('auth.passwordRequired'),
-                'password.min'        => trans('auth.PasswordMin'),
-                'password.max'        => trans('auth.PasswordMax'),
-                'role.required'       => trans('auth.roleRequired'),
+                'last_name.required' => trans('auth.lNameRequired'),
+                'email.required' => trans('auth.emailRequired'),
+                'email.email' => trans('auth.emailInvalid'),
+                'password.required' => trans('auth.passwordRequired'),
+                'password.min' => trans('auth.PasswordMin'),
+                'password.max' => trans('auth.PasswordMax'),
+                'role.required' => trans('auth.roleRequired'),
             ]
         );
 
@@ -98,14 +98,14 @@ class UsersManagementController extends Controller
         $profile = new Profile();
 
         $user = User::create([
-            'name'             => $request->input('name'),
-            'first_name'       => $request->input('first_name'),
-            'last_name'        => $request->input('last_name'),
-            'email'            => $request->input('email'),
-            'password'         => bcrypt($request->input('password')),
-            'token'            => str_random(64),
+            'name' => $request->input('name'),
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+            'token' => str_random(64),
             'admin_ip_address' => $ipAddress->getClientIp(),
-            'activated'        => 1,
+            'activated' => 1,
         ]);
 
         $user->profile()->save($profile);
@@ -146,8 +146,8 @@ class UsersManagementController extends Controller
         }
 
         $data = [
-            'user'        => $user,
-            'roles'       => $roles,
+            'user' => $user,
+            'roles' => $roles,
             'currentRole' => $currentRole,
         ];
 
@@ -158,7 +158,7 @@ class UsersManagementController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -171,13 +171,13 @@ class UsersManagementController extends Controller
 
         if ($emailCheck) {
             $validator = Validator::make($request->all(), [
-                'name'     => 'required|max:255|unique:users',
-                'email'    => 'email|max:255|unique:users',
+                'name' => 'required|max:255|unique:users',
+                'email' => 'email|max:255|unique:users',
                 'password' => 'present|confirmed|min:6',
             ]);
         } else {
             $validator = Validator::make($request->all(), [
-                'name'     => 'required|max:255|unique:users,name,'.$id,
+                'name' => 'required|max:255|unique:users,name,' . $id,
                 'password' => 'nullable|confirmed|min:6',
             ]);
         }
@@ -260,8 +260,8 @@ class UsersManagementController extends Controller
         ];
         $searchMessages = [
             'user_search_box.required' => 'Search term is required',
-            'user_search_box.string'   => 'Search term has invalid characters',
-            'user_search_box.max'      => 'Search term has too many characters - 255 allowed',
+            'user_search_box.string' => 'Search term has invalid characters',
+            'user_search_box.max' => 'Search term has too many characters - 255 allowed',
         ];
 
         $validator = Validator::make($request->all(), $searchRules, $searchMessages);
@@ -272,9 +272,9 @@ class UsersManagementController extends Controller
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        $results = User::where('id', 'like', $searchTerm.'%')
-                            ->orWhere('name', 'like', $searchTerm.'%')
-                            ->orWhere('email', 'like', $searchTerm.'%')->get();
+        $results = User::where('id', 'like', $searchTerm . '%')
+            ->orWhere('name', 'like', $searchTerm . '%')
+            ->orWhere('email', 'like', $searchTerm . '%')->get();
 
         // Attach roles to results
         foreach ($results as $result) {

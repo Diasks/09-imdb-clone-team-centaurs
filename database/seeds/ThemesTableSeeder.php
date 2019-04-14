@@ -136,9 +136,9 @@ class ThemesTableSeeder extends Seeder
             $newTheme = Theme::where('name', '=', $theme['name'])->first();
             if ($newTheme === null) {
                 $newTheme = Theme::create([
-                    'name'          => $theme['name'],
-                    'link'          => $theme['link'],
-                    'taggable_id'   => 0,
+                    'name' => $theme['name'],
+                    'link' => $theme['link'],
+                    'taggable_id' => 0,
                     'taggable_type' => 'theme',
                 ]);
             }

@@ -9,7 +9,7 @@
         $(this).find('.modal-title').text(title);
         $(this).find('.modal-footer #confirm').data('form', form);
     });
-    $('<?php echo e($formTrigger); ?>').find('.modal-footer #confirm').on('click', function(){
+    $('<?php echo e($formTrigger); ?>').find('.modal-footer #confirm').on('click', function () {
         $(this).data('form').submit();
     });
 

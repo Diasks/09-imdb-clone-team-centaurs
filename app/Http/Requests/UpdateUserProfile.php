@@ -24,13 +24,13 @@ class UpdateUserProfile extends FormRequest
     public function rules()
     {
         return [
-            'theme_id'         => '',
-            'location'         => '',
-            'bio'              => 'max:500',
+            'theme_id' => '',
+            'location' => '',
+            'bio' => 'max:500',
             'twitter_username' => 'max:50',
-            'github_username'  => 'max:50',
-            'avatar'           => '',
-            'avatar_status'    => '',
+            'github_username' => 'max:50',
+            'avatar' => '',
+            'avatar_status' => '',
         ];
     }
 }

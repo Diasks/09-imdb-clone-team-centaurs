@@ -26,7 +26,7 @@ class SocialController extends Controller
      */
     public function getSocialRedirect($provider)
     {
-        $providerKey = Config::get('services.'.$provider);
+        $providerKey = Config::get('services.' . $provider);
 
         if (empty($providerKey)) {
             return view('pages.status')
@@ -61,7 +61,7 @@ class SocialController extends Controller
         $email = $socialUserObject->email;
 
         if (!$socialUserObject->email) {
-            $email = 'missing'.str_random(10).'@'.str_random(10).'.example.org';
+            $email = 'missing' . str_random(10) . '@' . str_random(10) . '.example.org';
         }
 
         if (empty($userCheck)) {
@@ -90,13 +90,13 @@ class SocialController extends Controller
                 $username = $this->checkUserName($username, $email);
 
                 $user = User::create([
-                    'name'                 => $username,
-                    'first_name'           => $fullname[0],
-                    'last_name'            => $fullname[1],
-                    'email'                => $email,
-                    'password'             => bcrypt(str_random(40)),
-                    'token'                => str_random(64),
-                    'activated'            => true,
+                    'name' => $username,
+                    'first_name' => $fullname[0],
+                    'last_name' => $fullname[1],
+                    'email' => $email,
+                    'password' => bcrypt(str_random(40)),
+                    'token' => str_random(64),
+                    'activated' => true,
                     'signup_sm_ip_address' => $ipAddress->getClientIp(),
 
                 ]);
@@ -177,6 +177,6 @@ class SocialController extends Controller
      */
     public function generateUserName($username)
     {
-        return $username.'_'.str_random(10);
+        return $username . '_' . str_random(10);
     }
 }

@@ -24,10 +24,10 @@ class MovieListController extends Controller
         $user = User::find($userId);
 
         $userExists = $user ? true : false;
-        
+
         $lists = null;
         $isUserOwner = false;
-        if($userExists) {
+        if ($userExists) {
             $lists = $user->movie_lists;
             $isUserOwner = $currentUserId === $user->id;
         }
@@ -38,14 +38,14 @@ class MovieListController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, $userId)
     {
         $user = Auth::user();
-        
-        if($user && $userId == $user->id) {
+
+        if ($user && $userId == $user->id) {
             $validatedData = $request->validate([
                 'name' => 'required|max:50',
             ]);
@@ -64,7 +64,7 @@ class MovieListController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($userId, $listId)
@@ -77,12 +77,12 @@ class MovieListController extends Controller
         $listExists = false;
         $movies = null;
         $isUserOwner = false;
-        if($user) {
+        if ($user) {
             $list = $user->movie_lists()->find($listId);
-    
+
             $listExists = $list ? true : false;
-    
-            if($listExists) {
+
+            if ($listExists) {
                 $movies = $list->movies->toArray();
             }
 
@@ -95,8 +95,8 @@ class MovieListController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $userId, $listId)
@@ -114,28 +114,24 @@ class MovieListController extends Controller
 
         $user = Auth::user();
 
-        if($user && $userId == $user->id) {
+        if ($user && $userId == $user->id) {
             $list = $user->movie_lists()->find($listId);
 
             switch ($action) {
                 case 'add':
-                    if($list->movies->contains($movieId)) {
+                    if ($list->movies->contains($movieId)) {
                         //$request->session()->flash('error', 'That list already contains this movie');
-                    }
-        
-                    else {
+                    } else {
                         $list->movies()->attach($movieId);
                         //$request->session()->flash('success', 'Movie added');
                     }
 
                     return redirect()->route('movie', ['movie_id' => $movieId]);
                 case 'remove':
-                    if($list->movies->contains($movieId)) {
+                    if ($list->movies->contains($movieId)) {
                         $list->movies()->detach($movieId);
                         $request->session()->flash('success', 'Movie removed');
-                    }
-        
-                    else {
+                    } else {
                         $request->session()->flash('error', 'That movie is not in this list');
                     }
 
@@ -149,7 +145,7 @@ class MovieListController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request, $userId, $listId)
@@ -157,11 +153,11 @@ class MovieListController extends Controller
         $user = Auth::user();
 
         $list = false;
-        if($user && $userId == $user->id) {
+        if ($user && $userId == $user->id) {
             $list = $user->movie_lists()->find($listId);
         }
 
-        if(!$list) {
+        if (!$list) {
             return redirect()->route('list', ['user_id' => $userId, 'list_id' => $listId]);
         }
 
