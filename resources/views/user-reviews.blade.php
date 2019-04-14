@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2>Reviews by {{ $user->name }}</h2>
+    <h1 class="main-heading">Reviews by {{ $user->name }}</h1>
     @forelse ($reviews as $review)
         <div class="card mb-3">
             <div class="card-header">

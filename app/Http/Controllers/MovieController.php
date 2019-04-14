@@ -9,6 +9,7 @@ use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
+use \Exception;
 
 class MovieController extends Controller
 {
@@ -176,9 +177,8 @@ class MovieController extends Controller
     public function edit($id)
     {
         $movie = Movie::find($id);
-        // dd($movie);
+        
         return view('admin-movie-edit', compact('movie'));
-    
     }
 
     /**
@@ -191,53 +191,75 @@ class MovieController extends Controller
     public function update(Request $request,  $id)
     {
         $request->validate([
-            'movie_title',
-            'movie_genres',
-            'movie_runtime',
-            'movie_release',
-            'movie_adult' ,
-            'movie_revenue',
-            'movie_budget' ,
-            'movie_status',
-            'movie_tagline' ,
-            'movie_poster',
-            'movie_backdrop' ,
-            'movie_video',
-            'movie_vote' ,
-            'movie_average',
-            'movie_production' ,
-            'movie_cast' ,
-            'movie_crew' ,
-            'movie_overview' 
+            'movie_title' => 'required',
+            'movie_genres' => 'required',
+            'movie_runtime' => 'required',
+            'movie_release' => 'required',
+            'movie_adult' => 'required',
+            'movie_revenue' => 'required',
+            'movie_budget' => 'required',
+            'movie_status' => 'required',
+            'movie_tagline' => 'required',
+            'movie_poster' => 'required',
+            'movie_backdrop' => 'required',
+            'movie_video' => 'required',
+            'movie_vote' => 'required',
+            'movie_average' => 'required',
+            'movie_production' => 'required|json',
+            'movie_cast' => 'required|json',
+            'movie_crew' => 'required|json',
+            'movie_overview' => 'required' 
         ]);
-        
-        $movie = Movie::find($id);
-        $movie->title= $request->get('movie_title');
-        $movie->genres = $request->get('movie_genres');
-        $movie->runtime = $request->get('movie_runtime');
-        $movie->release_date = $request->get('movie_release');
-        $movie->adult = $request->get('movie_adult');
-        $movie->revenue = $request->get('movie_revenue');
-        $movie->budget = $request->get('movie_budget');
-        $movie->status = $request->get('movie_status');
-        $movie->tagline = $request->get('movie_tagline');
-        $movie->poster_path = $request->get('movie_poster');
-        $movie->backdrop_path = $request->get('movie_backdrop');
-        $movie->video = $request->get('movie_video');
-        $movie->vote_count = $request->get('movie_vote');
-        $movie->vote_average = $request->get('movie_average');
-        $movie->production_companies = $request->get('movie_production');
-        $movie->cast = $request->get('movie_cast');
-        $movie->crew = $request->get('movie_crew');
-        $movie->overview = $request->get('movie_overview');
 
-        $movie->save();
+        function isJson($string) {
+            json_decode($string);
+            return (json_last_error() == JSON_ERROR_NONE);
+        }
+
+        try {
+            $newGenres = array_map(function($g) {
+                return json_decode($g);
+            }, array_keys($request->movie_genres));
+
+            $jsonGenres = stripslashes(json_encode($newGenres));
+
+            if(!isJson($jsonGenres, true)) {
+                throw new Exception();
+            }
+
+            $movie = Movie::find($id);
+            $movie->title = $request->get('movie_title');
+            $movie->genres = json_decode($jsonGenres);
+            $movie->runtime = $request->get('movie_runtime');
+            $movie->release_date = $request->get('movie_release');
+            $movie->adult = $request->get('movie_adult');
+            $movie->revenue = $request->get('movie_revenue');
+            $movie->budget = $request->get('movie_budget');
+            $movie->status = $request->get('movie_status');
+            $movie->tagline = $request->get('movie_tagline');
+            $movie->poster_path = $request->get('movie_poster');
+            $movie->backdrop_path = $request->get('movie_backdrop');
+            $movie->video = $request->get('movie_video');
+            $movie->vote_count = $request->get('movie_vote');
+            $movie->vote_average = $request->get('movie_average');
+            $movie->production_companies = json_decode($request->get('movie_production'));
+            $movie->cast = json_decode($request->get('movie_cast'));
+            $movie->crew = json_decode($request->get('movie_crew'));
+            $movie->overview = $request->get('movie_overview');
+            
+            $movie->save();
+        } catch(Exception $e) {
+            return redirect()->back()->with('error', 'Invalid input');
+        }
+
         return redirect('/admin/movies')->with('success', 'Movie has been updated!');
     }
 
     public function get()
     {
-        $allMovies = Movie::all();
+        $allMovies = Movie::orderBy('release_date', 'desc')
+            ->paginate(36);
+
         return view('admin-movie', compact('allMovies'));
     }
 

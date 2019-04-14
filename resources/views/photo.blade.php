@@ -1,21 +1,19 @@
 
-@extends('layouts.app')
+@extends('layouts.app', ['container' => false])
 @section('content')
 
 
-<div class="jumbotron jumbotron-fluid bg-info">
-  <div class="container">
-    <h1 class="display-4">Photos for: {{$images->title}}</h1>
-    @foreach($imageData['backdrops'] as $images)
-    <img width="320" height="240" controls src="{{ 'http://image.tmdb.org/t/p/original/' .$images['file_path'] }}">
- 
 
-@endforeach
-@foreach($imageData['posters'] as $images)
-    <img width="320" height="240" controls src="{{ 'http://image.tmdb.org/t/p/original/' .$images['file_path'] }}">
- 
+   <h1 class="display-4">Photos for: {{$images->title}}</h1>
+   <div class="containerPhotos"> 
 
-@endforeach
+    @forelse(array_merge($imageData['backdrops'], $imageData['posters']) as $images)
+   <img class="photos" width="320" height="240" controls src="{{ 'http://image.tmdb.org/t/p/original/' .$images['file_path'] }}">
+   @empty
+   <h2> No photos were found for this movie </h2>
+   @endforelse
+
+  </div>
 
 
 
