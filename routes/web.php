@@ -71,7 +71,8 @@ Route::group(['middleware' => ['auth', 'activated', 'activity']], function () {
     Route::post('/movie/{movie_id}/reviews', 'ReviewController@store');
 
     // Activation Routes
-    Route::get('/activation-required', ['uses' => 'Auth\ActivateController@activationRequired'])->name('activation-required');
+    Route::get('/activation-required',
+        ['uses' => 'Auth\ActivateController@activationRequired'])->name('activation-required');
     Route::get('/logout', ['uses' => 'Auth\LoginController@logout'])->name('logout');
 });
 
@@ -79,11 +80,11 @@ Route::group(['middleware' => ['auth', 'activated', 'activity']], function () {
 Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], function () {
 
     //  Homepage Route - Redirect based on user role is in controller.
-    Route::get('/home', ['as' => 'public.home',   'uses' => 'UserController@index']);
+    Route::get('/home', ['as' => 'public.home', 'uses' => 'UserController@index']);
 
     // Show users profile - viewable by other users.
     Route::get('profile/{username}', [
-        'as'   => '{username}',
+        'as' => '{username}',
         'uses' => 'ProfilesController@show',
     ]);
 
@@ -93,7 +94,7 @@ Route::group(['middleware' => ['auth', 'activated', 'activity', 'twostep']], fun
 
 // Registered, activated, and is current user routes.
 Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', 'twostep']], function () {
-    
+
     // User Profile and Account Routes
     Route::resource(
         'profile',
@@ -107,15 +108,15 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
         ]
     );
     Route::put('profile/{username}/updateUserAccount', [
-        'as'   => '{username}',
+        'as' => '{username}',
         'uses' => 'ProfilesController@updateUserAccount',
     ]);
     Route::put('profile/{username}/updateUserPassword', [
-        'as'   => '{username}',
+        'as' => '{username}',
         'uses' => 'ProfilesController@updateUserPassword',
     ]);
     Route::delete('profile/{username}/deleteUserAccount', [
-        'as'   => '{username}',
+        'as' => '{username}',
         'uses' => 'ProfilesController@deleteUserAccount',
     ]);
 
@@ -132,13 +133,16 @@ Route::group(['middleware' => ['auth', 'activated', 'currentUser', 'activity', '
 Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 'twostep']], function () {
     Route::resource('/users/deleted', 'SoftDeletesController', [
         'only' => [
-            'index', 'show', 'update', 'destroy',
+            'index',
+            'show',
+            'update',
+            'destroy',
         ],
     ]);
 
     Route::resource('users', 'UsersManagementController', [
         'names' => [
-            'index'   => 'users',
+            'index' => 'users',
             'destroy' => 'user.destroy',
         ],
         'except' => [
@@ -149,7 +153,7 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
 
     Route::resource('themes', 'ThemesManagementController', [
         'names' => [
-            'index'   => 'themes',
+            'index' => 'themes',
             'destroy' => 'themes.destroy',
         ],
     ]);

@@ -84,12 +84,12 @@ class ActivateController extends Controller
     public static function activeRedirect($user, $currentRoute)
     {
         if ($user->activated) {
-            Log::info('Activated user attempted to visit '.$currentRoute.'. ', [$user]);
+            Log::info('Activated user attempted to visit ' . $currentRoute . '. ', [$user]);
 
             if ($user->isAdmin()) {
                 return redirect()->route(self::getAdminHomeRoute())
-                ->with('status', 'info')
-                ->with('message', trans('auth.alreadyActivated'));
+                    ->with('status', 'info')
+                    ->with('message', trans('auth.alreadyActivated'));
             }
 
             return redirect()->route(self::getUserHomeRoute())
@@ -118,7 +118,7 @@ class ActivateController extends Controller
 
         $data = [
             'email' => $user->email,
-            'date'  => $lastActivation->created_at->format('m/d/Y'),
+            'date' => $lastActivation->created_at->format('m/d/Y'),
         ];
 
         return view($this->getActivationView())->with($data);
@@ -146,7 +146,8 @@ class ActivateController extends Controller
                 ->count();
 
             if ($activationsCount > config('settings.maxAttempts')) {
-                Log::info('Exceded max resends in last '.config('settings.timePeriod').' hours. '.$currentRoute.'. ', [$user]);
+                Log::info('Exceded max resends in last ' . config('settings.timePeriod') . ' hours. ' . $currentRoute . '. ',
+                    [$user]);
 
                 $data = [
                     'email' => $user->email,
@@ -157,11 +158,11 @@ class ActivateController extends Controller
             }
         }
 
-        Log::info('Registered attempted to navigate while unactivate. '.$currentRoute.'. ', [$user]);
+        Log::info('Registered attempted to navigate while unactivate. ' . $currentRoute . '. ', [$user]);
 
         $data = [
             'email' => $user->email,
-            'date'  => $lastActivation ? $lastActivation->created_at->format('m/d/Y') : null, //
+            'date' => $lastActivation ? $lastActivation->created_at->format('m/d/Y') : null, //
         ];
 
         return view($this->getActivationView())->with($data);
@@ -192,7 +193,7 @@ class ActivateController extends Controller
             ->first();
 
         if (empty($activation)) {
-            Log::info('Registered user attempted to activate with an invalid token: '.$currentRoute.'. ', [$user]);
+            Log::info('Registered user attempted to activate with an invalid token: ' . $currentRoute . '. ', [$user]);
 
             return redirect()->route(self::getActivationRoute())
                 ->with('status', 'danger')
@@ -211,12 +212,12 @@ class ActivateController extends Controller
             $anActivation->delete();
         }
 
-        Log::info('Registered user successfully activated. '.$currentRoute.'. ', [$user]);
+        Log::info('Registered user successfully activated. ' . $currentRoute . '. ', [$user]);
 
         if ($user->isAdmin()) {
             return redirect()->route(self::$getAdminHomeRoute())
-            ->with('status', 'success')
-            ->with('message', trans('auth.successActivated'));
+                ->with('status', 'success')
+                ->with('message', trans('auth.successActivated'));
         }
 
         return redirect()->route(self::getUserHomeRoute())
@@ -241,7 +242,8 @@ class ActivateController extends Controller
                 ->count();
 
             if ($activationsCount >= config('settings.maxAttempts')) {
-                Log::info('Exceded max resends in last '.config('settings.timePeriod').' hours. '.$currentRoute.'. ', [$user]);
+                Log::info('Exceded max resends in last ' . config('settings.timePeriod') . ' hours. ' . $currentRoute . '. ',
+                    [$user]);
 
                 $data = [
                     'email' => $user->email,
@@ -253,14 +255,14 @@ class ActivateController extends Controller
 
             $sendEmail = $this->initiateEmailActivation($user);
 
-            Log::info('Activation resent to registered user. '.$currentRoute.'. ', [$user]);
+            Log::info('Activation resent to registered user. ' . $currentRoute . '. ', [$user]);
 
             return redirect()->route(self::getActivationRoute())
                 ->with('status', 'success')
                 ->with('message', trans('auth.activationSent'));
         }
 
-        Log::info('Activated user attempte to navigate to '.$currentRoute.'. ', [$user]);
+        Log::info('Activated user attempte to navigate to ' . $currentRoute . '. ', [$user]);
 
         return $this->activeRedirect($user, $currentRoute)
             ->with('status', 'info')
@@ -283,11 +285,11 @@ class ActivateController extends Controller
             ->count();
 
         if ($activationsCount >= config('settings.maxAttempts')) {
-            Log::info('Locked non-activated user attempted to visit '.$currentRoute.'. ', [$user]);
+            Log::info('Locked non-activated user attempted to visit ' . $currentRoute . '. ', [$user]);
 
             $data = [
-                'hours'    => config('settings.timePeriod'),
-                'email'    => $user->email,
+                'hours' => config('settings.timePeriod'),
+                'email' => $user->email,
                 'lastDate' => $lastActivation->created_at->format('m/d/Y'),
             ];
 

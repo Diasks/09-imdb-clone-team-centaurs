@@ -22,7 +22,8 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             {!! trans('usersmanagement.usersDeletedPanelTitle') !!}
                             <div class="float-right">
-                                <a href="/users/deleted/" class="btn btn-light btn-sm float-right" data-toggle="tooltip" data-placement="left" title="{{ trans('usersmanagement.usersBackDelBtn') }}">
+                                <a href="/users/deleted/" class="btn btn-light btn-sm float-right" data-toggle="tooltip"
+                                   data-placement="left" title="{{ trans('usersmanagement.usersBackDelBtn') }}">
                                     <i class="fa fa-fw fa-mail-reply" aria-hidden="true"></i>
                                     <span class="sr-only">
                                         {!! trans('usersmanagement.usersBackDelBtn') !!}
@@ -35,7 +36,9 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-4 offset-sm-2 col-md-2 offset-md-3">
-                                <img src="@if ($user->profile->avatar_status == 1) {{ $user->profile->avatar }} @else {{ Gravatar::get($user->email) }} @endif" alt="{{ $user->name }}" id="" class="rounded-circle center-block mb-3 mt-4 user-image">
+                                <img src="@if ($user->profile->avatar_status == 1) {{ $user->profile->avatar }} @else {{ Gravatar::get($user->email) }} @endif"
+                                     alt="{{ $user->name }}" id=""
+                                     class="rounded-circle center-block mb-3 mt-4 user-image">
                             </div>
                             <div class="col-sm-4 col-md-6">
                                 <h4 class="text-muted margin-top-sm-1 text-center text-left-tablet">
@@ -43,21 +46,21 @@
                                 </h4>
                                 <p class="text-center text-left-tablet">
                                     <strong>
-                                    {{ $user->first_name }} {{ $user->last_name }}
+                                        {{ $user->first_name }} {{ $user->last_name }}
                                     </strong>
-                                    <br />
+                                    <br/>
                                     {{ HTML::mailto($user->email, $user->email) }}
                                 </p>
                                 @if ($user->profile)
-                                <div class="text-center text-left-tablet mb-4">
-                                    {!! Form::model($user, array('action' => array('SoftDeletesController@update', $user->id), 'method' => 'PUT', 'class' => 'form-inline')) !!}
+                                    <div class="text-center text-left-tablet mb-4">
+                                        {!! Form::model($user, array('action' => array('SoftDeletesController@update', $user->id), 'method' => 'PUT', 'class' => 'form-inline')) !!}
                                         {!! Form::button('<i class="fa fa-refresh fa-fw" aria-hidden="true"></i> Restore User', array('class' => 'btn btn-success btn-block btn-sm mt-1 mb-1', 'type' => 'submit', 'data-toggle' => 'tooltip', 'title' => 'Restore User')) !!}
                                         {!! Form::close() !!}
                                         {!! Form::model($user, array('action' => array('SoftDeletesController@destroy', $user->id), 'method' => 'DELETE', 'class' => 'form-inline', 'data-toggle' => 'tooltip', 'title' => 'Permanently Delete User')) !!}
                                         {!! Form::hidden('_method', 'DELETE') !!}
                                         {!! Form::button('<i class="fa fa-user-times fa-fw" aria-hidden="true"></i> Delete User', array('class' => 'btn btn-danger btn-sm ','type' => 'button', 'style' =>'width: 100%;' ,'data-toggle' => 'modal', 'data-target' => '#confirmDelete', 'data-title' => 'Permanently Delete User', 'data-message' => 'Are you sure you want to permanently delete this user?')) !!}
-                                    {!! Form::close() !!}
-                                </div>
+                                        {!! Form::close() !!}
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -82,7 +85,7 @@
                         @if ($user->deleted_ip_address)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelIpDeleted') }}
+                                    {{ trans('usersmanagement.labelIpDeleted') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7 text-warning">
@@ -96,7 +99,7 @@
                         @if ($user->name)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelUserName') }}
+                                    {{ trans('usersmanagement.labelUserName') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7">
@@ -110,7 +113,7 @@
                         @if ($user->email)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelEmail') }}
+                                    {{ trans('usersmanagement.labelEmail') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7">
@@ -124,7 +127,7 @@
                         @if ($user->first_name)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelFirstName') }}
+                                    {{ trans('usersmanagement.labelFirstName') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7">
@@ -138,7 +141,7 @@
                         @if ($user->last_name)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelLastName') }}
+                                    {{ trans('usersmanagement.labelLastName') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7">
@@ -259,7 +262,7 @@
                         @if ($user->created_at)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelCreatedAt') }}
+                                    {{ trans('usersmanagement.labelCreatedAt') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7">
@@ -273,7 +276,7 @@
                         @if ($user->updated_at)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelUpdatedAt') }}
+                                    {{ trans('usersmanagement.labelUpdatedAt') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7">
@@ -287,12 +290,12 @@
                         @if ($user->signup_ip_address)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelIpEmail') }}
+                                    {{ trans('usersmanagement.labelIpEmail') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7">
                                 <code>
-                                {{ $user->signup_ip_address }}
+                                    {{ $user->signup_ip_address }}
                                 </code>
                             </div>
 
@@ -303,12 +306,12 @@
                         @if ($user->signup_confirmation_ip_address)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelIpConfirm') }}
+                                    {{ trans('usersmanagement.labelIpConfirm') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7">
                                 <code>
-                                {{ $user->signup_confirmation_ip_address }}
+                                    {{ $user->signup_confirmation_ip_address }}
                                 </code>
                             </div>
 
@@ -319,12 +322,12 @@
                         @if ($user->signup_sm_ip_address)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelIpSocial') }}
+                                    {{ trans('usersmanagement.labelIpSocial') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7">
                                 <code>
-                                {{ $user->signup_sm_ip_address }}
+                                    {{ $user->signup_sm_ip_address }}
                                 </code>
                             </div>
 
@@ -336,12 +339,12 @@
                         @if ($user->admin_ip_address)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelIpAdmin') }}
+                                    {{ trans('usersmanagement.labelIpAdmin') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7">
                                 <code>
-                                {{ $user->admin_ip_address }}
+                                    {{ $user->admin_ip_address }}
                                 </code>
                             </div>
 
@@ -352,12 +355,12 @@
                         @if ($user->updated_ip_address)
                             <div class="col-sm-5 col-xs-6 text-larger">
                                 <strong>
-                                {{ trans('usersmanagement.labelIpUpdate') }}
+                                    {{ trans('usersmanagement.labelIpUpdate') }}
                                 </strong>
                             </div>
                             <div class="col-sm-7">
                                 <code>
-                                {{ $user->updated_ip_address }}
+                                    {{ $user->updated_ip_address }}
                                 </code>
                             </div>
 

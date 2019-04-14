@@ -63,8 +63,8 @@ class ActivationRepository
     /**
      * Sends a new activation email.
      *
-     * @param \App\Models\User $user  The user
-     * @param string           $token The token
+     * @param \App\Models\User $user The user
+     * @param string $token The token
      */
     public function sendNewActivationEmail(User $user, $token)
     {

@@ -34,7 +34,7 @@ class Authenticate
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param \Closure $next
      *
      * ////////////////
      * @param $role
@@ -67,6 +67,6 @@ class Authenticate
     {
         $user = Auth::user();
         $currentRoute = Route::currentRouteName();
-        Log::info('Authenticate middleware was used: '.$currentRoute.'. ', [$user]);
+        Log::info('Authenticate middleware was used: ' . $currentRoute . '. ', [$user]);
     }
 }

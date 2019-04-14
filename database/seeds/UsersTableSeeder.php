@@ -24,15 +24,15 @@ class UsersTableSeeder extends Seeder
         $user = User::where('email', '=', $seededAdminEmail)->first();
         if ($user === null) {
             $user = User::create([
-                'name'                           => $faker->userName,
-                'first_name'                     => $faker->firstName,
-                'last_name'                      => $faker->lastName,
-                'email'                          => $seededAdminEmail,
-                'password'                       => Hash::make('password'),
-                'token'                          => str_random(64),
-                'activated'                      => true,
+                'name' => $faker->userName,
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
+                'email' => $seededAdminEmail,
+                'password' => Hash::make('password'),
+                'token' => str_random(64),
+                'activated' => true,
                 'signup_confirmation_ip_address' => $faker->ipv4,
-                'admin_ip_address'               => $faker->ipv4,
+                'admin_ip_address' => $faker->ipv4,
             ]);
 
             $user->profile()->save($profile);
@@ -44,14 +44,14 @@ class UsersTableSeeder extends Seeder
         $user = User::where('email', '=', 'user@user.com')->first();
         if ($user === null) {
             $user = User::create([
-                'name'                           => $faker->userName,
-                'first_name'                     => $faker->firstName,
-                'last_name'                      => $faker->lastName,
-                'email'                          => 'user@user.com',
-                'password'                       => Hash::make('password'),
-                'token'                          => str_random(64),
-                'activated'                      => true,
-                'signup_ip_address'              => $faker->ipv4,
+                'name' => $faker->userName,
+                'first_name' => $faker->firstName,
+                'last_name' => $faker->lastName,
+                'email' => 'user@user.com',
+                'password' => Hash::make('password'),
+                'token' => str_random(64),
+                'activated' => true,
+                'signup_ip_address' => $faker->ipv4,
                 'signup_confirmation_ip_address' => $faker->ipv4,
             ]);
 

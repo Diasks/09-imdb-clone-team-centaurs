@@ -17,6 +17,7 @@
 
 <script>
     import Chart from 'chart.js'
+
     export default {
         data() {
             return {
@@ -45,7 +46,7 @@
                         scales: {
                             yAxes: [{
                                 ticks: {
-                                    beginAtZero:true
+                                    beginAtZero: true
                                 }
                             }]
                         }

@@ -2,12 +2,15 @@
   .stack {
     font-size: 0.85em;
   }
+
   .date {
     min-width: 75px;
   }
+
   .text {
     word-break: break-all;
   }
+
   a.llv-active {
     z-index: 2;
     background-color: $brand-primary;

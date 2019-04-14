@@ -63,18 +63,18 @@ class ThemesManagementController extends Controller
         }
 
         $theme = Theme::create([
-            'name'          => $request->input('name'),
-            'link'          => $request->input('link'),
-            'notes'         => $request->input('notes'),
-            'status'        => $request->input('status'),
-            'taggable_id'   => 0,
+            'name' => $request->input('name'),
+            'link' => $request->input('link'),
+            'notes' => $request->input('notes'),
+            'status' => $request->input('status'),
+            'taggable_id' => 0,
             'taggable_type' => 'theme',
         ]);
 
         $theme->taggable_id = $theme->id;
         $theme->save();
 
-        return redirect('themes/'.$theme->id)->with('success', trans('themes.createSuccess'));
+        return redirect('themes/' . $theme->id)->with('success', trans('themes.createSuccess'));
     }
 
     /**
@@ -97,7 +97,7 @@ class ThemesManagementController extends Controller
         }
 
         $data = [
-            'theme'      => $theme,
+            'theme' => $theme,
             'themeUsers' => $themeUsers,
         ];
 
@@ -124,7 +124,7 @@ class ThemesManagementController extends Controller
         }
 
         $data = [
-            'theme'      => $theme,
+            'theme' => $theme,
             'themeUsers' => $themeUsers,
         ];
 
@@ -135,7 +135,7 @@ class ThemesManagementController extends Controller
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -153,7 +153,7 @@ class ThemesManagementController extends Controller
 
         $theme->fill($input)->save();
 
-        return redirect('themes/'.$theme->id)->with('success', trans('themes.updateSuccess'));
+        return redirect('themes/' . $theme->id)->with('success', trans('themes.updateSuccess'));
     }
 
     /**

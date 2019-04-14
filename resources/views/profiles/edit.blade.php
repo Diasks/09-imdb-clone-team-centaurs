@@ -12,56 +12,76 @@
                     <div class="card-body p-0">
                         @if ($user->profile)
                             @if (Auth::user()->id == $user->id)
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-12 col-sm-4 col-md-3 profile-sidebar text-white rounded-left-sm-up">
-                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                            <a class="nav-link active" data-toggle="pill" href=".edit-profile-tab" role="tab" aria-controls="edit-profile-tab" aria-selected="true">
-                                                {{ trans('profile.editProfileTitle') }}
-                                            </a>
-                                            <a class="nav-link" data-toggle="pill" href=".edit-settings-tab" role="tab" aria-controls="edit-settings-tab" aria-selected="false">
-                                                {{ trans('profile.editAccountTitle') }}
-                                            </a>
-                                            <a class="nav-link" data-toggle="pill" href=".edit-account-tab" role="tab" aria-controls="edit-settings-tab" aria-selected="false">
-                                                {{ trans('profile.editAccountAdminTitle') }}
-                                            </a>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12 col-sm-4 col-md-3 profile-sidebar text-white rounded-left-sm-up">
+                                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                                 aria-orientation="vertical">
+                                                <a class="nav-link active" data-toggle="pill" href=".edit-profile-tab"
+                                                   role="tab" aria-controls="edit-profile-tab" aria-selected="true">
+                                                    {{ trans('profile.editProfileTitle') }}
+                                                </a>
+                                                <a class="nav-link" data-toggle="pill" href=".edit-settings-tab"
+                                                   role="tab" aria-controls="edit-settings-tab" aria-selected="false">
+                                                    {{ trans('profile.editAccountTitle') }}
+                                                </a>
+                                                <a class="nav-link" data-toggle="pill" href=".edit-account-tab"
+                                                   role="tab" aria-controls="edit-settings-tab" aria-selected="false">
+                                                    {{ trans('profile.editAccountAdminTitle') }}
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-sm-8 col-md-9">
-                                        <div class="tab-content" id="v-pills-tabContent">
-                                            <div class="tab-pane fade show active edit-profile-tab" role="tabpanel" aria-labelledby="edit-profile-tab">
-                                                <div class="row mb-1">
-                                                    <div class="col-sm-12">
-                                                        <div id="avatar_container">
-                                                            <div class="collapseOne card-collapse collapse @if($user->profile->avatar_status == 0) show @endif">
-                                                                <div class="card-body">
-                                                                    <img src="{{  Gravatar::get($user->email) }}" alt="{{ $user->name }}" class="user-avatar">
+                                        <div class="col-12 col-sm-8 col-md-9">
+                                            <div class="tab-content" id="v-pills-tabContent">
+                                                <div class="tab-pane fade show active edit-profile-tab" role="tabpanel"
+                                                     aria-labelledby="edit-profile-tab">
+                                                    <div class="row mb-1">
+                                                        <div class="col-sm-12">
+                                                            <div id="avatar_container">
+                                                                <div class="collapseOne card-collapse collapse @if($user->profile->avatar_status == 0) show @endif">
+                                                                    <div class="card-body">
+                                                                        <img src="{{  Gravatar::get($user->email) }}"
+                                                                             alt="{{ $user->name }}"
+                                                                             class="user-avatar">
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="collapseTwo card-collapse collapse @if($user->profile->avatar_status == 1) show @endif">
-                                                                <div class="card-body">
-                                                                    <div class="dz-preview"></div>
-                                                                    {!! Form::open(array('route' => 'avatar.upload', 'method' => 'POST', 'name' => 'avatarDropzone','id' => 'avatarDropzone', 'class' => 'form single-dropzone dropzone single', 'files' => true)) !!}
-                                                                        <img id="user_selected_avatar" class="user-avatar" src="@if ($user->profile->avatar != NULL) {{ $user->profile->avatar }} @endif" alt="{{ $user->name }}">
-                                                                    {!! Form::close() !!}
+                                                                <div class="collapseTwo card-collapse collapse @if($user->profile->avatar_status == 1) show @endif">
+                                                                    <div class="card-body">
+                                                                        <div class="dz-preview"></div>
+                                                                        {!! Form::open(array('route' => 'avatar.upload', 'method' => 'POST', 'name' => 'avatarDropzone','id' => 'avatarDropzone', 'class' => 'form single-dropzone dropzone single', 'files' => true)) !!}
+                                                                        <img id="user_selected_avatar"
+                                                                             class="user-avatar"
+                                                                             src="@if ($user->profile->avatar != NULL) {{ $user->profile->avatar }} @endif"
+                                                                             alt="{{ $user->name }}">
+                                                                        {!! Form::close() !!}
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                {!! Form::model($user->profile, ['method' => 'PATCH', 'route' => ['profile.update', $user->name], 'id' => 'user_profile_form', 'class' => 'form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
+                                                    {!! Form::model($user->profile, ['method' => 'PATCH', 'route' => ['profile.update', $user->name], 'id' => 'user_profile_form', 'class' => 'form-horizontal', 'role' => 'form', 'enctype' => 'multipart/form-data']) !!}
                                                     {{ csrf_field() }}
                                                     <div class="row">
                                                         <div class="col-10 offset-1 col-sm-10 offset-sm-1 mb-1">
                                                             <div class="row" data-toggle="buttons">
                                                                 <div class="col-6 col-xs-6 right-btn-container">
-                                                                    <label class="btn btn-primary @if($user->profile->avatar_status == 0) active @endif btn-block btn-sm" data-toggle="collapse" data-target=".collapseOne:not(.show), .collapseTwo.show">
-                                                                        <input type="radio" name="avatar_status" id="option1" autocomplete="off" value="0" @if($user->profile->avatar_status == 0) checked @endif> Use Gravatar
+                                                                    <label class="btn btn-primary @if($user->profile->avatar_status == 0) active @endif btn-block btn-sm"
+                                                                           data-toggle="collapse"
+                                                                           data-target=".collapseOne:not(.show), .collapseTwo.show">
+                                                                        <input type="radio" name="avatar_status"
+                                                                               id="option1" autocomplete="off" value="0"
+                                                                               @if($user->profile->avatar_status == 0) checked @endif>
+                                                                        Use Gravatar
                                                                     </label>
                                                                 </div>
                                                                 <div class="col-6 col-xs-6 left-btn-container">
-                                                                    <label class="btn btn-primary @if($user->profile->avatar_status == 1) active @endif btn-block btn-sm" data-toggle="collapse" data-target=".collapseOne.show, .collapseTwo:not(.show)">
-                                                                        <input type="radio" name="avatar_status" id="option2" autocomplete="off" value="1" @if($user->profile->avatar_status == 1) checked @endif> Use My Image
+                                                                    <label class="btn btn-primary @if($user->profile->avatar_status == 1) active @endif btn-block btn-sm"
+                                                                           data-toggle="collapse"
+                                                                           data-target=".collapseOne.show, .collapseTwo:not(.show)">
+                                                                        <input type="radio" name="avatar_status"
+                                                                               id="option2" autocomplete="off" value="1"
+                                                                               @if($user->profile->avatar_status == 1) checked @endif>
+                                                                        Use My Image
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -73,11 +93,12 @@
                                                             <select class="form-control" name="theme_id" id="theme_id">
                                                                 @if ($themes->count())
                                                                     @foreach($themes as $theme)
-                                                                      <option value="{{ $theme->id }}"{{ $currentTheme->id == $theme->id ? 'selected="selected"' : '' }}>{{ $theme->name }}</option>
+                                                                        <option value="{{ $theme->id }}"{{ $currentTheme->id == $theme->id ? 'selected="selected"' : '' }}>{{ $theme->name }}</option>
                                                                     @endforeach
                                                                 @endif
                                                             </select>
-                                                            <span class="glyphicon {{ $errors->has('theme') ? ' glyphicon-asterisk ' : ' ' }} form-control-feedback" aria-hidden="true"></span>
+                                                            <span class="glyphicon {{ $errors->has('theme') ? ' glyphicon-asterisk ' : ' ' }} form-control-feedback"
+                                                                  aria-hidden="true"></span>
                                                             @if ($errors->has('theme'))
                                                                 <span class="help-block">
                                                                     <strong>{{ $errors->first('theme') }}</strong>
@@ -89,7 +110,8 @@
                                                         {!! Form::label('location', trans('profile.label-location') , array('class' => 'col-12 control-label')); !!}
                                                         <div class="col-12">
                                                             {!! Form::text('location', old('location'), array('id' => 'location', 'class' => 'form-control', 'placeholder' => trans('profile.ph-location'))) !!}
-                                                            <span class="glyphicon {{ $errors->has('location') ? ' glyphicon-asterisk ' : ' glyphicon-pencil ' }} form-control-feedback" aria-hidden="true"></span>
+                                                            <span class="glyphicon {{ $errors->has('location') ? ' glyphicon-asterisk ' : ' glyphicon-pencil ' }} form-control-feedback"
+                                                                  aria-hidden="true"></span>
                                                             @if ($errors->has('location'))
                                                                 <span class="help-block">
                                                                     <strong>{{ $errors->first('location') }}</strong>
@@ -101,7 +123,8 @@
                                                         {!! Form::label('bio', trans('profile.label-bio') , array('class' => 'col-12 control-label')); !!}
                                                         <div class="col-12">
                                                             {!! Form::textarea('bio', old('bio'), array('id' => 'bio', 'class' => 'form-control', 'placeholder' => trans('profile.ph-bio'))) !!}
-                                                            <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
+                                                            <span class="glyphicon glyphicon-pencil form-control-feedback"
+                                                                  aria-hidden="true"></span>
                                                             @if ($errors->has('bio'))
                                                                 <span class="help-block">
                                                                     <strong>{{ $errors->first('bio') }}</strong>
@@ -113,7 +136,8 @@
                                                         {!! Form::label('twitter_username', trans('profile.label-twitter_username') , array('class' => 'col-12 control-label')); !!}
                                                         <div class="col-12">
                                                             {!! Form::text('twitter_username', old('twitter_username'), array('id' => 'twitter_username', 'class' => 'form-control', 'placeholder' => trans('profile.ph-twitter_username'))) !!}
-                                                            <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
+                                                            <span class="glyphicon glyphicon-pencil form-control-feedback"
+                                                                  aria-hidden="true"></span>
                                                             @if ($errors->has('twitter_username'))
                                                                 <span class="help-block">
                                                                     <strong>{{ $errors->first('twitter_username') }}</strong>
@@ -125,7 +149,8 @@
                                                         {!! Form::label('github_username', trans('profile.label-github_username') , array('class' => 'col-12 control-label')); !!}
                                                         <div class="col-12">
                                                             {!! Form::text('github_username', old('github_username'), array('id' => 'github_username', 'class' => 'form-control', 'placeholder' => trans('profile.ph-github_username'))) !!}
-                                                            <span class="glyphicon glyphicon-pencil form-control-feedback" aria-hidden="true"></span>
+                                                            <span class="glyphicon glyphicon-pencil form-control-feedback"
+                                                                  aria-hidden="true"></span>
                                                             @if ($errors->has('github_username'))
                                                                 <span class="help-block">
                                                                     <strong>{{ $errors->first('github_username') }}</strong>
@@ -150,11 +175,12 @@
 
                                                         </div>
                                                     </div>
-                                                {!! Form::close() !!}
-                                            </div>
+                                                    {!! Form::close() !!}
+                                                </div>
 
-                                            <div class="tab-pane fade edit-settings-tab" role="tabpanel" aria-labelledby="edit-settings-tab">
-                                                {!! Form::model($user, array('action' => array('ProfilesController@updateUserAccount', $user->id), 'method' => 'PUT', 'id' => 'user_basics_form')) !!}
+                                                <div class="tab-pane fade edit-settings-tab" role="tabpanel"
+                                                     aria-labelledby="edit-settings-tab">
+                                                    {!! Form::model($user, array('action' => array('ProfilesController@updateUserAccount', $user->id), 'method' => 'PUT', 'id' => 'user_basics_form')) !!}
 
                                                     {!! csrf_field() !!}
 
@@ -165,7 +191,8 @@
                                                                 {!! Form::text('name', $user->name, array('id' => 'name', 'class' => 'form-control', 'placeholder' => trans('forms.create_user_ph_username'))) !!}
                                                                 <div class="input-group-append">
                                                                     <label class="input-group-text" for="name">
-                                                                        <i class="fa fa-fw {{ trans('forms.create_user_icon_username') }}" aria-hidden="true"></i>
+                                                                        <i class="fa fa-fw {{ trans('forms.create_user_icon_username') }}"
+                                                                           aria-hidden="true"></i>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -184,7 +211,8 @@
                                                                 {!! Form::text('email', $user->email, array('id' => 'email', 'class' => 'form-control', 'placeholder' => trans('forms.create_user_ph_email'))) !!}
                                                                 <div class="input-group-append">
                                                                     <label for="email" class="input-group-text">
-                                                                        <i class="fa fa-fw {{ trans('forms.create_user_icon_email') }}" aria-hidden="true"></i>
+                                                                        <i class="fa fa-fw {{ trans('forms.create_user_icon_email') }}"
+                                                                           aria-hidden="true"></i>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -203,7 +231,8 @@
                                                                 {!! Form::text('first_name', $user->first_name, array('id' => 'first_name', 'class' => 'form-control', 'placeholder' => trans('forms.create_user_ph_firstname'))) !!}
                                                                 <div class="input-group-append">
                                                                     <label class="input-group-text" for="first_name">
-                                                                        <i class="fa fa-fw {{ trans('forms.create_user_icon_firstname') }}" aria-hidden="true"></i>
+                                                                        <i class="fa fa-fw {{ trans('forms.create_user_icon_firstname') }}"
+                                                                           aria-hidden="true"></i>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -222,7 +251,8 @@
                                                                 {!! Form::text('last_name', $user->last_name, array('id' => 'last_name', 'class' => 'form-control', 'placeholder' => trans('forms.create_user_ph_lastname'))) !!}
                                                                 <div class="input-group-append">
                                                                     <label class="input-group-text" for="last_name">
-                                                                        <i class="fa fa-fw {{ trans('forms.create_user_icon_lastname') }}" aria-hidden="true"></i>
+                                                                        <i class="fa fa-fw {{ trans('forms.create_user_icon_lastname') }}"
+                                                                           aria-hidden="true"></i>
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -252,31 +282,35 @@
                                                             )) !!}
                                                         </div>
                                                     </div>
-                                                {!! Form::close() !!}
-                                            </div>
+                                                    {!! Form::close() !!}
+                                                </div>
 
-                                            <div class="tab-pane fade edit-account-tab" role="tabpanel" aria-labelledby="edit-account-tab">
-                                                <ul class="account-admin-subnav nav nav-pills nav-justified margin-bottom-3 margin-top-1">
-                                                    <li class="nav-item bg-info">
-                                                        <a data-toggle="pill" href="#changepw" class="nav-link warning-pill-trigger text-white active" aria-selected="true">
-                                                            {{ trans('profile.changePwPill') }}
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item bg-info">
-                                                        <a data-toggle="pill" href="#deleteAccount" class="nav-link danger-pill-trigger text-white">
-                                                            {{ trans('profile.deleteAccountPill') }}
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                                <div class="tab-content">
+                                                <div class="tab-pane fade edit-account-tab" role="tabpanel"
+                                                     aria-labelledby="edit-account-tab">
+                                                    <ul class="account-admin-subnav nav nav-pills nav-justified margin-bottom-3 margin-top-1">
+                                                        <li class="nav-item bg-info">
+                                                            <a data-toggle="pill" href="#changepw"
+                                                               class="nav-link warning-pill-trigger text-white active"
+                                                               aria-selected="true">
+                                                                {{ trans('profile.changePwPill') }}
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item bg-info">
+                                                            <a data-toggle="pill" href="#deleteAccount"
+                                                               class="nav-link danger-pill-trigger text-white">
+                                                                {{ trans('profile.deleteAccountPill') }}
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="tab-content">
 
-                                                    <div id="changepw" class="tab-pane fade show active">
+                                                        <div id="changepw" class="tab-pane fade show active">
 
-                                                        <h3 class="margin-bottom-1 text-center text-warning">
-                                                            {{ trans('profile.changePwTitle') }}
-                                                        </h3>
+                                                            <h3 class="margin-bottom-1 text-center text-warning">
+                                                                {{ trans('profile.changePwTitle') }}
+                                                            </h3>
 
-                                                        {!! Form::model($user, array('action' => array('ProfilesController@updateUserPassword', $user->id), 'method' => 'PUT', 'autocomplete' => 'new-password')) !!}
+                                                            {!! Form::model($user, array('action' => array('ProfilesController@updateUserPassword', $user->id), 'method' => 'PUT', 'autocomplete' => 'new-password')) !!}
 
                                                             <div class="pw-change-container margin-bottom-2">
 
@@ -323,28 +357,35 @@
                                                                     )) !!}
                                                                 </div>
                                                             </div>
-                                                        {!! Form::close() !!}
+                                                            {!! Form::close() !!}
 
-                                                    </div>
+                                                        </div>
 
-                                                    <div id="deleteAccount" class="tab-pane fade">
-                                                        <h3 class="margin-bottom-1 text-center text-danger">
-                                                            {{ trans('profile.deleteAccountTitle') }}
-                                                        </h3>
-                                                        <p class="margin-bottom-2 text-center">
-                                                            <i class="fa fa-exclamation-triangle fa-fw" aria-hidden="true"></i>
-                                                                <strong>Deleting</strong> your account is <u><strong>permanent</strong></u> and <u><strong>cannot</strong></u> be undone.
-                                                            <i class="fa fa-exclamation-triangle fa-fw" aria-hidden="true"></i>
-                                                        </p>
-                                                        <hr>
-                                                        <div class="row">
-                                                            <div class="col-sm-6 offset-sm-3 margin-bottom-3 text-center">
+                                                        <div id="deleteAccount" class="tab-pane fade">
+                                                            <h3 class="margin-bottom-1 text-center text-danger">
+                                                                {{ trans('profile.deleteAccountTitle') }}
+                                                            </h3>
+                                                            <p class="margin-bottom-2 text-center">
+                                                                <i class="fa fa-exclamation-triangle fa-fw"
+                                                                   aria-hidden="true"></i>
+                                                                <strong>Deleting</strong> your account is <u><strong>permanent</strong></u>
+                                                                and <u><strong>cannot</strong></u> be undone.
+                                                                <i class="fa fa-exclamation-triangle fa-fw"
+                                                                   aria-hidden="true"></i>
+                                                            </p>
+                                                            <hr>
+                                                            <div class="row">
+                                                                <div class="col-sm-6 offset-sm-3 margin-bottom-3 text-center">
 
-                                                                {!! Form::model($user, array('action' => array('ProfilesController@deleteUserAccount', $user->id), 'method' => 'DELETE')) !!}
+                                                                    {!! Form::model($user, array('action' => array('ProfilesController@deleteUserAccount', $user->id), 'method' => 'DELETE')) !!}
 
-                                                                    <div class="btn-group btn-group-vertical margin-bottom-2 custom-checkbox-fa" data-toggle="buttons">
-                                                                        <label class="btn no-shadow" for="checkConfirmDelete" >
-                                                                            <input type="checkbox" name='checkConfirmDelete' id="checkConfirmDelete">
+                                                                    <div class="btn-group btn-group-vertical margin-bottom-2 custom-checkbox-fa"
+                                                                         data-toggle="buttons">
+                                                                        <label class="btn no-shadow"
+                                                                               for="checkConfirmDelete">
+                                                                            <input type="checkbox"
+                                                                                   name='checkConfirmDelete'
+                                                                                   id="checkConfirmDelete">
                                                                             <i class="fa fa-square-o fa-fw fa-2x"></i>
                                                                             <i class="fa fa-check-square-o fa-fw fa-2x"></i>
                                                                             <span class="margin-left-2"> Confirm Account Deletion</span>
@@ -367,8 +408,9 @@
                                                                         )
                                                                     ) !!}
 
-                                                                {!! Form::close() !!}
+                                                                    {!! Form::close() !!}
 
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -377,7 +419,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @else
                                 <p>{{ trans('profile.notYourProfile') }}</p>
                             @endif
@@ -407,19 +448,19 @@
 
     <script type="text/javascript">
 
-        $('.dropdown-menu li a').click(function() {
+        $('.dropdown-menu li a').click(function () {
             $('.dropdown-menu li').removeClass('active');
         });
 
-        $('.profile-trigger').click(function() {
+        $('.profile-trigger').click(function () {
             $('.panel').alterClass('card-*', 'card-default');
         });
 
-        $('.settings-trigger').click(function() {
+        $('.settings-trigger').click(function () {
             $('.panel').alterClass('card-*', 'card-info');
         });
 
-        $('.admin-trigger').click(function() {
+        $('.admin-trigger').click(function () {
             $('.panel').alterClass('card-*', 'card-warning');
             $('.edit_account .nav-pills li, .edit_account .tab-pane').removeClass('active');
             $('#changepw')
@@ -428,39 +469,38 @@
             $('.change-pw').addClass('active');
         });
 
-        $('.warning-pill-trigger').click(function() {
+        $('.warning-pill-trigger').click(function () {
             $('.panel').alterClass('card-*', 'card-warning');
         });
 
-        $('.danger-pill-trigger').click(function() {
+        $('.danger-pill-trigger').click(function () {
             $('.panel').alterClass('card-*', 'card-danger');
         });
 
-        $('#user_basics_form').on('keyup change', 'input, select, textarea', function(){
+        $('#user_basics_form').on('keyup change', 'input, select, textarea', function () {
             $('#account_save_trigger').attr('disabled', false).removeClass('disabled').show();
         });
 
-        $('#user_profile_form').on('keyup change', 'input, select, textarea', function(){
+        $('#user_profile_form').on('keyup change', 'input, select, textarea', function () {
             $('#confirmFormSave').attr('disabled', false).removeClass('disabled').show();
         });
 
-        $('#checkConfirmDelete').change(function() {
+        $('#checkConfirmDelete').change(function () {
             var submitDelete = $('#delete_account_trigger');
             var self = $(this);
 
             if (self.is(':checked')) {
                 submitDelete.attr('disabled', false);
-            }
-            else {
+            } else {
                 submitDelete.attr('disabled', true);
             }
         });
 
-        $("#password_confirmation").keyup(function() {
+        $("#password_confirmation").keyup(function () {
             checkPasswordMatch();
         });
 
-        $("#password, #password_confirmation").keyup(function() {
+        $("#password, #password_confirmation").keyup(function () {
             enableSubmitPWCheck();
         });
 
@@ -487,8 +527,7 @@
             var confirmPassword = $("#password_confirmation").val();
             if (password != confirmPassword) {
                 $("#pw_status").html("Passwords do not match!");
-            }
-            else {
+            } else {
                 $("#pw_status").html("Passwords match.");
             }
         }
@@ -499,8 +538,7 @@
             var submitChange = $('#pw_save_trigger');
             if (password != confirmPassword) {
                 submitChange.attr('disabled', true);
-            }
-            else {
+            } else {
                 submitChange.attr('disabled', false);
             }
         }

@@ -1,84 +1,85 @@
 .movie-list-container {
-    margin: 20px 0;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 20px;
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
 
-    @include media-breakpoint-down(lg) {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-    @include media-breakpoint-down(sm) {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-breakpoint-down(xs) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .paginator {
 
     @include media-breakpoint-down(xs) {
-        grid-template-columns: repeat(1, 1fr);
+      width: 80%;
     }
-    
-    .paginator {
+  }
 
-        @include media-breakpoint-down(xs) {
-            width: 80%;
-        }
+  .movie-list-item {
+    background-color: white;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 5px 10px #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      margin: 0;
+      border-radius: 5px 5px 0 0;
     }
-    .movie-list-item {
-        background-color: white;
-        text-decoration: none;
-        color: inherit;
-        box-shadow: 0 5px 10px #ddd;
-        border-radius: 5px;
+
+    .movie-list-item-poster {
+      display: block;
+
+      @include media-breakpoint-down(xs) {
+        display: none;
+      }
+    }
+
+    .movie-list-item-backdrop {
+      display: none;
+
+      @include media-breakpoint-down(xs) {
+        display: block;
+      }
+    }
+
+    .movie-list-item-info {
+      padding: 15px;
+
+      & > h2 {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      & > .genre-box {
+        color: #777;
+      }
+
+      & > h2, .genre-box {
+        white-space: nowrap;
+        text-overflow: ellipsis;
         overflow: hidden;
-
-        img {
-            width: 100%;
-            margin: 0;
-            border-radius: 5px 5px 0 0;
-        }
-
-        .movie-list-item-poster {
-            display: block;
-
-            @include media-breakpoint-down(xs) {
-                display: none;
-            }
-        }
-
-        .movie-list-item-backdrop {
-            display: none;
-
-            @include media-breakpoint-down(xs) {
-                display: block;
-            }
-        }
-
-        .movie-list-item-info {
-            padding: 15px;
-
-            & > h2 {
-                font-size: 1.2em;
-                font-weight: bold;
-            }
-
-            & > .genre-box {
-                color: #777;
-            }
-
-            & > h2, .genre-box {
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
-            }
-        }
-
-        .movie-list-item-rating {
-            margin: 3px 0 0 0;
-            display: flex;
-            justify-content: space-between;
-
-            .date-container {
-                color: #777;
-            }
-        }
+      }
     }
+
+    .movie-list-item-rating {
+      margin: 3px 0 0 0;
+      display: flex;
+      justify-content: space-between;
+
+      .date-container {
+        color: #777;
+      }
+    }
+  }
 }

@@ -13,19 +13,21 @@
                 <div class="form-group">
                     @csrf
                     <label for="title">Title</label>
-                <input type="text" class="form-control" name="movie_title" value="{{ $movie->title }}">
+                    <input type="text" class="form-control" name="movie_title" value="{{ $movie->title }}">
                 </div>
                 <div class="form-group">
                     <label for="genres">Genres</label>
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Select
                         </button>
                         <ul class="dropdown-menu checkbox-menu allow-focus">
                             @foreach ($genreData as $genre)
                                 <li>
                                     <label>
-                                        <input type="checkbox" name="movie_genres[{{ json_encode($genre, true) }}]" {{ in_array($genre, $movie->genres) ? 'checked' : '' }}> {{ $genre['name'] }}
+                                        <input type="checkbox"
+                                               name="movie_genres[{{ json_encode($genre, true) }}]" {{ in_array($genre, $movie->genres) ? 'checked' : '' }}> {{ $genre['name'] }}
                                     </label>
                                 </li>
                             @endforeach
@@ -88,18 +90,21 @@
 
                 <div class="form-group">
                     <label for="production_companies">Production companies</label>
-                    <input type="text" class="form-control" name="movie_production" value="{{ json_encode($movie->production_companies, true) }}">
+                    <input type="text" class="form-control" name="movie_production"
+                           value="{{ json_encode($movie->production_companies, true) }}">
                 </div>
 
 
                 <div class="form-group">
                     <label for="cast">Cast</label>
-                    <textarea type="text" class="form-control" rows="10" name="movie_cast">{{ json_encode($movie->cast, true) }}</textarea>
+                    <textarea type="text" class="form-control" rows="10"
+                              name="movie_cast">{{ json_encode($movie->cast, true) }}</textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="crew">Crew</label>
-                    <textarea type="text" class="form-control" rows="10" name="movie_crew">{{ json_encode($movie->crew, true) }}</textarea>
+                    <textarea type="text" class="form-control" rows="10"
+                              name="movie_crew">{{ json_encode($movie->crew, true) }}</textarea>
                 </div>
 
                 <div class="form-group">

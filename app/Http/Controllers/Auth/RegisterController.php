@@ -65,27 +65,27 @@ class RegisterController extends Controller
 
         return Validator::make($data,
             [
-                'name'                  => 'required|max:255|unique:users',
-                'first_name'            => '',
-                'last_name'             => '',
-                'email'                 => 'required|email|max:255|unique:users',
-                'password'              => 'required|min:6|max:30|confirmed',
+                'name' => 'required|max:255|unique:users',
+                'first_name' => '',
+                'last_name' => '',
+                'email' => 'required|email|max:255|unique:users',
+                'password' => 'required|min:6|max:30|confirmed',
                 'password_confirmation' => 'required|same:password',
-                'g-recaptcha-response'  => '',
-                'captcha'               => 'required|min:1',
+                'g-recaptcha-response' => '',
+                'captcha' => 'required|min:1',
             ],
             [
-                'name.unique'                   => trans('auth.userNameTaken'),
-                'name.required'                 => trans('auth.userNameRequired'),
-                'first_name.required'           => trans('auth.fNameRequired'),
-                'last_name.required'            => trans('auth.lNameRequired'),
-                'email.required'                => trans('auth.emailRequired'),
-                'email.email'                   => trans('auth.emailInvalid'),
-                'password.required'             => trans('auth.passwordRequired'),
-                'password.min'                  => trans('auth.PasswordMin'),
-                'password.max'                  => trans('auth.PasswordMax'),
+                'name.unique' => trans('auth.userNameTaken'),
+                'name.required' => trans('auth.userNameRequired'),
+                'first_name.required' => trans('auth.fNameRequired'),
+                'last_name.required' => trans('auth.lNameRequired'),
+                'email.required' => trans('auth.emailRequired'),
+                'email.email' => trans('auth.emailInvalid'),
+                'password.required' => trans('auth.passwordRequired'),
+                'password.min' => trans('auth.PasswordMin'),
+                'password.max' => trans('auth.PasswordMax'),
                 'g-recaptcha-response.required' => trans('auth.captchaRequire'),
-                'captcha.min'                   => trans('auth.CaptchaWrong'),
+                'captcha.min' => trans('auth.CaptchaWrong'),
             ]
         );
     }
@@ -103,14 +103,14 @@ class RegisterController extends Controller
         $role = Role::where('slug', '=', 'user')->first();
 
         $user = User::create([
-            'name'              => $data['name'],
-            'first_name'        => $data['first_name'],
-            'last_name'         => $data['last_name'],
-            'email'             => $data['email'],
-            'password'          => Hash::make($data['password']),
-            'token'             => str_random(64),
+            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'token' => str_random(64),
             'signup_ip_address' => $ipAddress->getClientIp(),
-            'activated'         => !config('settings.activation'),
+            'activated' => !config('settings.activation'),
         ]);
 
         $user->attachRole($role);

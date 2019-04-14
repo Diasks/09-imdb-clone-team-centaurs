@@ -24,7 +24,7 @@ class UpdateUserPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password'              => 'required|min:6|max:20|confirmed',
+            'password' => 'required|min:6|max:20|confirmed',
             'password_confirmation' => 'required|same:password',
         ];
     }
@@ -38,8 +38,8 @@ class UpdateUserPasswordRequest extends FormRequest
     {
         return [
             'password.required' => trans('auth.passwordRequired'),
-            'password.min'      => trans('auth.PasswordMin'),
-            'password.max'      => trans('auth.PasswordMax'),
+            'password.min' => trans('auth.PasswordMin'),
+            'password.max' => trans('auth.PasswordMax'),
         ];
     }
 }

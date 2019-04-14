@@ -16,7 +16,7 @@ class CheckIsUserActivated
      * Handle an incoming request.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
+     * @param \Closure $next
      *
      * @return mixed
      */
@@ -42,12 +42,12 @@ class CheckIsUserActivated
 
             if (!in_array($currentRoute, $routesAllowed)) {
                 if ($user && $user->activated != 1) {
-                    Log::info('Non-activated user attempted to visit '.$currentRoute.'. ', [$user]);
+                    Log::info('Non-activated user attempted to visit ' . $currentRoute . '. ', [$user]);
 
                     return redirect()->route('activation-required')
                         ->with([
                             'message' => 'Activation is required. ',
-                            'status'  => 'danger',
+                            'status' => 'danger',
                         ]);
                 }
             }
@@ -64,7 +64,7 @@ class CheckIsUserActivated
 
             if (in_array($currentRoute, $routesAllowed)) {
                 if ($user && $user->activated == 1) {
-                    Log::info('Activated user attempted to visit '.$currentRoute.'. ', [$user]);
+                    Log::info('Activated user attempted to visit ' . $currentRoute . '. ', [$user]);
 
                     if ($user->isAdmin()) {
                         return redirect('home');
@@ -74,7 +74,7 @@ class CheckIsUserActivated
                 }
 
                 if (!$user) {
-                    Log::info('Non registered visit to '.$currentRoute.'. ');
+                    Log::info('Non registered visit to ' . $currentRoute . '. ');
 
                     return redirect()->route('welcome');
                 }

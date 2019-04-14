@@ -3,9 +3,9 @@
 return [
 
     // Permissions
-    'permissionView'   => 'Voir',
+    'permissionView' => 'Voir',
     'permissionCreate' => 'Créer',
-    'permissionEdit'   => 'Editer',
+    'permissionEdit' => 'Editer',
     'permissionDelete' => 'Supprimer',
 
 ];

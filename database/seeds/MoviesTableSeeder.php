@@ -13,19 +13,17 @@ class MoviesTableSeeder extends Seeder
     public function run()
     {
         $movieData = json_decode(Storage::get('movies.json'), true);
-        
+
         $creditJson = json_decode(Storage::get('credits.json'), true);
         $creditData = [];
 
-        foreach($creditJson as $key => $object)
-        {
+        foreach ($creditJson as $key => $object) {
             $id = $object['id'];
             unset($object['id']);
             $creditData[$id] = $object;
         }
 
-        foreach($movieData as $key => &$object)
-        {
+        foreach ($movieData as $key => &$object) {
             $id = $object['id'];
             $object['cast'] = $creditData[$id]['cast'];
             $object['crew'] = $creditData[$id]['crew'];
@@ -55,9 +53,10 @@ class MoviesTableSeeder extends Seeder
                     'crew' => $movieItem['crew'],
                     'overview' => $movieItem['overview'],
                 ];
-    
+
                 $movie = Movie::create($dataArr);
-            } catch(Exception $e) {}
+            } catch (Exception $e) {
+            }
         }
 
         array_map('movieAdder', $movieData);

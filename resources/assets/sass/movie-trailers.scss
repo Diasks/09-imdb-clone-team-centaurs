@@ -1,24 +1,24 @@
 .movie-trailers-container {
-    
-        margin: 70px;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 70px;
-    
-        @include media-breakpoint-down(lg) {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    
-        @include media-breakpoint-down(sm) {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    
-        @include media-breakpoint-down(xs) {
-            grid-template-columns: repeat(1, 1fr);
-        }
-    }
+
+  margin: 70px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 70px;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-down(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-breakpoint-down(xs) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 
 .headerTextContainer {
-    text-align: center;
-    margin: 15px;
+  text-align: center;
+  margin: 15px;
 }

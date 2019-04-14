@@ -1,186 +1,186 @@
 .movie-details {
-    position: relative;
-    top: -250px;
+  position: relative;
+  top: -250px;
 
-    & > *:not(.collapse) {
-        color: white;
-    }
+  & > *:not(.collapse) {
+    color: white;
+  }
 
-    @include media-breakpoint-down(sm) {
-        top: -210px;
-        font-size: 0.9em;
-    }
+  @include media-breakpoint-down(sm) {
+    top: -210px;
+    font-size: 0.9em;
+  }
 
-    @include media-breakpoint-down(xs) {
-        top: -140px;
-    }
+  @include media-breakpoint-down(xs) {
+    top: -140px;
+  }
 }
 
 .movie-poster {
-    width: 200px;
-    margin-right: 25px;
+  width: 200px;
+  margin-right: 25px;
 
-    @include media-breakpoint-down(xs) {
-        width: 100px;
-    }
+  @include media-breakpoint-down(xs) {
+    width: 100px;
+  }
 }
 
 .movie-backdrop-container {
-    height: 600px;
-    overflow: hidden;
-    display: inline-block;
-    position: relative;
-    top: -100px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(21, 21, 21, 1));
+  height: 600px;
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  top: -100px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(21, 21, 21, 1));
 
-    @include media-breakpoint-down(lg) {
-        top: -55px;
-        height: 550px;
-    }
+  @include media-breakpoint-down(lg) {
+    top: -55px;
+    height: 550px;
+  }
 
-    @include media-breakpoint-down(md) {
-        height: 430px;
-    }
+  @include media-breakpoint-down(md) {
+    height: 430px;
+  }
 
-    @include media-breakpoint-down(sm) {
-        height: auto;
-    }
+  @include media-breakpoint-down(sm) {
+    height: auto;
+  }
 }
 
 .movie-backdrop {
-    z-index: -9999;
-    position: relative;
-    display: block;
+  z-index: -9999;
+  position: relative;
+  display: block;
 }
 
 .movie-wrapper {
-    z-index: 0;
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    background-color: rgb(21, 21, 21);
+  z-index: 0;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgb(21, 21, 21);
 }
 
 .movie-head-info {
-    display: flex;
-    align-items: flex-start;
+  display: flex;
+  align-items: flex-start;
 }
 
 .movie-head-info-text {
-    align-self: stretch;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    & > .lead {
-        display: block;
+  & > .lead {
+    display: block;
 
-        @include media-breakpoint-down(xs) {
-            display: none;
-        }
+    @include media-breakpoint-down(xs) {
+      display: none;
     }
+  }
 }
 
 .movie-mobile-overview {
-    display: none;
-    margin-top: 20px;
+  display: none;
+  margin-top: 20px;
 
-    @include media-breakpoint-down(xs) {
-        display: block;
-    }
+  @include media-breakpoint-down(xs) {
+    display: block;
+  }
 }
 
 .movie-title {
-    font-size: 4em;
-    margin-bottom: -5px;
+  font-size: 4em;
+  margin-bottom: -5px;
 
-    @include media-breakpoint-down(xs) {
-        font-size: 2.5em;
-    }
+  @include media-breakpoint-down(xs) {
+    font-size: 2.5em;
+  }
 }
 
 .movie-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: #191919;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #191919;
 }
 
 .cast-list {
+  overflow: hidden;
+  white-space: nowrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 18px;
+
+  @include media-breakpoint-down(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include media-breakpoint-down(xs) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cast-list-item {
     overflow: hidden;
-    white-space: nowrap;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 18px;
+    background-color: #222;
+    box-shadow: 0 5px 10px #000;
+    border-radius: 5px;
+    margin-bottom: 30px;
 
-    @include media-breakpoint-down(lg) {    
-        grid-template-columns: repeat(3, 1fr);
+    .cast-list-item-info {
+      padding: 15px;
+      white-space: normal;
+
+      .cast-list-item-name {
+        font-size: 1.1em;
+        font-weight: bold;
+      }
+
+
     }
 
-    @include media-breakpoint-down(xs) {    
-        grid-template-columns: repeat(2, 1fr);
+    .cast-list-item-image-container {
+      width: 100%;
+      height: 15vw;
+      overflow: hidden;
+      border-radius: 5px 5px 0 0;
+
+      @include media-breakpoint-down(lg) {
+        height: 26vw;
+      }
+
+      @include media-breakpoint-down(md) {
+        height: 31vw;
+      }
+
+      @include media-breakpoint-down(sm) {
+        height: 37vw;
+      }
+
+      @include media-breakpoint-down(xs) {
+        height: 54vw;
+      }
     }
-    
-    .cast-list-item {
-        overflow: hidden;
-        background-color: #222;
-        box-shadow: 0 5px 10px #000;
-        border-radius: 5px;
-        margin-bottom: 30px;
 
-        .cast-list-item-info {
-            padding: 15px;
-            white-space: normal;
-
-            .cast-list-item-name {
-                font-size: 1.1em;
-                font-weight: bold;
-            }
-
-            
-        }
-
-        .cast-list-item-image-container {
-            width: 100%;
-            height: 15vw;
-            overflow: hidden;
-            border-radius: 5px 5px 0 0;
-
-            @include media-breakpoint-down(lg) {    
-                height: 26vw;
-            }
-
-            @include media-breakpoint-down(md) {    
-                height: 31vw;
-            }
-
-            @include media-breakpoint-down(sm) {    
-                height: 37vw;
-            }
-
-            @include media-breakpoint-down(xs) {    
-                height: 54vw;
-            }
-        }
-
-        .cast-list-item-image {
-            width: 100%;
-            position: relative;
-            top: -5px;
-        }
+    .cast-list-item-image {
+      width: 100%;
+      position: relative;
+      top: -5px;
     }
+  }
 }
 
 .movie-sub-title {
-    font-weight: bold;
-    margin: 15px 0 10px 0;
+  font-weight: bold;
+  margin: 15px 0 10px 0;
 }
 
 @media (min-width: 1600px) {
-    .movie-backdrop-container {
-        height: 700px;
-        top: -125px;
-    }
+  .movie-backdrop-container {
+    height: 700px;
+    top: -125px;
+  }
 }
